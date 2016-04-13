@@ -38,10 +38,15 @@ public class GameController : MonoBehaviour {
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.M) && paused)
-        {
-            Application.LoadLevel("MenuPrincipale");
-        }
+		if(Input.GetKeyDown(KeyCode.M) && paused)
+		{
+			Application.LoadLevel("MenuPrincipale");
+		}
+
+		if(Input.GetKeyDown(KeyCode.R) && paused)
+		{
+			Application.LoadLevel(Application.loadedLevel);
+		}
 
         StartCoroutine(IncreaseSecond());
         timer.text=hourFormat+" : " + minuteFormat + " : " + secondFormat;
