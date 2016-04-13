@@ -22,11 +22,13 @@ public class CheckPointManager : MonoBehaviour {
 	}
 
     public float Respawn()
-    { if (currentCheckpoint >= 0)
-        { for (int j = 0; j < pillars.Length; j++)
-            {
-                pillars[j].ResetPillar();
-            }
+    {
+        for (int j = 0; j < pillars.Length; j++)
+        {
+            pillars[j].ResetPillar();
+        }
+        if (currentCheckpoint >= 0)
+        { 
          return checkpoints[currentCheckpoint].gameObject.transform.position.x;
 
        }

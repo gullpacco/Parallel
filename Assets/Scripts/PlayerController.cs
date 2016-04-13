@@ -19,7 +19,13 @@ public class PlayerController : MonoBehaviour {
     bool checkPointReached;
     public float screenSize = 34f;
     public float screenHeight = 10f;
+    public float groundRadius;
     CheckPointManager cpm;
+
+    public Transform groundCheck;
+    public LayerMask whatIsGround;
+    bool isJumping=false;
+    bool locked = false;
 
 
     // Use this for initialization
@@ -30,19 +36,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void FixedUpdate() {
 
 
-
-        
-
-        }
-
-    void Update()
+    void FixedUpdate()
     {
- 
+        if(!locked)
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
-        if(transform.position.x -other.transform.position.x < screenSize)
+        if (transform.position.x -other.transform.position.x < screenSize)
         {
             canGoForward = true;
         }
@@ -66,9 +67,9 @@ public class PlayerController : MonoBehaviour {
             if (transform.position.y > screenHeight)
                 body.velocity = new Vector2(body.velocity.y, 0);
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) && !isJumping)
             {
-                if (isGrounded)
+                if (isGrounded) 
                     Jump();
             }
 
@@ -106,9 +107,9 @@ public class PlayerController : MonoBehaviour {
         {
             if (transform.position.y < -screenHeight)
                 body.velocity = new Vector2(body.velocity.y, 0);
-            if (Input.GetKeyDown(KeyCode.DownArrow) )
+            if (Input.GetKey(KeyCode.DownArrow) )
             {
-                if (isGrounded)
+                if (isGrounded && !isJumping)
                     JumpDown();
             }
             if (Input.GetKeyDown(KeyCode.K))
@@ -173,14 +174,26 @@ public class PlayerController : MonoBehaviour {
     {
         //body.velocity = new Vector2(body.velocity.x, jumpForce);
         body.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        isJumping = true;
         isGrounded = false;
+        locked = true;
+        Invoke("Unlock", 0.1f);
+
     }
 
     void JumpDown()
     {
         //body.velocity = new Vector2(body.velocity.x, jumpForce);
         body.AddForce(new Vector2(0, -jumpForce), ForceMode2D.Impulse);
+        isJumping = true;
         isGrounded = false;
+        locked = true;
+        Invoke("Unlock", 0.1f);
+    }
+
+    void Unlock()
+    {
+        locked = false;
     }
 
 
@@ -195,7 +208,7 @@ public class PlayerController : MonoBehaviour {
         if (coll.gameObject.tag == "Ground"|| coll.gameObject.tag == "Pillar")
         {
 
-            isGrounded = true;
+            isJumping = false;
         }
     }
 
@@ -204,7 +217,7 @@ public class PlayerController : MonoBehaviour {
         if (coll.gameObject.tag == "Ground" || coll.gameObject.tag == "Pillar")
         {
 
-            isGrounded = false;
+            isJumping = true;
         }
     }
 
@@ -250,6 +263,8 @@ public class PlayerController : MonoBehaviour {
            other.gameObject.transform.position = new Vector3(cpm.Respawn(), other.gameObject.transform.position.y, transform.position.z);
 
         }
+
+
     }
 
     //void EnemyFollow()

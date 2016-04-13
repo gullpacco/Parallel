@@ -134,10 +134,21 @@ public class PillarController : MonoBehaviour
 
     public void ResetPillar()
     {
+
         transform.position = new Vector3(transform.position.x, baseY, transform.position.z);
         isFree = false;
         isGoingBack = false;
-        body.constraints =  RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        body.constraints =  RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        Invoke("Free", 0.2f);
+    }
+
+    void Free()
+    {
+        body.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    public void ResetAnyPillar()
+    {
 
     }
 }
