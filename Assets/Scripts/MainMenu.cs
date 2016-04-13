@@ -34,4 +34,9 @@ public class MainMenu : MonoBehaviour {
 		selectedButton.transform.localScale = new Vector2(1f, 1f); //Il pulsante si rimpicciolisce
 	}
 
+	public void MouseClickBtn(Button selectedButton)
+	{
+		selectedButton.transform.localScale = new Vector2(.8f, .8f); //Il pulsante si rimpicciolisce
+	}
+
 }
