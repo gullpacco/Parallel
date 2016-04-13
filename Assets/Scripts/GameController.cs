@@ -38,6 +38,11 @@ public class GameController : MonoBehaviour {
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.M) && paused)
+        {
+            Application.LoadLevel("MenuPrincipale");
+        }
+
         StartCoroutine(IncreaseSecond());
         timer.text=hourFormat+" : " + minuteFormat + " : " + secondFormat;
 
