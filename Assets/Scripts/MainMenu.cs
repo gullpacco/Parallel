@@ -17,6 +17,11 @@ public class MainMenu : MonoBehaviour {
 
 	}
 
+	public void exitGame()
+	{
+		Application.Quit();
+	}
+
 	public void startLevel(Button selectedButton)
 	{
 		levelToLoad = int.Parse(selectedButton.name);
