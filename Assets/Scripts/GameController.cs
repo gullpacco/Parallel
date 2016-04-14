@@ -8,11 +8,7 @@ public class GameController : MonoBehaviour {
     public GameObject pauseMenu;
     public static GameController instance;
     public bool ended;
-    public Text timer;
-    public int seconds,
-                   minutes,
-                    hours;
-    string secondFormat ="00", minuteFormat="00", hourFormat="00";
+
 
     void Awake()
     {
@@ -76,49 +72,10 @@ public class GameController : MonoBehaviour {
                 Application.LoadLevel(Application.loadedLevel);
             }
 
-            StartCoroutine(IncreaseSecond());
-            timer.text = hourFormat + " : " + minuteFormat + " : " + secondFormat;
         }
 
     }
 
-
-    IEnumerator IncreaseSecond()
-    {
-        yield return new WaitForSeconds(1);
-
-
-        if (seconds < 59)
-        {
-            seconds++;
-        }
-        else
-        {
-            seconds = 0;
-            if (minutes < 59)
-                minutes++;
-            else
-            {
-                minutes = 0;
-                hours++;
-            }
-        }
-
-        if (seconds < 10)
-        {
-            secondFormat = "0" + seconds; ;
-        }
-        else secondFormat = ""+ seconds;
-        if (minutes < 10)
-        {
-            minuteFormat = "0" + minutes;
-        }
-        else minuteFormat = "" + minutes;
-        if (hours < 10)
-            hourFormat = "0" + hours;
-        else hourFormat = "" + hours;
-        StopAllCoroutines();
-    }
 
    
 
