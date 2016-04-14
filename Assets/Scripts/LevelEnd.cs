@@ -4,13 +4,13 @@ using System.Collections;
 public class LevelEnd : MonoBehaviour {
 
     public string nextLevel;
-    public ScoreManager sm;
+     ScoreManager sm;
     string playerEnded;
 
 
 	// Use this for initialization
 	void Start () {
-	
+        sm = FindObjectOfType<ScoreManager>();
 	}
 	
 	// Update is called once per frame

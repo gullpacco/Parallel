@@ -74,9 +74,11 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKey(KeyCode.W) && !isJumping)
             {
-                if (isGrounded) 
+                if (isGrounded && !isJumping)
+                {
                     Jump();
-					jumpAudioSource.PlayOneShot(jumpSample);
+                    jumpAudioSource.PlayOneShot(jumpSample);
+                }
             }
 
             //if (Input.GetKeyDown(KeyCode.A))
@@ -116,8 +118,10 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetKey(KeyCode.DownArrow)  && !isJumping)
             {
                 if (isGrounded && !isJumping)
+                {
                     JumpDown();
-					jumpAudioSource.PlayOneShot(jumpSample);
+                    jumpAudioSource.PlayOneShot(jumpSample);
+                }
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
@@ -212,6 +216,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
+        if(isGrounded)
 		jumpAudioSource.PlayOneShot(landSample);
 	}
     void OnCollisionStay2D(Collision2D coll)

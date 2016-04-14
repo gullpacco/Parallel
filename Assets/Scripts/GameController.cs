@@ -8,7 +8,8 @@ public class GameController : MonoBehaviour {
     public GameObject pauseMenu;
     public static GameController instance;
     public bool ended;
-
+    public GameObject [] textToHide;
+    public Text hideText;
 
     void Awake()
     {
@@ -72,6 +73,22 @@ public class GameController : MonoBehaviour {
                 Application.LoadLevel(Application.loadedLevel);
             }
 
+        }
+
+        if(!paused & !ended & Input.GetKeyDown(KeyCode.H))
+        {
+            for (int k = 0; k < textToHide.Length; k++)
+            { if (textToHide[k].activeSelf)
+                {
+                    textToHide[k].SetActive(false);
+                    hideText.text = "H: Show controls";
+                }
+                else
+                {
+                    textToHide[k].SetActive(true);
+                    hideText.text = "H: Hide controls";
+                }
+                }
         }
 
     }
