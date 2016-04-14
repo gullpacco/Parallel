@@ -32,7 +32,6 @@ public class GameController : MonoBehaviour {
 
             else if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("next");
                 Application.LoadLevel(Application.loadedLevel + 1);
             }
 

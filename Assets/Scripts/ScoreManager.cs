@@ -26,7 +26,10 @@ public class ScoreManager : MonoBehaviour
 
         void Awake()
     {
-         if (PlayerPrefs.HasKey("HighScore" + lvNum))
+
+        lvNum = Application.loadedLevel;
+
+        if (PlayerPrefs.HasKey("HighScore" + lvNum))
         //// PlayerPrefs.SetInt("HighScore",3000);
         {
 
@@ -34,11 +37,11 @@ public class ScoreManager : MonoBehaviour
 
         }
 
-        lvNum = Application.loadedLevel;
 
         if (PlayerPrefs.HasKey("BestTime" + lvNum))
         {
             bestTime = "Best Time: " + PlayerPrefs.GetString("BestTime" + lvNum);
+            Debug.Log(lvNum);
         }
 
         else bestTime = "Best Time: 00 : 10 : 00";
