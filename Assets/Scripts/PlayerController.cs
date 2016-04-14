@@ -27,12 +27,17 @@ public class PlayerController : MonoBehaviour {
     bool isJumping=false;
     bool locked = false;
 
+	public AudioClip jumpSample; 
+	public AudioClip landSample; 
+	private AudioSource jumpAudioSource;
 
     // Use this for initialization
     void Start () {
         body = GetComponent<Rigidbody2D>();
         baseSpeed = speed;
         cpm = GameObject.FindObjectOfType<CheckPointManager>();
+
+		jumpAudioSource = GetComponent<AudioSource>();
 	}
 
     // Update is called once per frame
@@ -71,6 +76,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if (isGrounded) 
                     Jump();
+					jumpAudioSource.PlayOneShot(jumpSample);
             }
 
             //if (Input.GetKeyDown(KeyCode.A))
@@ -107,10 +113,11 @@ public class PlayerController : MonoBehaviour {
         {
             if (transform.position.y < -screenHeight)
                 body.velocity = new Vector2(body.velocity.y, 0);
-            if (Input.GetKey(KeyCode.DownArrow) )
+			if (Input.GetKey(KeyCode.DownArrow)  && !isJumping)
             {
                 if (isGrounded && !isJumping)
                     JumpDown();
+					jumpAudioSource.PlayOneShot(jumpSample);
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
@@ -203,6 +210,10 @@ public class PlayerController : MonoBehaviour {
         Invoke("StopFighting", fightTime);
     }
 
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		jumpAudioSource.PlayOneShot(landSample);
+	}
     void OnCollisionStay2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Ground"|| coll.gameObject.tag == "Pillar")
