@@ -37,6 +37,7 @@ public class ScoreManager : MonoBehaviour
 
         }
 
+       // PlayerPrefs.SetString("BestTime" + lvNum, "Best Time: 00 : 10 : 00");
 
         if (PlayerPrefs.HasKey("BestTime" + lvNum))
         {
