@@ -4,6 +4,9 @@ using System.Collections;
 public class LevelEnd : MonoBehaviour {
 
     public string nextLevel;
+    public ScoreManager sm;
+    string playerEnded;
+
 
 	// Use this for initialization
 	void Start () {
@@ -26,8 +29,15 @@ public class LevelEnd : MonoBehaviour {
     {
         if (coll.tag == "Player")
         {
-            Application.LoadLevel(nextLevel);
+            if (playerEnded == null)
+                playerEnded = coll.gameObject.name;
+            else   if  (coll.gameObject.name != playerEnded) { 
+                    Application.LoadLevel(nextLevel);
+                sm.SetHighScore();
+                GameController.instance.ended = true;
+            }
         }
     }
 
+  
 }
