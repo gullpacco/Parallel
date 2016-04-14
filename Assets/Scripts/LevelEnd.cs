@@ -16,12 +16,7 @@ public class LevelEnd : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.X))
-            Application.LoadLevel("Tutorial");
-        if (Input.GetKeyDown(KeyCode.C))
-            Application.LoadLevel("Intermedio");
-    if(Input.GetKeyDown(KeyCode.V))
-            Application.LoadLevel("Difficile");
+      
 
     }
 
