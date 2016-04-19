@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour {
         {
             if (!paused)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     Time.timeScale = 0;
                     pauseMenu.SetActive(true);
@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour {
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     Time.timeScale = 1;
                     pauseMenu.SetActive(false);

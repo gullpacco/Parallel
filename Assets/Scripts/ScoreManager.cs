@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
                    hours;
     string secondFormat = "00", minuteFormat = "00", hourFormat = "00";
 
-    public int highScore;
+     int highScore=600;
     public GameObject endLevelMenu;
     public Text bestFinal;
 
@@ -34,18 +34,18 @@ public class ScoreManager : MonoBehaviour
         {
 
             highScore = PlayerPrefs.GetInt("HighScore" + lvNum);
-
         }
+        else PlayerPrefs.SetInt("HighScore" +lvNum, highScore);
 
-       // PlayerPrefs.SetString("BestTime" + lvNum, "Best Time: 00 : 10 : 00");
 
         if (PlayerPrefs.HasKey("BestTime" + lvNum))
         {
             bestTime = "Best Time: " + PlayerPrefs.GetString("BestTime" + lvNum);
-            Debug.Log(lvNum);
         }
 
-        else bestTime = "Best Time: 00 : 10 : 00";
+        else { bestTime = "Best Time: 00 : 10 : 00";
+            PlayerPrefs.SetString("BestTime" + lvNum, "00 : 10 : 00");
+        }
         bestTimeText.text = bestTime;
     }
 
@@ -77,8 +77,9 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt("HighScore" + lvNum, currentScore);
             PlayerPrefs.SetString("BestPlayer" + lvNum, playerName);
             PlayerPrefs.SetString("BestTime" + lvNum, timer.text);
+            bestFinal.text = timer.text;
         }
-        
+        else 
         bestFinal.text = PlayerPrefs.GetString("BestTime" + lvNum);
         endLevelMenu.SetActive(true);
 

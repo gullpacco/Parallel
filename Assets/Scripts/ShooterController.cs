@@ -32,6 +32,15 @@ public class ShooterController : MonoBehaviour {
         StartCoroutine(Shoot());
 	}
 
+    public void ResetShooter()
+    {
+        for (int i=0; i<poolBullets.Length; i++)
+        {
+            if(poolBullets[i].activeSelf)
+            poolBullets[i].GetComponent<BulletController>().Countdown(0);
+        }
+    }
+
     IEnumerator Shoot()
     {
         yield return new WaitForSeconds(fireRate);

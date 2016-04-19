@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -7,9 +9,12 @@ public class PlayerController : MonoBehaviour {
     private float baseSpeed;
     public float speed;
     public float jumpForce;
+    public bool canDie = true;
     bool isGrounded=true;
     bool isFighting;
+    int deaths;
     Rigidbody2D body;
+     Text deathText;
     public float fightTime = 1;
     public PlayerController other;
     public GameObject currentEnemy;
@@ -27,9 +32,12 @@ public class PlayerController : MonoBehaviour {
     bool isJumping=false;
     bool locked = false;
 
+    float regTime;
+
 	public AudioClip jumpSample; 
 	public AudioClip landSample; 
 	private AudioSource jumpAudioSource;
+   public  AudioClip shot;
 
     // Use this for initialization
     void Start () {
@@ -38,119 +46,142 @@ public class PlayerController : MonoBehaviour {
         cpm = GameObject.FindObjectOfType<CheckPointManager>();
 
 		jumpAudioSource = GetComponent<AudioSource>();
-	}
+        if (isOne)
+        {
+            deathText = GameObject.FindGameObjectWithTag("P1D").GetComponent<Text>();
+        }
+        else
+        {
+            deathText = GameObject.FindGameObjectWithTag("P2D").GetComponent<Text>();
+
+        }
+
+        regTime = Time.fixedDeltaTime;
+    }
 
     // Update is called once per frame
 
 
     void FixedUpdate()
     {
-        if(!locked)
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+       if(canDie) {
+            if (!locked)
+                isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+                //RaycastHit2D hit= Physics2D.Raycast(transform.position, Vector2.left);
+                //{
+                //    if (hit)
+                //    {
+                //        Debug.Log(hit.transform.tag);
+                //        if (hit.transform.CompareTag("Ground"))
+                //        {
+                //            isGrounded = true;
+                //        }
+                //        else isGrounded = false;
+                //    }
+                //    else isGrounded = false;
+                //}
 
-        if (transform.position.x -other.transform.position.x < screenSize)
-        {
-            canGoForward = true;
-        }
-        else
-        {
-            canGoForward = false;
-        }
-
-
-        if ( other.transform.position.x -transform.position.x < screenSize)
-        {
-            canGoBack = true;
-        }
-        else
-        {
-            canGoBack = false;
-        }
-
-        if (isOne)
-        {
-            if (transform.position.y > screenHeight)
-                body.velocity = new Vector2(body.velocity.y, 0);
-
-            if (Input.GetKey(KeyCode.W) && !isJumping)
+                if (transform.position.x - other.transform.position.x < screenSize)
             {
-                if (isGrounded && !isJumping)
+                canGoForward = true;
+            }
+            else
+            {
+                canGoForward = false;
+            }
+
+
+            if (other.transform.position.x - transform.position.x < screenSize)
+            {
+                canGoBack = true;
+            }
+            else
+            {
+                canGoBack = false;
+            }
+
+            if (isOne)
+            {
+                if (transform.position.y > screenHeight)
+                    body.velocity = new Vector2(body.velocity.y, 0);
+
+                if (Input.GetKey(KeyCode.W) && !isJumping)
                 {
-                    Jump();
-                    jumpAudioSource.PlayOneShot(jumpSample);
+                    if (isGrounded && !isJumping)
+                    {
+                        Jump();
+                        jumpAudioSource.PlayOneShot(jumpSample);
+                    }
                 }
-            }
 
-            //if (Input.GetKeyDown(KeyCode.A))
-            //{
-            //    Fight();
-            //}
+                //if (Input.GetKeyDown(KeyCode.A))
+                //{
+                //    Fight();
+                //}
 
-            if (Input.GetKey(KeyCode.D) && canGoForward)
-            {
-                //transform.Translate(speed * Time.deltaTime, 0, 0);
-                //   transform.localPosition += transform.forward * Time.deltaTime * 6f;
-                body.velocity = new Vector2(speed, body.velocity.y);
+                if (Input.GetKey(KeyCode.D) && canGoForward)
+                {
+                    //transform.Translate(speed * Time.deltaTime, 0, 0);
+                    //   transform.localPosition += transform.forward * Time.deltaTime * 6f;
+                    body.velocity = new Vector2(speed, body.velocity.y);
 
-            }
+                }
 
 
-           else if (Input.GetKey(KeyCode.A)&&canGoBack)
-            {
-              // transform.Translate(-speed * Time.deltaTime, 0, 0);
-                body.velocity = new Vector2(-speed, body.velocity.y);
+                else if (Input.GetKey(KeyCode.A) && canGoBack)
+                {
+                    // transform.Translate(-speed * Time.deltaTime, 0, 0);
+                    body.velocity = new Vector2(-speed, body.velocity.y);
+
+                }
+
+                else
+                {
+                    body.velocity = new Vector2(0, body.velocity.y);
+
+                }
+
 
             }
 
             else
             {
-                body.velocity = new Vector2(0, body.velocity.y);
-
-            }
-
-
-        }
-
-        else
-        {
-            if (transform.position.y < -screenHeight)
-                body.velocity = new Vector2(body.velocity.y, 0);
-			if (Input.GetKey(KeyCode.DownArrow)  && !isJumping)
-            {
-                if (isGrounded && !isJumping)
+                if (transform.position.y < -screenHeight)
+                    body.velocity = new Vector2(body.velocity.y, 0);
+                if (Input.GetKey(KeyCode.DownArrow) && !isJumping)
                 {
-                    JumpDown();
-                    jumpAudioSource.PlayOneShot(jumpSample);
+                    if (isGrounded && !isJumping)
+                    {
+                        JumpDown();
+                        jumpAudioSource.PlayOneShot(jumpSample);
+                    }
                 }
+
+
+                if (Input.GetKey(KeyCode.RightArrow) && canGoForward)
+                {
+                    //transform.Translate(speed * Time.deltaTime, 0, 0);
+                    body.velocity = new Vector2(speed, body.velocity.y);
+
+                }
+
+
+
+                else if (Input.GetKey(KeyCode.LeftArrow) && canGoBack)
+                {
+                    //transform.Translate(-speed * Time.deltaTime, 0, 0);
+                    body.velocity = new Vector2(-speed, body.velocity.y);
+
+                }
+
+                else
+                {
+                    body.velocity = new Vector2(0, body.velocity.y);
+
+                }
+
+
             }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                Fight();
-            }
-
-            if (Input.GetKey(KeyCode.RightArrow) && canGoForward)
-            {
-                //transform.Translate(speed * Time.deltaTime, 0, 0);
-                body.velocity = new Vector2(speed, body.velocity.y);
-
-            }
-
-
-
-           else if (Input.GetKey(KeyCode.LeftArrow) &&canGoBack)
-            {
-                //transform.Translate(-speed * Time.deltaTime, 0, 0);
-                body.velocity = new Vector2(-speed, body.velocity.y);
-
-            }
-
-            else
-            {
-                body.velocity = new Vector2(0, body.velocity.y);
-
-            }
-
-
         }
     }
 
@@ -272,15 +303,32 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Enemy")
+        if (coll.gameObject.tag == "Enemy" && canDie)
         {
             //Application.LoadLevel(Application.loadedLevel);
-            transform.position = new Vector3(cpm.Respawn(), transform.position.y, transform.position.z);
-           other.gameObject.transform.position = new Vector3(cpm.Respawn(), other.gameObject.transform.position.y, transform.position.z);
+            Time.timeScale = 0.05f;
+            Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
+            deaths++;
+            deathText.text = "" + deaths;
+            Invoke("Die", 0.15f);
+            canDie = false;
+            other.canDie = false;
+            jumpAudioSource.PlayOneShot(shot);
 
         }
 
 
+    }
+
+    void Die()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = regTime;
+
+        transform.position = new Vector3(cpm.Respawn(), transform.position.y, transform.position.z);
+        other.gameObject.transform.position = new Vector3(cpm.Respawn(), other.gameObject.transform.position.y, transform.position.z);
+        canDie = true;
+        other.canDie = true;
     }
 
     //void EnemyFollow()
