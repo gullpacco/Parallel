@@ -13,6 +13,7 @@ public class PillarController : MonoBehaviour
     bool isGoingBack;
     bool playerContact = false;
 
+
     [HideInInspector]
     public bool locked;
     bool isGrounded;

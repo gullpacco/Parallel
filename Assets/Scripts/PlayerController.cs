@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public float jumpForce;
     public bool canDie = true;
-    bool isGrounded=true;
+     bool isGrounded=true;
     bool isFighting;
     int deaths;
     Rigidbody2D body;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour {
     bool locked = false;
 
     float regTime;
+    float lastY;
 
 	public AudioClip jumpSample; 
 	public AudioClip landSample; 
@@ -62,11 +63,16 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
 
 
+
     void FixedUpdate()
     {
+        StartCoroutine(SaveNewY());
+        
        if(canDie) {
-            if (!locked)
-                isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+            //if (!locked)
+            //    isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+
+
                 //RaycastHit2D hit= Physics2D.Raycast(transform.position, Vector2.left);
                 //{
                 //    if (hit)
@@ -199,6 +205,12 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    IEnumerator SaveNewY()
+    {
+        yield return new WaitForEndOfFrame();
+        lastY = transform.position.y;
+    }
+
     void LeftMove()
     {
         body.velocity = new Vector2(-speed, 0);
@@ -269,10 +281,16 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    //void StopFighting()
-    //{
-    //    isFighting = false;
-    //}
+    public void SetGround(bool ground)
+    {
+        //if (!locked && canDie)
+        //{
+        //    if (isOne && transform.position.y <= lastY)
+        //        isGrounded = true;
+        //    else if (!isOne && transform.position.y >= lastY)
+        //        isGrounded=true; }
+        isGrounded = ground;
+    }
 
     public void ReachCheckpoint(bool reached)
     {
