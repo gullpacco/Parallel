@@ -17,7 +17,7 @@ public class BulletController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.tag != "Enemy")
+        if (coll.tag != "Enemy" && coll.tag != "Triggers")
         //Destroy(this.gameObject);
         {
             gameObject.SetActive(false);

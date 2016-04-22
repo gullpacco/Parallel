@@ -28,7 +28,7 @@ public class Checkpoint : MonoBehaviour {
             triggeredPlayers = 0;
             canTrigger = false;
             platformCheck.CheckpointReached();
-            Debug.Log(transform.position.x);
+
         }
     }
 

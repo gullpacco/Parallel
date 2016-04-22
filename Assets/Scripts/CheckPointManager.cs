@@ -6,7 +6,7 @@ public class CheckPointManager : MonoBehaviour {
     Checkpoint[] checkpoints;
     int currentCheckpoint = -1;
     PlayerController[] players;
-    PillarController[] pillars;
+    Pillar[] pillars;
     ShooterController[] shooters;
 
     void Awake()
@@ -14,7 +14,7 @@ public class CheckPointManager : MonoBehaviour {
         checkpoints = GameObject.FindObjectsOfType<Checkpoint>();
         players = GameObject.FindObjectsOfType<PlayerController>();
 
-        pillars = GameObject.FindObjectsOfType<PillarController>();
+        pillars = GameObject.FindObjectsOfType<Pillar>();
         shooters = GameObject.FindObjectsOfType<ShooterController>();
     }
 
@@ -30,8 +30,10 @@ public class CheckPointManager : MonoBehaviour {
 
     public float Respawn()
     {
+      
         for (int j = 0; j < pillars.Length; j++)
         {
+            
             pillars[j].ResetPillar();
         }
 

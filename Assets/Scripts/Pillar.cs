@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Pillar : MonoBehaviour
+public class Pillar : MonoBehaviour
 {
 
 
@@ -18,15 +18,16 @@ public abstract class Pillar : MonoBehaviour
 
     protected virtual void Awake()
     {
+        baseY = transform.position.y;
+
         body = GetComponent<Rigidbody2D>();
 
     }
 
 
     // Use this for initialization
-    protected void Start()
+    protected virtual void Start()
     {
-        baseY = transform.position.y;
 
     }
 
@@ -57,31 +58,30 @@ public abstract class Pillar : MonoBehaviour
     }
 
 
-    protected virtual void OnCollisionEnter2D(Collision2D coll)
-    {
+    //protected virtual void OnCollisionEnter2D(Collision2D coll)
+    //{
 
 
-        //if (coll.gameObject.tag == "Ground")
-        //{
-        //    isGrounded = true;
-        //}
+    //    //if (coll.gameObject.tag == "Ground")
+    //    //{
+    //    //    isGrounded = true;
+    //    //}
 
-    }
+    //}
 
-    protected virtual void OnCollisionExit2D(Collision2D coll)
-    {
+    //protected virtual void OnCollisionExit2D(Collision2D coll)
+    //{
 
 
       
 
-    }
+    //}
 
-    protected virtual void OnCollisionStay2D(Collision2D coll)
-    {
+    //protected virtual void OnCollisionStay2D(Collision2D coll)
+    //{
 
         
 
-    }
+    //}
 
-    protected abstract void UnKinematic();
 }

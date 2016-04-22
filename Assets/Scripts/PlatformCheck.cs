@@ -4,7 +4,7 @@ using System.Collections;
 public class PlatformCheck : MonoBehaviour {
 
     // Use this for initialization
-    PillarController[] selectedPillars;
+    Pillar[] selectedPillars;
     int pillarCount = 0;
     PlayerController[] players;
 
@@ -12,7 +12,7 @@ public class PlatformCheck : MonoBehaviour {
 
     void Awake() {
         players = GameObject.FindObjectsOfType<PlayerController>();
-        selectedPillars = new PillarController[GameObject.FindObjectsOfType<PillarController>().Length];
+        selectedPillars = new Pillar[GameObject.FindObjectsOfType<Pillar>().Length];
     }
 
     void Start () {
@@ -35,20 +35,51 @@ public class PlatformCheck : MonoBehaviour {
 
     void OnTriggerEnter2D (Collider2D coll)
     {
-        PillarController currentP;
+        Pillar currentP = new Pillar();
         bool doubled = false;
 
         if (coll.tag == "Pillar")
         {
-            currentP = coll.transform.GetComponent<PillarController>();
+            //Component[] cs = (Component[])coll.transform.parent.GetComponents(typeof(Component));
+            //foreach (Component c in cs)
+            //{
+            //    Debug.Log(c.GetType());
+            //    if (c.GetType() == typeof(PillarElastic))
+            //    {
+            //        currentP = coll.transform.parent.GetComponent<PillarElastic>();
+            //        break;
+
+            //    }
+            //    else if (c.GetType() == typeof(PillarLock))
+            //    {
+            //        currentP = coll.transform.parent.GetComponent<PillarLock>();
+            //        break;
+
+            //    }
+
+            //    else if (c.GetType() == typeof(Pillar))
+            //    {
+            //        currentP = coll.transform.parent.GetComponent<Pillar>();
+            //        break;
+            //    }
+
+            //}
+
+            if (coll.transform.parent != null)
+            {
+                currentP = coll.transform.parent.GetComponent<Pillar>();
+            }
+            else currentP = coll.gameObject.GetComponent<Pillar>();
 
             if (pillarCount == 0)
             { selectedPillars[0] = currentP;
-                pillarCount=1;
+                Debug.Log(currentP.name);
+
+                pillarCount = 1;
             }
             else
             {
-                foreach (PillarController pillar in selectedPillars)
+                foreach (Pillar pillar in selectedPillars)
                 {
                     if (currentP == pillar)
                     {
@@ -70,11 +101,13 @@ public class PlatformCheck : MonoBehaviour {
     public void CheckpointReached()
     {
 
-        for (int j=0; j<pillarCount; j++)
-        {
-            selectedPillars[j].locked = true;
-            selectedPillars[j] = null;
-        }
-        pillarCount = 0;
+        
+       for (int j=0; j<pillarCount; j++)
+       {
+            Debug.Log(selectedPillars.Length);
+           selectedPillars[j].locked = true;
+           selectedPillars[j] = null;
+       }
+       pillarCount = 0;
     }
 }
