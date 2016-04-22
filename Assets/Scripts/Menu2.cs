@@ -23,6 +23,24 @@ public class Menu2 : MonoBehaviour {
 	public void ClickBtn(Button selectedButton)
 	{
 		selectedButton.transform.localScale = new Vector2(.8f, .8f); //Il pulsante si rimpicciolisce
+
+		if (selectedButton.name == "btnStart") 
+		{
+			Application.LoadLevel ("LevelSelection");
+		} 
+		else if (selectedButton.name == "btnOptions") 
+		{
+			Application.LoadLevel ("OptionsMenu");
+		} 
+		else if (selectedButton.name == "btnCredits") 
+		{
+			Application.LoadLevel ("CreditsScene");
+		}
+		else if (selectedButton.name == "btnQuit") 
+		{
+			Application.Quit();
+		}
+
 	}
 
 	public void OverBtn(Button selectedButton)
