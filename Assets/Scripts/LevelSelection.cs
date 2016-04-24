@@ -16,6 +16,7 @@ public class LevelSelection : MonoBehaviour {
 
 	void Start () 
 	{
+		Time.timeScale=1;
 		launch = true;
 		launched = false;
 		GameObject player1 = GameObject.Find ("Player1");
@@ -24,8 +25,12 @@ public class LevelSelection : MonoBehaviour {
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.Escape)){
+		if(Input.GetKeyDown(KeyCode.Space)){
 			StopAllCoroutines();
+		}
+
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			Application.LoadLevel ("Menu2.0");
 		}
 	}
 		
