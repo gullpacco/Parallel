@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                Application.LoadLevel("MenuPrincipale");
+                Application.LoadLevel("Menu2.0");
             }
 
             else if (Input.GetKeyDown(KeyCode.Space))
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.M) && paused)
             {
-                Application.LoadLevel("MenuPrincipale");
+                Application.LoadLevel("Menu2.0");
             }
 
             if (Input.GetKeyDown(KeyCode.R) && paused)
