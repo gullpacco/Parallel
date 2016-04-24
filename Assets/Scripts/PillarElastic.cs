@@ -25,7 +25,7 @@ public class PillarElastic : Pillar
 
         protected override void Start()
     {
-        endPosition = new Vector3(transform.position.x, baseY, transform.position.x);
+        endPosition = new Vector3(transform.position.x, baseY, transform.position.z);
 
 
     }
@@ -100,8 +100,7 @@ public class PillarElastic : Pillar
         {
             if ( transform.position.y != baseY) {
                 StartLerping();
-                isPushed = false;
-                Debug.Log(name + " i'm lerping"); }
+                isPushed = false; }
             else isGoingBack = false;
 
         }

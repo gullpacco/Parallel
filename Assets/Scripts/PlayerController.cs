@@ -323,7 +323,25 @@ public class PlayerController : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Enemy" && canDie)
         {
-            //Application.LoadLevel(Application.loadedLevel);
+            //Time.timeScale = 0.05f;
+            //Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
+            //deaths++;
+            //deathText.text = "" + deaths;
+            //Invoke("Die", 0.15f);
+            //canDie = false;
+            //other.canDie = false;
+            //jumpAudioSource.PlayOneShot(shot);
+            SlowMo();
+
+        }
+
+
+    }
+
+    public void SlowMo()
+    {
+        if (canDie)
+        {
             Time.timeScale = 0.05f;
             Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
             deaths++;
@@ -332,10 +350,7 @@ public class PlayerController : MonoBehaviour {
             canDie = false;
             other.canDie = false;
             jumpAudioSource.PlayOneShot(shot);
-
         }
-
-
     }
 
     void Die()

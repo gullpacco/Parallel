@@ -7,12 +7,13 @@ public class PlatformCheck : MonoBehaviour {
     Pillar[] selectedPillars;
     int pillarCount = 0;
     PlayerController[] players;
-
+    int layerNumber;
 
 
     void Awake() {
         players = GameObject.FindObjectsOfType<PlayerController>();
         selectedPillars = new Pillar[GameObject.FindObjectsOfType<Pillar>().Length];
+        layerNumber = GameObject.FindObjectOfType<PillarElastic>().gameObject.layer;
     }
 
     void Start () {
@@ -65,15 +66,14 @@ public class PlatformCheck : MonoBehaviour {
 
             //}
 
-            if (coll.transform.parent != null)
-            {
+           if (coll.transform.parent != null)
+      
                 currentP = coll.transform.parent.GetComponent<Pillar>();
-            }
-            else currentP = coll.gameObject.GetComponent<Pillar>();
+            
+           else currentP = coll.gameObject.GetComponent<Pillar>();
 
             if (pillarCount == 0)
             { selectedPillars[0] = currentP;
-                Debug.Log(currentP.name);
 
                 pillarCount = 1;
             }
