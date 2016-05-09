@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 
                 if (Input.GetKey(KeyCode.W) && !isJumping)
                 {
-                    if (isGrounded && !isJumping)
+                    if (isGrounded && !isJumping && !locked)
                     {
                         Jump();
                         jumpAudioSource.PlayOneShot(jumpSample);
@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour {
                     body.velocity = new Vector2(body.velocity.y, 0);
                 if (Input.GetKey(KeyCode.DownArrow) && !isJumping)
                 {
-                    if (isGrounded && !isJumping)
+                    if (isGrounded && !isJumping&& !locked)
                     {
                         JumpDown();
                         jumpAudioSource.PlayOneShot(jumpSample);
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour {
         isJumping = true;
         isGrounded = false;
         locked = true;
-        Invoke("Unlock", 0.1f);
+        Invoke("Unlock", 0.5f);
 
     }
 
@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour {
         isJumping = true;
         isGrounded = false;
         locked = true;
-        Invoke("Unlock", 0.1f);
+        Invoke("Unlock", 0.5f);
     }
 
     void Unlock()
