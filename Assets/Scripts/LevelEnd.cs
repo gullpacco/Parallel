@@ -27,7 +27,7 @@ public class LevelEnd : MonoBehaviour {
             if (playerEnded == null)
                 playerEnded = coll.gameObject.name;
             else   if  (coll.gameObject.name != playerEnded) { 
-                    Application.LoadLevel(nextLevel);
+                    //Application.LoadLevel(nextLevel);
                 sm.SetHighScore();
                 GameController.instance.ended = true;
             }

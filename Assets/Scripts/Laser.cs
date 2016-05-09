@@ -22,7 +22,7 @@ public abstract class Laser : MonoBehaviour {
         las.material = LasMaterial;
         particle = transform.GetChild(0).gameObject;
         las.SetPosition(0, transform.position);
-        Debug.Log(transform.position);
+
         las.SetPosition(1, transform.position);
         las.SetWidth(0.2f, .2f);
 
