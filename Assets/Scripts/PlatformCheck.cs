@@ -66,14 +66,19 @@ public class PlatformCheck : MonoBehaviour {
 
             //}
 
-           //if (coll.transform.parent != null)
-      
-           //     currentP = coll.transform.parent.GetComponent<Pillar>();
-            
-           //else currentP = coll.gameObject.GetComponent<Pillar>();
+            //if (coll.transform.parent != null)
 
-            if(coll.transform.parent != null & coll.transform.parent.tag=="Pillar")
-                currentP = coll.transform.parent.GetComponent<Pillar>();
+            //     currentP = coll.transform.parent.GetComponent<Pillar>();
+
+            //else currentP = coll.gameObject.GetComponent<Pillar>();
+
+            if (coll.transform.parent != null)
+            {
+                if (coll.transform.parent.tag == "Pillar")
+                {
+                    currentP = coll.transform.parent.GetComponent<Pillar>();
+                }
+            }
             else currentP = coll.gameObject.GetComponent<Pillar>();
 
             if (pillarCount == 0)
