@@ -14,7 +14,22 @@ public class PillarFree : Pillar {
 	//}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
 	
-	}
+	//}
+
+
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        Debug.Log("Free");
+
+        if (coll.gameObject.tag == "Pillar")
+        {
+            if (coll.gameObject.GetComponent<Rigidbody2D>().isKinematic)
+                body.isKinematic = true;
+        }
+    }
+
+
 }

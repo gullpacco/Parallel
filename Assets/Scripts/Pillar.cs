@@ -73,14 +73,14 @@ public class Pillar : MonoBehaviour
     //{
 
 
-      
+
 
     //}
 
     //protected virtual void OnCollisionStay2D(Collision2D coll)
     //{
 
-        
+
 
     //}
 
