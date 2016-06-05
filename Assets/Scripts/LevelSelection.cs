@@ -23,6 +23,9 @@ public class LevelSelection : MonoBehaviour {
 	public Text txtLevel8;
 	public Text txtLevel9;
 	public Text txtLevel10;
+	
+	public Text txtCancel;
+
 
 	//BlurEffect blur;
 
@@ -32,12 +35,15 @@ public class LevelSelection : MonoBehaviour {
 
 		GameObject player1 = GameObject.Find ("Player1");
 		worldSelection = player1.GetComponent<WorldSelection>();
+		
+		txtCancel=txtCancel.GetComponent<Text>();
+		txtCancel.text="";
 	}
 
 	void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.Space)){
-
+			txtCancel.text="";
 			launched = false;
 			StopAllCoroutines();
 			worldSelection.txtWorld1.color = Color.black;worldSelection.txtWorld2.color = Color.black;worldSelection.txtWorld3.color = Color.black;
@@ -53,6 +59,7 @@ public class LevelSelection : MonoBehaviour {
 	{
 		if (worldSelection.world!=0 && launched!=true && (coll.gameObject==levelPillars[0]||coll.gameObject==levelPillars[1]||coll.gameObject==levelPillars[2]||coll.gameObject==levelPillars[3]||coll.gameObject==levelPillars[4]||coll.gameObject==levelPillars[5]||coll.gameObject==levelPillars[6]||coll.gameObject==levelPillars[7]||coll.gameObject==levelPillars[8]||coll.gameObject==levelPillars[9])) 
 		{
+			txtCancel.text="press space to cancel";
 			if (coll.gameObject == levelPillars [0]) {
 				level = 1;
 				txtLevel1.color = Color.red;txtLevel2.color = Color.black;txtLevel3.color = Color.black;txtLevel4.color = Color.black;txtLevel5.color = Color.black;txtLevel6.color = Color.black;txtLevel7.color = Color.black;txtLevel8.color = Color.black;txtLevel9.color = Color.black;txtLevel10.color = Color.black;
