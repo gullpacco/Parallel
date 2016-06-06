@@ -14,6 +14,10 @@ public class GameController : MonoBehaviour {
     void Awake()
     {
         instance = this;
+        GameObject.Find("Collisions").transform.GetChild(0).gameObject.SetActive(false);
+        GameObject tmp = GameObject.Find("Collisions").transform.GetChild(1).gameObject;
+        tmp.tag = "Ground";
+        tmp.layer = 9;
     }
 
 	// Use this for initialization
