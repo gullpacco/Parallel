@@ -42,7 +42,7 @@ public class Menu2 : MonoBehaviour {
 		}
 
 	}
-
+/*
 	public void OverBtn(Button selectedButton)
 	{
 		selectedButton.transform.localScale = new Vector2(.9f, .9f); //Il pulsante si rimpicciolisce
@@ -52,6 +52,6 @@ public class Menu2 : MonoBehaviour {
 	{
 		selectedButton.transform.localScale = new Vector2(1f, 1f); //Il pulsante si rimpicciolisce
 	}
-
+*/
 
 }
