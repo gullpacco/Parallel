@@ -25,6 +25,10 @@ public class LevelSelection : MonoBehaviour {
 	public Text txtLevel10;
 	
 	public Text txtCancel;
+	
+	public Text txtCountdown;
+	
+	private int countdownN=3;
 
 
 	//BlurEffect blur;
@@ -38,12 +42,16 @@ public class LevelSelection : MonoBehaviour {
 		
 		txtCancel=txtCancel.GetComponent<Text>();
 		txtCancel.text="";
+		
+		txtCountdown=txtCountdown.GetComponent<Text>();
+		txtCountdown.text="";
 	}
 
 	void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.Space)){
-			txtCancel.text="";
+			txtCancel.text=""; txtCountdown.text="";
+			countdownN=3;
 			launched = false;
 			StopAllCoroutines();
 			worldSelection.txtWorld1.color = Color.black;worldSelection.txtWorld2.color = Color.black;worldSelection.txtWorld3.color = Color.black;
@@ -53,6 +61,32 @@ public class LevelSelection : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			Application.LoadLevel ("Menu2.0");
 		}
+		
+		if(launched==true)
+		{
+			if(countdownN==3)
+			{
+				txtCountdown.text="III";
+			}
+			else if(countdownN==2)
+			{
+				txtCountdown.text="II";
+			}
+			else if(countdownN==1)
+			{
+				txtCountdown.text="I";
+			}
+			else
+			{
+				txtCountdown.text="";
+			}
+			
+			if(launched==true)
+			{
+				StartCoroutine("countdown");
+			}
+		}
+		
 	}
 		
 	void OnTriggerEnter2D(Collider2D coll)
@@ -94,10 +128,13 @@ public class LevelSelection : MonoBehaviour {
 
 			if (worldSelection.world == 1) {
 				StartCoroutine(preloadLevel (level + 1));
+				//StartCoroutine(countdown());
 			} else if (worldSelection.world == 2) {
 				StartCoroutine(preloadLevel (level + 11));
+				//StartCoroutine(countdown());
 			} else if (worldSelection.world == 3) {
 				StartCoroutine(preloadLevel (level + 21));
+				//StartCoroutine(countdown());
 			}
 		}
 	}
@@ -106,13 +143,21 @@ public class LevelSelection : MonoBehaviour {
 	{
 		launched = true;
 
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(4f);
 
 		AsyncOperation async=Application.LoadLevelAsync(levelToPreload);
 
 		launched = false;
 
 		StopAllCoroutines();
+	}
+	
+	IEnumerator countdown() 
+	{
+		yield return new WaitForSeconds(1f);
+		
+		countdownN--;
+		StopCoroutine("countdown");
 	}
 }
 
