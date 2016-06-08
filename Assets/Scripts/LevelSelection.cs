@@ -53,6 +53,7 @@ public class LevelSelection : MonoBehaviour {
 			txtCancel.text=""; txtCountdown.text="";
 			countdownN=3;
 			launched = false;
+			worldSelection.world=0;
 			StopAllCoroutines();
 			worldSelection.txtWorld1.color = Color.black;worldSelection.txtWorld2.color = Color.black;worldSelection.txtWorld3.color = Color.black;
 			txtLevel1.color = Color.black;txtLevel2.color = Color.black;txtLevel3.color = Color.black;txtLevel4.color = Color.black;txtLevel5.color = Color.black;txtLevel6.color = Color.black;txtLevel7.color = Color.black;txtLevel8.color = Color.black;txtLevel9.color = Color.black;txtLevel10.color = Color.black;
