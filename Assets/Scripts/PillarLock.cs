@@ -21,16 +21,19 @@ public class PillarLock : Pillar
 
 
             {
-                body.isKinematic = true;
-                finalPosReached = true;
-                body.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-
+                StartCoroutine(Lock());
             }
         }
     }
 
    
-  
+   IEnumerator Lock()
+    {
+        yield return new WaitForEndOfFrame();
+        body.isKinematic = true;
+        finalPosReached = true;
+        body.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+    }
 
     //protected override void UnKinematic()
     //{

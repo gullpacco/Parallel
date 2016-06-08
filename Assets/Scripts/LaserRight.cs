@@ -26,7 +26,7 @@ public class LaserRight : Laser {
         if (hit.collider != null)
         {
             distanceToReach = hit.point.x;
-            if (hit.collider.tag == "Player")
+            if (hit.collider.tag == "Player" && hit.distance<=currentEnd)
                 hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
 
         }

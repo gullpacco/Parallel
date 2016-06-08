@@ -27,8 +27,10 @@ public class LaserLeft : Laser {
         {
             distanceToReach = hit.point.x;
 
-            if (hit.collider.tag == "Player")
+            if (hit.collider.tag == "Player" && hit.distance <= Mathf.Abs(currentEnd - transform.position.x)) 
+            {
                 hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
+            }
 
         }
         else distanceToReach = -1000;
