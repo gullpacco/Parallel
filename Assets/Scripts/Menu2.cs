@@ -30,23 +30,33 @@ public class Menu2 : MonoBehaviour {
 		
     }
 	
-	
-	
 	public void EnableAnimator(Animator anim)
 	{
-		anim.SetBool("isDisplayed", true);
+		anim.SetBool("atWorld1", true);
 	}
 	
 	public void EnableFirstLeft(Animator anim)
 	{
-		anim.SetBool("isDisplayed", false);
-		anim.SetBool("isWorld1Displayed", true);
+		anim.SetBool("atWorld1", false);
+		anim.SetBool("atWorld2", true);
+	}
+	
+	public void DisableFirstLeft(Animator anim)
+	{
+		anim.SetBool("atWorld1", true);
+		anim.SetBool("atWorld2", false);
 	}
 	
 	public void EnableSecondLeft(Animator anim)
 	{
-		anim.SetBool("isWorld1Displayed", false);
-		anim.SetBool("isWorld2Displayed", true);
+		anim.SetBool("atWorld2", false);
+		anim.SetBool("atWorld3", true);
+	}
+	
+	public void DisableSecondLeft(Animator anim)
+	{
+		anim.SetBool("atWorld2", true);
+		anim.SetBool("atWorld3", false);
 	}
 
 	public void DisableMenuAnimator(Animator anim)
