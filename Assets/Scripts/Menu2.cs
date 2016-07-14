@@ -9,6 +9,9 @@ public class Menu2 : MonoBehaviour {
 	public Button btnCredits;
 	public Button btnQuit;
 	
+	public Animator menuAnim;
+	public Animator levelAnim;
+	
 	// Use this for initialization
 	/*void Start () {
 		Cursor.visible = false;
@@ -28,6 +31,11 @@ public class Menu2 : MonoBehaviour {
     }
     void Update() {
 		
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			DisableMenuAnimator(menuAnim);
+			DisableAnimator(levelAnim);
+		}
     }
 	
 	public void EnableAnimator(Animator anim)
