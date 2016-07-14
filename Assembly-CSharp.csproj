@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\LaserUp.cs" />
      <Compile Include="Assets\Scripts\LevelEnd.cs" />
      <Compile Include="Assets\Scripts\LevelSelection.cs" />
+     <Compile Include="Assets\Scripts\LevelSelection2.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Menu2.cs" />
      <Compile Include="Assets\Scripts\Pillar.cs" />
@@ -86,6 +87,7 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Tutorial_PilastriSoloFree.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Cristian_01.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\Tutorial_PilastriSoloFree2.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\Tiled2Unity\Imported\Pietro_Medio01.tiled2unity.xml" />
      <None Include="Assets\Shaders\WaterBlurModified.shader" />

@@ -64,6 +64,7 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Tutorial_PilastriSoloFree.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Cristian_01.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\Tutorial_PilastriSoloFree2.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\Tiled2Unity\Imported\Pietro_Medio01.tiled2unity.xml" />
      <None Include="Assets\Shaders\WaterBlurModified.shader" />
