@@ -35,6 +35,13 @@ public class Menu2 : MonoBehaviour {
 		anim.SetBool("atWorld1", true);
 	}
 	
+	public void DisableAnimator(Animator anim)
+	{
+		anim.SetBool("atWorld1", false);
+		anim.SetBool("atWorld2", false);
+		anim.SetBool("atWorld3", false);
+	}
+	
 	public void EnableFirstLeft(Animator anim)
 	{
 		anim.SetBool("atWorld1", false);
