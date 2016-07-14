@@ -25,10 +25,11 @@ public class Menu2 : MonoBehaviour {
 			Cursor.visible = true;
 		}
 	}*/
+
+	void Start() {
+		Time.timeScale=1;
+	}
 	
-    void Start() {
-       
-    }
     void Update() {
 		
 		if(Input.GetKeyDown(KeyCode.Escape))
@@ -113,6 +114,11 @@ public class Menu2 : MonoBehaviour {
 			Application.Quit();
 		}
 
+	}
+	
+	public void loadLevel (string levelName)
+	{
+		Application.LoadLevel(levelName);
 	}
 /*
 	public void OverBtn(Button selectedButton)
