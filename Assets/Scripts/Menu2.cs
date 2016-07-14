@@ -8,36 +8,10 @@ public class Menu2 : MonoBehaviour {
 	public Button btnOptions;
 	public Button btnCredits;
 	public Button btnQuit;
-	
-	public Animator menuAnim;
-	public Animator levelAnim;
-	
-	// Use this for initialization
-	/*void Start () {
-		Cursor.visible = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			Cursor.visible = true;
-		}
-	}*/
 
 	void Start() {
 		Time.timeScale=1;
 	}
-	
-    void Update() {
-		
-		if(Input.GetKeyDown(KeyCode.Escape))
-		{
-			DisableMenuAnimator(menuAnim);
-			DisableAnimator(levelAnim);
-		}
-    }
 	
 	public void EnableAnimator(Animator anim)
 	{
@@ -120,16 +94,16 @@ public class Menu2 : MonoBehaviour {
 	{
 		Application.LoadLevel(levelName);
 	}
-/*
+
 	public void OverBtn(Button selectedButton)
 	{
-		selectedButton.transform.localScale = new Vector2(.9f, .9f); //Il pulsante si rimpicciolisce
+		selectedButton.transform.localScale = new Vector2(.7f, .7f); //Il pulsante si rimpicciolisce
 	}
 
 	public void OutBtn(Button selectedButton)
 	{
 		selectedButton.transform.localScale = new Vector2(1f, 1f); //Il pulsante si rimpicciolisce
 	}
-*/
+
 
 }
