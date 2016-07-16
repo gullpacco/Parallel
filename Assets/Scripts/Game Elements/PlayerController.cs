@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        GameObject firstGo = GameObject.Find("Checkpoint");
+        firstGo.transform.position = new Vector3(transform.position.x, transform.position.y);
         body = GetComponent<Rigidbody2D>();
         baseSpeed = speed;
         cpm = GameObject.FindObjectOfType<CheckPointManager>();

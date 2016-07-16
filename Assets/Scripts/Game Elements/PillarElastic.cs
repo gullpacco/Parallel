@@ -125,7 +125,7 @@ public class PillarElastic : Pillar
         }
     }
 
-    void OnTriggernStay2D(Collider2D coll)
+    void OnTriggerStay2D(Collider2D coll)
     {
         if (coll.tag != "Enemy" && coll.tag!= "Triggers")
         {
@@ -143,6 +143,29 @@ public class PillarElastic : Pillar
             }
         }
     }
+
+    //void OnCollisionStay2D(Collision2D coll)
+    //{
+
+    //    Debug.Log(coll.gameObject.tag);
+    //    if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Triggers")
+    //    {
+
+    //        if (coll.gameObject.tag == "PlayerGround")
+    //        {
+    //            isFree = false;
+    //            isGoingBack = false;
+    //            isPushed = true;
+    //        }
+    //        if (!isPushed)
+    //        {
+    //            isFree = false;
+    //            isGoingBack = false;
+    //        }
+    //    }
+    //}
+
+
 
 
     void OnTriggerExit2D(Collider2D coll)

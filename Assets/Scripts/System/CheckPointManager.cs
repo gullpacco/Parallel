@@ -7,7 +7,7 @@ public class CheckPointManager : MonoBehaviour {
     int currentCheckpoint = -1;
     PlayerController[] players;
     Pillar[] pillars;
-    ShooterController[] shooters;
+  //  ShooterController[] shooters;
 
     void Awake()
     {
@@ -15,7 +15,7 @@ public class CheckPointManager : MonoBehaviour {
         players = GameObject.FindObjectsOfType<PlayerController>();
 
         pillars = GameObject.FindObjectsOfType<Pillar>();
-        shooters = GameObject.FindObjectsOfType<ShooterController>();
+       // shooters = GameObject.FindObjectsOfType<ShooterController>();
     }
 
 	// Use this for initialization
@@ -37,10 +37,10 @@ public class CheckPointManager : MonoBehaviour {
             pillars[j].ResetPillar();
         }
 
-        for (int k=0; k<shooters.Length; k++)
-        {
-            shooters[k].ResetShooter();
-        }
+        //for (int k=0; k<shooters.Length; k++)
+        //{
+        //    shooters[k].ResetShooter();
+        //}
         //if (currentCheckpoint >= 0)
         //{ 
          return checkpoints[currentCheckpoint].gameObject.transform.position.x;

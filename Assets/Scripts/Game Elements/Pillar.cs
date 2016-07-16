@@ -6,12 +6,15 @@ public class Pillar : MonoBehaviour
 
 
     protected float baseY;
+    protected bool changingColour = false;
 
     [HideInInspector]
     public bool locked;
     protected bool [] playerContact = new bool [2];
     protected bool isGrounded;
     protected bool finalPosReached;
+    protected Color baseColor;
+    protected SpriteRenderer sr;
 
     protected Rigidbody2D body;
 
@@ -19,7 +22,8 @@ public class Pillar : MonoBehaviour
     protected virtual void Awake()
     {
         baseY = transform.position.y;
-
+        sr = GetComponent<SpriteRenderer>();
+        baseColor = sr.color;
         body = GetComponent<Rigidbody2D>();
 
     }
@@ -32,10 +36,7 @@ public class Pillar : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-
-    }
+   
 
     public virtual void ResetPillar()
     {
@@ -48,6 +49,8 @@ public class Pillar : MonoBehaviour
             Invoke("Free", 0.2f);
             //iskin?
             body.isKinematic = false;
+            sr.color = baseColor;
+            changingColour = false;
         }
 
     }

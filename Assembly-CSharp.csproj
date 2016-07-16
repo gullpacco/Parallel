@@ -45,35 +45,33 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BlurControl.cs" />
-     <Compile Include="Assets\Scripts\BulletController.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\CheckPointManager.cs" />
-     <Compile Include="Assets\Scripts\Checkpoint.cs" />
-     <Compile Include="Assets\Scripts\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\FallingEnemyController.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\Laser.cs" />
-     <Compile Include="Assets\Scripts\LaserDown.cs" />
-     <Compile Include="Assets\Scripts\LaserLeft.cs" />
-     <Compile Include="Assets\Scripts\LaserRight.cs" />
-     <Compile Include="Assets\Scripts\LaserUp.cs" />
-     <Compile Include="Assets\Scripts\LevelEnd.cs" />
-     <Compile Include="Assets\Scripts\LevelSelection.cs" />
-     <Compile Include="Assets\Scripts\LevelSelection2.cs" />
-     <Compile Include="Assets\Scripts\MainMenu.cs" />
-     <Compile Include="Assets\Scripts\Menu2.cs" />
-     <Compile Include="Assets\Scripts\Pillar.cs" />
-     <Compile Include="Assets\Scripts\PillarController.cs" />
-     <Compile Include="Assets\Scripts\PillarElastic.cs" />
-     <Compile Include="Assets\Scripts\PillarFree.cs" />
-     <Compile Include="Assets\Scripts\PillarLock.cs" />
-     <Compile Include="Assets\Scripts\PlatformCheck.cs" />
-     <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\PlayerGround.cs" />
-     <Compile Include="Assets\Scripts\ScoreManager.cs" />
-     <Compile Include="Assets\Scripts\ShooterController.cs" />
-     <Compile Include="Assets\Scripts\WorldSelection.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Laser.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\LaserDown.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\LaserLeft.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\LaserRight.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\LaserUp.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\ObjectMovement.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Pillar.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\PillarElastic.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\PillarFree.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\PillarLock.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelEnd.cs" />
+     <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelSelection.cs" />
+     <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelSelection2.cs" />
+     <Compile Include="Assets\Scripts\Gui&amp;Menu\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Gui&amp;Menu\Menu2.cs" />
+     <Compile Include="Assets\Scripts\Gui&amp;Menu\WorldSelection.cs" />
+     <Compile Include="Assets\Scripts\OldScripts\BulletController.cs" />
+     <Compile Include="Assets\Scripts\OldScripts\PillarController.cs" />
+     <Compile Include="Assets\Scripts\OldScripts\ShooterController.cs" />
+     <Compile Include="Assets\Scripts\System\CameraController.cs" />
+     <Compile Include="Assets\Scripts\System\CheckPointManager.cs" />
+     <Compile Include="Assets\Scripts\System\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\System\GameController.cs" />
+     <Compile Include="Assets\Scripts\System\PlatformCheck.cs" />
+     <Compile Include="Assets\Scripts\System\PlayerGround.cs" />
+     <Compile Include="Assets\Scripts\System\ScoreManager.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileAnimator.cs" />
@@ -117,17 +115,11 @@
      <None Include="Assets\Tiled2Unity\Imported\Giorsetti_DiffElevata3.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
