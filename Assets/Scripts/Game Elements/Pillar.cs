@@ -10,6 +10,8 @@ public class Pillar : MonoBehaviour
 
     [HideInInspector]
     public bool locked;
+    public bool isPushed;
+
     protected bool [] playerContact = new bool [2];
     protected bool isGrounded;
     protected bool finalPosReached;

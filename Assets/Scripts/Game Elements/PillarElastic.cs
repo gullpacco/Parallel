@@ -6,7 +6,6 @@ public class PillarElastic : Pillar
 
     bool isFree;
     bool isGoingBack;
-    bool isPushed;
     public float resettingSpeed;
     float startTime;
     float journeyLength;
@@ -98,7 +97,7 @@ public class PillarElastic : Pillar
         yield return new WaitForSeconds(0.2f);
         if (isFree)
         {
-            if ( transform.position.y != baseY) {
+            if ( transform.position.y <= baseY-0.001f || transform.position.y >= baseY + 0.001f) {
                 StartLerping();
                 isPushed = false; }
             else isGoingBack = false;
@@ -109,38 +108,60 @@ public class PillarElastic : Pillar
 
    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.tag != "Enemy" && coll.tag != "Triggers")
-        {
+        //if (coll.tag != "Enemy" && coll.tag != "Triggers")
+        //{
+        //if (coll.tag == "PlayerGround")
+        //{
+            Debug.Log( "enter " + Time.time);
             if (coll.tag == "PlayerGround")
             {
                 isFree = false;
                 isGoingBack = false;
                 isPushed = true;
             }
-            if (!isPushed)
-            {
+
+
+        if (coll.tag == "Pillar")
+        {
+            if (!coll.GetComponent<Pillar>().isPushed && !isPushed)
+                isFree = true;
+            else
                 isFree = false;
-                isGoingBack = false;
-            }
+
         }
+        //if (!isPushed)
+        //{
+        //    isFree = false;
+        //    isGoingBack = false;
+        //}
+        //  }
+
+        //else if( coll.tag == "Pillar")
+        //{
+        //    if (!coll.GetComponent<Pillar>().isPushed && isPushed)
+        //    {
+        //        isFree = false;
+        //    }
+        //    else if (coll.GetComponent<Pillar>().isPushed && isPushed)
+        //    {
+        //        isFree = false;
+        //            coll.GetComponent<Pillar>().isPushed = false;
+        //    }
+        //}
+        //}
     }
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.tag != "Enemy" && coll.tag!= "Triggers")
-        {
+        
 
-            if (coll.tag == "PlayerGround")
-            {
+        if (coll.tag == "Pillar")
+        {
+            if (!coll.GetComponent<Pillar>().isPushed &&!isPushed)
+                isFree = true;
+            else
                 isFree = false;
-                isGoingBack = false;
-                isPushed = true;
-            }
-            if (!isPushed)
-            {
-                isFree = false;
-                isGoingBack = false;
-            }
+               
         }
     }
 
@@ -171,14 +192,20 @@ public class PillarElastic : Pillar
     void OnTriggerExit2D(Collider2D coll)
     {
 
-
-
+        
         // if (coll.transform.tag == "Player")
-        if (coll.tag != "Enemy" && coll.tag != "Triggers")
+        if (coll.tag == "PlayerGround" || coll.tag == "Pillar")
         {
             //playerContact[0] = false;
             //Invoke("StartLerping", 0.5f);
+          Debug.Log( "exit " + Time.time);
+         //   if (isPushed)
+                isPushed = false;
+           // else
             isFree = true;
+
+         
+            
             }
 
             

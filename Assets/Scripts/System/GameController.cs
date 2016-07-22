@@ -8,20 +8,23 @@ public class GameController : MonoBehaviour {
     public GameObject pauseMenu;
     public static GameController instance;
     public bool ended;
+    public bool complete;
     public GameObject [] textToHide;
     public Text hideText;
 
     void Awake()
     {
         instance = this;
-        GameObject collisions = GameObject.Find("Collisions").transform.GetChild(0).gameObject;
-        if(collisions.activeSelf)
-            collisions.SetActive(false);
-        GameObject tmp = GameObject.Find("Collisions").transform.GetChild(1).gameObject;
-        tmp.tag = "Ground";
-        tmp.layer = 9;
+        if (!complete)
+        {
+            GameObject collisions = GameObject.Find("Collisions").transform.GetChild(0).gameObject;
+            if (collisions.activeSelf)
+                collisions.SetActive(false);
+            GameObject tmp = GameObject.Find("Collisions").transform.GetChild(1).gameObject;
+            tmp.tag = "Ground";
+            tmp.layer = 9;
+        }
     }
-
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = 1;
