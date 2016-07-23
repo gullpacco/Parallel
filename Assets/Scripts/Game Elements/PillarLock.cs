@@ -35,6 +35,7 @@ public class PillarLock : Pillar
 
     void Update()
     {
+
         if (changingColour)
         {
             float distCovered = (Time.time - startTime) * colourSpeed;

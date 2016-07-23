@@ -20,6 +20,10 @@ public class Pillar : MonoBehaviour
 
     protected Rigidbody2D body;
 
+    public bool pushedByPlayer;
+    public bool pushedByPillar;
+    public Pillar pillarPushing;
+
 
     protected virtual void Awake()
     {

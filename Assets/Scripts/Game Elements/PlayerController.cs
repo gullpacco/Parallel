@@ -266,7 +266,7 @@ public class PlayerController : MonoBehaviour {
 	}
     void OnCollisionStay2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Ground"|| coll.gameObject.tag == "Pillar")
+        if (coll.gameObject.tag == "Ground"|| coll.gameObject.tag.Contains("Pillar") || coll.gameObject.tag == "PillarElastic")
         {
 
             isJumping = false;
@@ -275,7 +275,7 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionExit2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Ground" || coll.gameObject.tag == "Pillar")
+        if (coll.gameObject.tag == "Ground" || coll.gameObject.tag == "Pillar" || coll.gameObject.tag == "PillarElastic")
         {
 
             isJumping = true;

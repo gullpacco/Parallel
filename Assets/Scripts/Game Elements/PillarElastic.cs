@@ -12,6 +12,8 @@ public class PillarElastic : Pillar
     Vector3 startPosition, endPosition;
     bool[] pillarsInContact = new bool[2];
 
+  
+
     protected override void Awake()
     {
         base.Awake();
@@ -36,9 +38,9 @@ public class PillarElastic : Pillar
         //    isFree = false;
         //else isFree = true;
 
-        StartCoroutine(CheckCollision());
+       StartCoroutine( CheckCollision());
 
-        if (!isFree)
+        if (pushedByPlayer||pushedByPillar)
         {
             isGoingBack = false;
         }
@@ -84,7 +86,8 @@ public class PillarElastic : Pillar
         base.ResetPillar();
         if (!locked)
         {
-            isFree = false;
+            pushedByPlayer = false;
+            pushedByPillar = false;
             isGoingBack = false;
         }
 
@@ -95,38 +98,67 @@ public class PillarElastic : Pillar
     IEnumerator CheckCollision()
     {
         yield return new WaitForSeconds(0.2f);
-        if (isFree)
+        if (!pushedByPillar && !pushedByPlayer)
         {
-            if ( transform.position.y <= baseY-0.001f || transform.position.y >= baseY + 0.001f) {
+            if (transform.position.y <= baseY - 0.001f || transform.position.y >= baseY + 0.001f)
+            {
                 StartLerping();
-                isPushed = false; }
+            }
             else isGoingBack = false;
 
         }
         StopAllCoroutines();
     }
 
-   void OnTriggerEnter2D(Collider2D coll)
+    //void CheckCollision()
+    //{
+    //   // yield return new WaitForSeconds(0.2f);
+
+
+
+    //    if (!pushedByPillar && !pushedByPlayer)
+    //    {
+    //        if (transform.position.y <= baseY - 0.001f || transform.position.y >= baseY + 0.001f)
+    //        {
+    //            StartLerping();
+    //        }
+    //        else isGoingBack = false;
+
+    //    }
+    //   // StopAllCoroutines();
+    //}
+
+    void OnTriggerEnter2D(Collider2D coll)
     {
         //if (coll.tag != "Enemy" && coll.tag != "Triggers")
         //{
         //if (coll.tag == "PlayerGround")
         //{
-            Debug.Log( "enter " + Time.time);
             if (coll.tag == "PlayerGround")
             {
-                isFree = false;
+                //isFree = false;
                 isGoingBack = false;
-                isPushed = true;
+            //isPushed = true;
+            pushedByPlayer = true;
+            pushedByPillar = false;
+            pillarPushing = null;
             }
 
 
-        if (coll.tag == "Pillar")
+        if (coll.tag == "PillarElastic")
         {
-            if (!coll.GetComponent<Pillar>().isPushed && !isPushed)
-                isFree = true;
-            else
-                isFree = false;
+            Pillar pillar = coll.GetComponent<Pillar>();
+            Debug.Log(pillar);
+            if ((pillar.pushedByPillar || pillar.pushedByPlayer) && !pushedByPlayer)
+            {
+                if (pillar.pillarPushing != this)
+                {
+                    pushedByPillar = true;
+                    pillarPushing = pillar;
+                }
+
+
+            }
 
         }
         //if (!isPushed)
@@ -153,15 +185,35 @@ public class PillarElastic : Pillar
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        
 
-        if (coll.tag == "Pillar")
+        if (coll.tag == "PlayerGround")
         {
-            if (!coll.GetComponent<Pillar>().isPushed &&!isPushed)
-                isFree = true;
-            else
-                isFree = false;
-               
+            //isFree = false;
+            isGoingBack = false;
+            //isPushed = true;
+            pushedByPlayer = true;
+            pushedByPillar = false;
+            pillarPushing = null;
+        }
+
+
+        if (coll.tag == "PillarElastic")
+        {
+            Pillar pillar = coll.GetComponent<Pillar>();
+            if ((pillar.pushedByPillar || pillar.pushedByPlayer) && !pushedByPlayer)
+            {
+                if (pillar.pillarPushing != this)
+                {
+                    pushedByPillar = true;
+                    
+                    pillarPushing = pillar;
+                }
+
+
+
+            }
+
+
         }
     }
 
@@ -192,21 +244,28 @@ public class PillarElastic : Pillar
     void OnTriggerExit2D(Collider2D coll)
     {
 
-        
+
         // if (coll.transform.tag == "Player")
-        if (coll.tag == "PlayerGround" || coll.tag == "Pillar")
+        if (coll.tag == "PlayerGround")
+            pushedByPlayer = false;
+        if (coll.tag == "PillarElastic")
         {
-            //playerContact[0] = false;
-            //Invoke("StartLerping", 0.5f);
-          Debug.Log( "exit " + Time.time);
-         //   if (isPushed)
-                isPushed = false;
-           // else
-            isFree = true;
+            pushedByPillar = false;
+
+            pillarPushing = null;
+        }
+        //{
+        //    //playerContact[0] = false;
+        //    //Invoke("StartLerping", 0.5f);
+        //  Debug.Log( "exit " + Time.time);
+        // //   if (isPushed)
+        //        isPushed = false;
+        //   // else
+        //    isFree = true;
 
          
             
-            }
+            
 
             
             
@@ -235,7 +294,7 @@ public class PillarElastic : Pillar
 
         void StartLerping()
     {
-        if (isFree)
+        if (!pushedByPillar && !pushedByPlayer && !isGoingBack)
         {
             isGoingBack = true;
             body.velocity = new Vector2(0, 0);
@@ -250,5 +309,12 @@ public class PillarElastic : Pillar
     //    //if (!playerContact[0])
     //     //   body.isKinematic = false;
 
+    //}
+
+    //bool PlayerIsPushing()
+    //{
+    //    if (pushedByPillar)
+    //        return PlayerIsPushing();
+    //    return pushedByPlayer;
     //}
 }
