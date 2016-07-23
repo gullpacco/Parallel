@@ -97,7 +97,7 @@ public class PillarElastic : Pillar
 
     IEnumerator CheckCollision()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForFixedUpdate();
         if (!pushedByPillar && !pushedByPlayer)
         {
             if (transform.position.y <= baseY - 0.001f || transform.position.y >= baseY + 0.001f)
