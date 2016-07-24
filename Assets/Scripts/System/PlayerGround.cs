@@ -39,4 +39,10 @@ public class PlayerGround : MonoBehaviour {
     }
 
 
+    public void SetSliderSpeed(float sSpeed)
+    {
+        parentPlayer.SetSliderSpeed(sSpeed);
+        Debug.Log("speed");
+
+    }
 }

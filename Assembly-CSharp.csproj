@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Game Elements\PillarFree.cs" />
      <Compile Include="Assets\Scripts\Game Elements\PillarLock.cs" />
      <Compile Include="Assets\Scripts\Game Elements\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Slider.cs" />
      <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelEnd.cs" />
      <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelSelection.cs" />
      <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelSelection2.cs" />

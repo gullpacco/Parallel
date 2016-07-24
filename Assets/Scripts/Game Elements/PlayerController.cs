@@ -6,16 +6,14 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public bool isOne;
-    private float baseSpeed;
+    private float sliderSpeed;
     public float speed;
     public float jumpForce;
     public bool canDie = true;
      bool isGrounded=true;
-    bool isFighting;
     int deaths;
     Rigidbody2D body;
      Text deathText;
-    public float fightTime = 1;
     public PlayerController other;
     public GameObject currentEnemy;
     bool canGoForward=true;
@@ -26,6 +24,7 @@ public class PlayerController : MonoBehaviour {
     public float screenHeight = 10f;
     public float groundRadius;
     CheckPointManager cpm;
+
 
     public Transform groundCheck;
     public LayerMask whatIsGround;
@@ -45,7 +44,7 @@ public class PlayerController : MonoBehaviour {
         GameObject firstGo = GameObject.Find("Checkpoint");
         firstGo.transform.position = new Vector3(transform.position.x, transform.position.y);
         body = GetComponent<Rigidbody2D>();
-        baseSpeed = speed;
+        sliderSpeed = 0;
         cpm = GameObject.FindObjectOfType<CheckPointManager>();
 
 		jumpAudioSource = GetComponent<AudioSource>();
@@ -69,6 +68,10 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         StartCoroutine(SaveNewY());
+        if (!isGrounded)
+        {
+            sliderSpeed = 0;
+        }
         
        if(canDie) {
             //if (!locked)
@@ -122,16 +125,13 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
 
-                //if (Input.GetKeyDown(KeyCode.A))
-                //{
-                //    Fight();
-                //}
+             
 
                 if (Input.GetKey(KeyCode.D) && canGoForward)
                 {
                     //transform.Translate(speed * Time.deltaTime, 0, 0);
                     //   transform.localPosition += transform.forward * Time.deltaTime * 6f;
-                    body.velocity = new Vector2(speed, body.velocity.y);
+                    body.velocity = new Vector2(speed + sliderSpeed, body.velocity.y);
 
                 }
 
@@ -139,13 +139,13 @@ public class PlayerController : MonoBehaviour {
                 else if (Input.GetKey(KeyCode.A) && canGoBack)
                 {
                     // transform.Translate(-speed * Time.deltaTime, 0, 0);
-                    body.velocity = new Vector2(-speed, body.velocity.y);
+                    body.velocity = new Vector2(-speed + sliderSpeed, body.velocity.y);
 
                 }
 
                 else
                 {
-                    body.velocity = new Vector2(0, body.velocity.y);
+                    body.velocity = new Vector2(sliderSpeed, body.velocity.y);
 
                 }
 
@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour {
                 if (Input.GetKey(KeyCode.RightArrow) && canGoForward)
                 {
                     //transform.Translate(speed * Time.deltaTime, 0, 0);
-                    body.velocity = new Vector2(speed, body.velocity.y);
+                    body.velocity = new Vector2(speed +sliderSpeed, body.velocity.y);
 
                 }
 
@@ -178,13 +178,13 @@ public class PlayerController : MonoBehaviour {
                 else if (Input.GetKey(KeyCode.LeftArrow) && canGoBack)
                 {
                     //transform.Translate(-speed * Time.deltaTime, 0, 0);
-                    body.velocity = new Vector2(-speed, body.velocity.y);
+                    body.velocity = new Vector2(-speed + sliderSpeed, body.velocity.y);
 
                 }
 
                 else
                 {
-                    body.velocity = new Vector2(0, body.velocity.y);
+                    body.velocity = new Vector2(sliderSpeed, body.velocity.y);
 
                 }
 
@@ -253,11 +253,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    void Fight()
-    {
-        isFighting = true;
-        Invoke("StopFighting", fightTime);
-    }
+   
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
@@ -364,6 +360,11 @@ public class PlayerController : MonoBehaviour {
         other.gameObject.transform.position = new Vector3(cpm.Respawn(), other.gameObject.transform.position.y, transform.position.z);
         canDie = true;
         other.canDie = true;
+    }
+
+    public void SetSliderSpeed(float sSpeed)
+    {
+        sliderSpeed = sSpeed;
     }
 
     //void EnemyFollow()
