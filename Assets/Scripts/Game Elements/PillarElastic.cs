@@ -33,7 +33,7 @@ public class PillarElastic : Pillar
     // Update is called once per frame
     void FixedUpdate()
     {
-       
+        Debug.Log(isGoingBack);
 
        StartCoroutine( CheckCollision());
 
@@ -77,7 +77,7 @@ public class PillarElastic : Pillar
 
     IEnumerator CheckCollision()
     {
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(0.1f);
         if (!pushedByPillar && !pushedByPlayer)
         {
             if (transform.position.y != baseY)
@@ -186,7 +186,7 @@ public class PillarElastic : Pillar
     {
         if (!pushedByPillar && !pushedByPlayer && !isGoingBack)
         {
-            Debug.Log("StartLerping");
+
             isGoingBack = true;
             body.velocity = new Vector2(0, 0);
             startTime = Time.time;

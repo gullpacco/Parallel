@@ -17,12 +17,47 @@ public class GameController : MonoBehaviour {
         instance = this;
         if (!complete)
         {
-            GameObject collisions = GameObject.Find("Collision").transform.GetChild(0).gameObject;
-            if (collisions.activeSelf)
-                collisions.SetActive(false);
-            GameObject tmp = GameObject.Find("Collisions").transform.GetChild(1).gameObject;
-            tmp.tag = "Ground";
-            tmp.layer = 9;
+
+
+            GameObject[] gos = (GameObject[])FindObjectsOfType(typeof(GameObject));
+            GameObject collisions;
+            GameObject tmp;
+            for (int i = 0; i < gos.Length; i++)
+            {
+                if (gos[i].name.Contains("Collisions"))
+                {
+                    Debug.Log("OK");
+                    if (gos[i].transform.childCount > 1)
+                    {
+                        collisions = gos[i].transform.GetChild(0).gameObject;
+                        if (collisions.activeSelf)
+                            collisions.SetActive(false);
+                        tmp = gos[i].transform.GetChild(1).gameObject;
+
+                    }
+                    else
+                        tmp = gos[i].transform.GetChild(0).gameObject;
+                    tmp.tag = "Ground";
+                    tmp.layer = 9;
+
+                }
+
+               else if (gos[i].name.Contains("Lava"))
+                {
+                    Debug.Log("Lava");
+                    if (gos[i].transform.childCount > 1)
+                    {
+
+                        tmp = gos[i].transform.GetChild(1).gameObject;
+
+                    }
+                    else
+                        tmp = gos[i].transform.GetChild(0).gameObject;
+                    tmp.tag = "Enemy";
+                    tmp.layer = 16;
+
+                }
+            }
         }
     }
 	// Use this for initialization

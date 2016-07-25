@@ -22,7 +22,7 @@ public class PillarFree : Pillar {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log("Free");
+
 
         if (coll.gameObject.tag == "Pillar")
         {
