@@ -10,7 +10,6 @@ public class PillarElastic : Pillar
     float startTime;
     float journeyLength;
     Vector3 startPosition, endPosition;
-    bool[] pillarsInContact = new bool[2];
 
   
 
@@ -34,9 +33,7 @@ public class PillarElastic : Pillar
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if (pillarsInContact[0] | pillarsInContact[1] | playerContact[0])
-        //    isFree = false;
-        //else isFree = true;
+       
 
        StartCoroutine( CheckCollision());
 
@@ -48,34 +45,17 @@ public class PillarElastic : Pillar
         //lerp
         if (isGoingBack)
         {
-           // if (transform.position.y > baseY)
             {
-                //transform.Translate(0, -resettingSpeed * Time.deltaTime, 0);
-
-                //if (transform.position.y < baseY + 0.01f)
-                //{
-                //    transform.position = new Vector3(transform.position.x, baseY, transform.position.z);
-                //    isGoingBack = false;
-                //}
-
+                
                 float distCovered = (Time.time - startTime) * resettingSpeed;
                 float fracJourney = Mathf.Abs(distCovered / journeyLength);
                 transform.position = Vector3.Lerp(startPosition, endPosition, fracJourney);
-                //Debug.Log(distCovered);
-                
+                if (transform.position.y == baseY)
+                isGoingBack = false;
             }
 
         }
-        //if (transform.position.y <= baseY - 0.01f)
-        //{
-        //    transform.Translate(0, resettingSpeed * Time.deltaTime, 0);
-        //    if (transform.position.y > baseY - 0.01f)
-        //    {
-        //        transform.position = new Vector3(transform.position.x, baseY, transform.position.z);
-
-        //        isGoingBack = false;
-        //    }
-        //}
+    
     }
 
   
@@ -100,45 +80,25 @@ public class PillarElastic : Pillar
         yield return new WaitForFixedUpdate();
         if (!pushedByPillar && !pushedByPlayer)
         {
-            if (transform.position.y <= baseY - 0.001f || transform.position.y >= baseY + 0.001f)
+            if (transform.position.y != baseY)
             {
                 StartLerping();
             }
             else isGoingBack = false;
 
+
         }
         StopAllCoroutines();
     }
 
-    //void CheckCollision()
-    //{
-    //   // yield return new WaitForSeconds(0.2f);
-
-
-
-    //    if (!pushedByPillar && !pushedByPlayer)
-    //    {
-    //        if (transform.position.y <= baseY - 0.001f || transform.position.y >= baseY + 0.001f)
-    //        {
-    //            StartLerping();
-    //        }
-    //        else isGoingBack = false;
-
-    //    }
-    //   // StopAllCoroutines();
-    //}
+ 
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        //if (coll.tag != "Enemy" && coll.tag != "Triggers")
-        //{
-        //if (coll.tag == "PlayerGround")
-        //{
+       
             if (coll.tag == "PlayerGround")
             {
-                //isFree = false;
                 isGoingBack = false;
-            //isPushed = true;
             pushedByPlayer = true;
             pushedByPillar = false;
             pillarPushing = null;
@@ -161,26 +121,7 @@ public class PillarElastic : Pillar
             }
 
         }
-        //if (!isPushed)
-        //{
-        //    isFree = false;
-        //    isGoingBack = false;
-        //}
-        //  }
-
-        //else if( coll.tag == "Pillar")
-        //{
-        //    if (!coll.GetComponent<Pillar>().isPushed && isPushed)
-        //    {
-        //        isFree = false;
-        //    }
-        //    else if (coll.GetComponent<Pillar>().isPushed && isPushed)
-        //    {
-        //        isFree = false;
-        //            coll.GetComponent<Pillar>().isPushed = false;
-        //    }
-        //}
-        //}
+   
     }
 
     void OnTriggerStay2D(Collider2D coll)
@@ -217,26 +158,7 @@ public class PillarElastic : Pillar
         }
     }
 
-    //void OnCollisionStay2D(Collision2D coll)
-    //{
-
-    //    Debug.Log(coll.gameObject.tag);
-    //    if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Triggers")
-    //    {
-
-    //        if (coll.gameObject.tag == "PlayerGround")
-    //        {
-    //            isFree = false;
-    //            isGoingBack = false;
-    //            isPushed = true;
-    //        }
-    //        if (!isPushed)
-    //        {
-    //            isFree = false;
-    //            isGoingBack = false;
-    //        }
-    //    }
-    //}
+    
 
 
 
@@ -254,48 +176,17 @@ public class PillarElastic : Pillar
 
             pillarPushing = null;
         }
-        //{
-        //    //playerContact[0] = false;
-        //    //Invoke("StartLerping", 0.5f);
-        //  Debug.Log( "exit " + Time.time);
-        // //   if (isPushed)
-        //        isPushed = false;
-        //   // else
-        //    isFree = true;
-
-         
-            
-            
-
-            
-            
-
-
-        //if (coll.transform.tag == "Ground")
-        //    isGrounded = false;
-
-        //if (coll.transform.tag == "Pillar")
-        //{
-        //    if (pillarsInContact[1])
-        //        pillarsInContact[1] = false;
-        //    else if (pillarsInContact[0])
-        //        pillarsInContact[0] = false;
-        //}
+      
 
     }
 
-    //void OnCollisionExit2D(Collision2D coll)
-    //{
-    //    {
-           
-    //        isFree = true;
-    //    }
-    //}
+  
 
         void StartLerping()
     {
         if (!pushedByPillar && !pushedByPlayer && !isGoingBack)
         {
+            Debug.Log("StartLerping");
             isGoingBack = true;
             body.velocity = new Vector2(0, 0);
             startTime = Time.time;
@@ -304,17 +195,4 @@ public class PillarElastic : Pillar
         }
     }
 
-    //protected  override void UnKinematic()
-    //{
-    //    //if (!playerContact[0])
-    //     //   body.isKinematic = false;
-
-    //}
-
-    //bool PlayerIsPushing()
-    //{
-    //    if (pushedByPillar)
-    //        return PlayerIsPushing();
-    //    return pushedByPlayer;
-    //}
 }

@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour {
         instance = this;
         if (!complete)
         {
-            GameObject collisions = GameObject.Find("Collisions").transform.GetChild(0).gameObject;
+            GameObject collisions = GameObject.Find("Collision").transform.GetChild(0).gameObject;
             if (collisions.activeSelf)
                 collisions.SetActive(false);
             GameObject tmp = GameObject.Find("Collisions").transform.GetChild(1).gameObject;
