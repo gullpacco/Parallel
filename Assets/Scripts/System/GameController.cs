@@ -26,7 +26,6 @@ public class GameController : MonoBehaviour {
             {
                 if (gos[i].name.Contains("Collisions"))
                 {
-                    Debug.Log("OK");
                     if (gos[i].transform.childCount > 1)
                     {
                         collisions = gos[i].transform.GetChild(0).gameObject;
@@ -42,20 +41,23 @@ public class GameController : MonoBehaviour {
 
                 }
 
-               else if (gos[i].name.Contains("Lava"))
+                else if (gos[i].name.Contains("Lava"))
                 {
-                    Debug.Log("Lava");
-                    if (gos[i].transform.childCount > 1)
+                    if (gos[i].transform.childCount > 0)
                     {
 
-                        tmp = gos[i].transform.GetChild(1).gameObject;
+                        if (gos[i].transform.childCount > 1)
+                        {
+
+                            tmp = gos[i].transform.GetChild(1).gameObject;
+
+                        }
+                        else
+                            tmp = gos[i].transform.GetChild(0).gameObject;
+                        tmp.tag = "Enemy";
+                        tmp.layer = 16;
 
                     }
-                    else
-                        tmp = gos[i].transform.GetChild(0).gameObject;
-                    tmp.tag = "Enemy";
-                    tmp.layer = 16;
-
                 }
             }
         }
