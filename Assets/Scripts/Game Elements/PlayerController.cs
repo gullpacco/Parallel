@@ -267,6 +267,18 @@ public class PlayerController : MonoBehaviour {
 
             isJumping = false;
         }
+
+        if (coll.gameObject.tag == "MovingPlatform")
+        {
+            isJumping = false;
+            transform.parent = coll.transform;
+        }
+        else
+        {
+            transform.parent = null;
+        }
+
+
     }
 
     void OnCollisionExit2D(Collision2D coll)
@@ -275,6 +287,12 @@ public class PlayerController : MonoBehaviour {
         {
 
             isJumping = true;
+        }
+
+        if (coll.gameObject.tag == "MovingPlatform")
+        {
+            isJumping = true;
+            transform.parent = null;
         }
     }
 

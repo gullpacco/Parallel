@@ -24,7 +24,7 @@ public class PlayerGround : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.tag == "Ground" | coll.tag=="Pillar" | coll.tag== "PillarElastic")
+        if (coll.tag == "Ground" | coll.tag=="Pillar" | coll.tag== "PillarElastic" || coll.tag=="MovingPlatform")
         {
             parentPlayer.SetGround(true);
         }
@@ -32,7 +32,7 @@ public class PlayerGround : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D coll)
     {
-        if (coll.tag == "Ground" | coll.tag == "Pillar" | coll.tag == "PillarElastic")
+        if (coll.tag == "Ground" | coll.tag == "Pillar" | coll.tag == "PillarElastic" || coll.tag == "MovingPlatform")
         {
             parentPlayer.SetGround(false);
         }
