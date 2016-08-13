@@ -15,8 +15,9 @@ public abstract class Laser : MonoBehaviour {
     bool hasStarted;
 
     public bool intermittent;
-    public float offTime, onTime;
+    public float offTime, onTime, activationOffset;
     protected bool isOn=true;
+    bool offsetEnded;
 
 
     protected virtual void Awake()
@@ -25,6 +26,7 @@ public abstract class Laser : MonoBehaviour {
         las = GetComponent<LineRenderer>();
         las.material = LasMaterial;
         particle = transform.GetChild(0).gameObject;
+        particle.transform.position = transform.position;
         las.SetPosition(0, transform.position);
 
         las.SetPosition(1, transform.position);
@@ -36,7 +38,7 @@ public abstract class Laser : MonoBehaviour {
         //    body = GetComponent<Rigidbody2D>();
         //}
 
-            Invoke("Shoot", 0.6f);
+        Invoke("EndOffset", activationOffset);
 
     }
 
@@ -48,10 +50,11 @@ public abstract class Laser : MonoBehaviour {
     // Update is called once per frame
     protected virtual void Update()
     {
-      
+        if (offsetEnded)
+        {
             if (!hasStarted)
             {
-       
+
                 for (int i = 0; i < 20; i++)
                 {
                     LaserLength();
@@ -71,39 +74,45 @@ public abstract class Laser : MonoBehaviour {
 
             else
             {
-            if (isOn)
-            {
-                if (intermittent)
-                StartCoroutine(Switch(false, onTime));
-                
-                LaserLength();
+                if (isOn)
+                {
+                    if (intermittent)
+                        StartCoroutine(Switch(false, onTime));
 
-                if (distChanged)
-                    ExtendBeam();
-                else
-                    FinalDist();
+                    LaserLength();
 
-                las.SetPosition(0, transform.position);
-                las.SetPosition(1, distance);
+                    if (distChanged)
+                        ExtendBeam();
+                    else
+                        FinalDist();
 
-                particle.transform.position = distance;
-            }
-
-            else
-            {
                     las.SetPosition(0, transform.position);
-                las.SetPosition(1, transform.position);
-                particle.transform.position = transform.position;
+                    las.SetPosition(1, distance);
 
-                StartCoroutine(Switch(true, offTime));
+                    particle.transform.position = distance;
+                }
+
+                else
+                {
+                    las.SetPosition(0, transform.position);
+                    las.SetPosition(1, transform.position);
+                    particle.transform.position = transform.position;
+
+                    StartCoroutine(Switch(true, offTime));
+                }
+
             }
 
         }
 
-        
-
     }
 
+    void EndOffset()
+    {
+        offsetEnded = true;
+        Invoke("Shoot", 0.01f);
+
+    }
 
     void Shoot()
     {
