@@ -7,10 +7,12 @@ public class ObjectMovement : MonoBehaviour
     public float Speed_X, Speed_Y;
 
     //protected Rigidbody2D body;
+    float previousTime;
     public bool moving = false;
     public float minX, maxX, minY, maxY;
     bool goingUp;
     bool goingRight;
+    public bool toDebug;
 
     // Use this for initialization
     void Start()
@@ -26,7 +28,7 @@ public class ObjectMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (moving)
         {
@@ -57,14 +59,33 @@ public class ObjectMovement : MonoBehaviour
             // body.velocity = new Vector2(laserSpeedX, body.velocity.y);
             Speed_X = -Speed_X;
             goingRight = true;
+            if (toDebug)
+            {
+                Debug.Log(this.name + " at " + (previousTime - Time.time) + " " + (maxX-minX)/Speed_X );
+                previousTime = Time.time;
+               
+            }
+
+
         }
         else if (transform.position.x >= maxX && goingRight)
         {
             // body.velocity = new Vector2(-laserSpeedX, body.velocity.y);
             Speed_X = -Speed_X;
             goingRight = false;
+            if (toDebug)
+            {
+                Debug.Log(this.name + " at " + (previousTime - Time.time) + " " + (maxX - minX) / Speed_X);
+                previousTime = Time.time;
+            }
         }
 
         transform.position = new Vector2(transform.position.x + Speed_X * Time.deltaTime, transform.position.y + Speed_Y * Time.deltaTime);
+
+   
+  
+
+
+
     }
 }

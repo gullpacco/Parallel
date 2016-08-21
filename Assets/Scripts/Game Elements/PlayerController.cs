@@ -259,7 +259,10 @@ public class PlayerController : MonoBehaviour {
 	{
         if(isGrounded)
 		jumpAudioSource.PlayOneShot(landSample);
-	}
+
+
+
+    }
     void OnCollisionStay2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Ground"|| coll.gameObject.tag.Contains("Pillar") || coll.gameObject.tag == "PillarElastic")
@@ -273,10 +276,10 @@ public class PlayerController : MonoBehaviour {
             isJumping = false;
             transform.parent = coll.transform;
         }
-        else
-        {
-            transform.parent = null;
-        }
+        //else
+        //{
+        //    transform.parent = null;
+        //}
 
 
     }
@@ -295,6 +298,8 @@ public class PlayerController : MonoBehaviour {
             transform.parent = null;
         }
     }
+
+
 
 
     public void SetGround(bool ground)

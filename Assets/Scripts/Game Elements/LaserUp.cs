@@ -14,9 +14,8 @@ public class LaserUp : Laser {
 
     }
 
-    protected override void Update() {
-        base.Update();
-
+    protected override void FixedUpdate() {
+        base.FixedUpdate();
     }
 
     protected override void LaserLength()
@@ -41,11 +40,11 @@ public class LaserUp : Laser {
     protected override void ExtendBeam()
     {
         currentEnd += 0.5f;
-        if (currentEnd < distanceToReach)
-        {
-            distance = new Vector3(transform.position.x, currentEnd, transform.position.z);
-        }
-        else
+        //if (currentEnd < distanceToReach)
+        //{
+        //    distance = new Vector3(transform.position.x, currentEnd, transform.position.z);
+        //}
+        //else
         {
             distance = new Vector3(transform.position.x, distanceToReach, transform.position.z);
             distChanged = false;

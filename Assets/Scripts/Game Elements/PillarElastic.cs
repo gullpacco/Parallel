@@ -33,7 +33,7 @@ public class PillarElastic : Pillar
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(isGoingBack);
+
 
        StartCoroutine( CheckCollision());
 

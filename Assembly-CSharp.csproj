@@ -45,6 +45,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Game Elements\EventTrigger.cs" />
      <Compile Include="Assets\Scripts\Game Elements\Laser.cs" />
      <Compile Include="Assets\Scripts\Game Elements\LaserDown.cs" />
      <Compile Include="Assets\Scripts\Game Elements\LaserLeft.cs" />
@@ -81,7 +82,7 @@
      <None Include="Assets\Tiled2Unity\Imported\Tutorial_PilastriSoloFissi.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_09.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_Tutorial02.tiled2unity.xml" />
-     <None Include="Assets\Shaders\WaterBlurFinal.shader" />
+     <None Include="Assets\Prefabs\Shaders\WaterBlurFinal.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_04.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
@@ -93,7 +94,7 @@
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_10.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Cristian_W2_L1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Pietro_Medio01.tiled2unity.xml" />
-     <None Include="Assets\Shaders\WaterBlurModified.shader" />
+     <None Include="Assets\Prefabs\Shaders\WaterBlurModified.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_difficile.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_level03.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Livello_Personale_Difficile_2.tiled2unity.xml" />

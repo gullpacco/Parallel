@@ -12,9 +12,8 @@ public class LaserLeft : Laser {
 
     }
 
-	protected override void Update () {
-        base.Update();
-       
+	protected override void FixedUpdate () {
+        base.FixedUpdate();
 
     }
 
@@ -42,12 +41,12 @@ public class LaserLeft : Laser {
 
     protected override void ExtendBeam()
     {
-        currentEnd -= 0.5f;
-        if (currentEnd > distanceToReach)
-        {
-            distance = new Vector3(currentEnd, transform.position.y, transform.position.z);
-        }
-        else
+        //currentEnd -= 0.5f;
+        //if (currentEnd > distanceToReach)
+        //{
+        //    distance = new Vector3(currentEnd, transform.position.y, transform.position.z);
+        //}
+       // else
         {
             distance = new Vector3(distanceToReach, transform.position.y, transform.position.z);
             distChanged = false;
