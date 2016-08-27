@@ -8,7 +8,7 @@ public abstract class Laser : MonoBehaviour {
     public LayerMask playerMask;
     protected Vector3 distance;
     protected GameObject particle;
-   // protected ParticleSystem parSystem;
+    protected ParticleSystem parSystem;
     protected float distanceToReach,
                     currentEnd;
     protected bool distChanged = true;
@@ -36,7 +36,7 @@ public abstract class Laser : MonoBehaviour {
         las.material = LasMaterial;
         particle = transform.GetChild(0).gameObject;
         particle.transform.position = transform.position;
-       // parSystem = particle.GetComponent<ParticleSystem>();
+        parSystem = particle.GetComponent<ParticleSystem>();
         las.SetPosition(0, transform.position);
 
         las.SetPosition(1, transform.position);
@@ -234,7 +234,14 @@ public abstract class Laser : MonoBehaviour {
     void StartInvoking()
     {
         InvokeRepeating("StayOn", 0, onTime + offTime);
+        InvokeRepeating("Burst", onTime + offTime*0.75f /*- ((offTime+onTime)/5)*/ , onTime+offTime );
         InvokeRepeating("StayOff", onTime, onTime + offTime);
+    }
+
+
+    void Burst()
+    {
+        parSystem.Emit(100);
     }
     protected abstract void LaserLength();
     protected abstract void ExtendBeam();
