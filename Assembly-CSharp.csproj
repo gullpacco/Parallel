@@ -92,6 +92,7 @@
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\Tiled2Unity\Imported\Pietro_Mondo2_Difficile1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_10.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\Parallel_Cristian_W2_L2.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Cristian_W2_L1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Pietro_Medio01.tiled2unity.xml" />
      <None Include="Assets\Prefabs\Shaders\WaterBlurModified.shader" />
@@ -108,6 +109,7 @@
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Cristian_04_VeryHard.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Pietro_Facile_2_Mondo2.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_06.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_11.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Tutorial_PilastriElastici.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_01.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_02.tiled2unity.xml" />

@@ -8,6 +8,7 @@ public abstract class Laser : MonoBehaviour {
     public LayerMask playerMask;
     protected Vector3 distance;
     protected GameObject particle;
+   // protected ParticleSystem parSystem;
     protected float distanceToReach,
                     currentEnd;
     protected bool distChanged = true;
@@ -35,6 +36,7 @@ public abstract class Laser : MonoBehaviour {
         las.material = LasMaterial;
         particle = transform.GetChild(0).gameObject;
         particle.transform.position = transform.position;
+       // parSystem = particle.GetComponent<ParticleSystem>();
         las.SetPosition(0, transform.position);
 
         las.SetPosition(1, transform.position);
@@ -216,7 +218,7 @@ public abstract class Laser : MonoBehaviour {
                 if (!skipOn)
                 {
                     isOn = true;
-                    skipOn = true;
+                    skipOn = tmp.skip;
                 }
                 else
                     skipOn = false;
