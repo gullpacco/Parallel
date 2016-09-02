@@ -26,9 +26,25 @@ public class LaserDown : Laser {
 
         if (hit.collider != null)
         {
-            distanceToReach = hit.point.y;
+
             if (hit.collider.tag == "Player")
-                hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
+            {
+
+                if (hit.distance >= minDistance)
+
+
+                {
+                    hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
+                    distanceToReach = hit.point.x;
+
+                }
+
+            }
+
+            else distanceToReach = hit.point.x;
+
+
+
 
         }
         else distanceToReach = -1000;
@@ -52,6 +68,14 @@ public class LaserDown : Laser {
             currentEnd = distanceToReach;
 
         }
+    }
+
+    protected override void addColliderToLine()
+    {
+        base.addColliderToLine();
+        midPoint.y = midPoint.y - colliderOffset / 2;
+        col.transform.position = midPoint;
+
     }
 
     protected override void FinalDist()

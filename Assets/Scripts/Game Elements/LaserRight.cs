@@ -24,9 +24,25 @@ public class LaserRight : Laser {
 
         if (hit.collider != null)
         {
-            distanceToReach = hit.point.x;
-            if (hit.collider.tag == "Player" )
-                hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
+
+            if (hit.collider.tag == "Player")
+            {
+
+                if (hit.distance >= minDistance)
+
+
+                {
+                    hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
+                    distanceToReach = hit.point.x;
+
+                }
+
+            }
+
+            else distanceToReach = hit.point.x;
+
+
+
 
         }
         else distanceToReach = 1000;
@@ -50,6 +66,14 @@ public class LaserRight : Laser {
             currentEnd = distanceToReach;
 
         }
+    }
+
+    protected override void addColliderToLine()
+    {
+        base.addColliderToLine();
+        midPoint.x = midPoint.x + colliderOffset/2;
+        col.transform.position = midPoint;
+
     }
 
     protected override void FinalDist()

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public float jumpForce;
     public bool canDie = true;
+    bool isSafe;
      bool isGrounded=true;
     int deaths;
     Rigidbody2D body;
@@ -342,7 +343,11 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Enemy" && canDie)
+        if (coll.tag == "SafeZone")
+        { isSafe = true;
+            Debug.Log("safezonetrue");
+}
+        else if (coll.tag == "Enemy" && canDie && !isSafe)
         {
             //Time.timeScale = 0.05f;
             //Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
@@ -355,7 +360,19 @@ public class PlayerController : MonoBehaviour {
             SlowMo();
 
         }
+       
 
+    }
+
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.tag == "SafeZone")
+        {
+            isSafe = false;
+
+            Debug.Log("safezonefalse");
+        }
 
     }
 
