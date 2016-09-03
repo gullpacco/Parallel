@@ -11,6 +11,8 @@ public class Menu2 : MonoBehaviour {
 
 	void Start() {
 		Time.timeScale=1;
+		
+		btnStart.Select();
 	}
 	
 	public void EnableAnimator(Animator anim)
@@ -67,6 +69,26 @@ public class Menu2 : MonoBehaviour {
 		btnQuit.interactable=false;
 	}
 	
+	public void ShowOptions(Animator optionsAnim)
+	{
+		optionsAnim.SetBool("ShowOptions", true);
+	}
+	
+	public void HideMenu(Animator menuAnim)
+	{
+		menuAnim.SetBool("HideMenu", true);
+	}
+	
+	public void HideOptions(Animator optionsAnim)
+	{
+		optionsAnim.SetBool("ShowOptions", false);
+	}
+	
+	public void ShowMenu(Animator menuAnim)
+	{
+		menuAnim.SetBool("HideMenu", false);
+	}
+	
 	public void NavigateTo(int scene)
 	{
 		Application.LoadLevel(scene);
@@ -75,11 +97,11 @@ public class Menu2 : MonoBehaviour {
 	public void ClickBtn(Button selectedButton)
 	{
 		selectedButton.transform.localScale = new Vector2(.8f, .8f); //Il pulsante si rimpicciolisce
-		if (selectedButton.name == "btnOptions") 
+		/*if (selectedButton.name == "btnOptions") 
 		{
 			Application.LoadLevel ("OptionsMenu");
-		} 
-		else if (selectedButton.name == "btnCredits") 
+		} */
+		if (selectedButton.name == "btnCredits") 
 		{
 			Application.LoadLevel ("CreditsScene");
 		}
