@@ -25,7 +25,7 @@ public class PillarLock : Pillar
 
         if (coll.tag == "Ground")
         {
-            Debug.Log(coll.gameObject);
+
 
             {
                 StartCoroutine(Lock());

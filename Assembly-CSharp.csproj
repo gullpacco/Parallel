@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\OldScripts\BulletController.cs" />
      <Compile Include="Assets\Scripts\OldScripts\PillarController.cs" />
      <Compile Include="Assets\Scripts\OldScripts\ShooterController.cs" />
+     <Compile Include="Assets\Scripts\System\AudioManager.cs" />
      <Compile Include="Assets\Scripts\System\CameraController.cs" />
      <Compile Include="Assets\Scripts\System\CheckPointManager.cs" />
      <Compile Include="Assets\Scripts\System\Checkpoint.cs" />
@@ -114,6 +115,7 @@
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_06.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_11.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Tutorial_PilastriElastici.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_13.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_01.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Compito_02.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Parallel_Intermediate.tiled2unity.xml" />

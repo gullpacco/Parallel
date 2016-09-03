@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour {
     public GameObject [] textToHide;
     public Text hideText;
 
+    public string musicTrack;
+  
+
     void Awake()
     {
         instance = this;
@@ -54,7 +57,7 @@ public class GameController : MonoBehaviour {
                         }
                         else
                             tmp = gos[i].transform.GetChild(0).gameObject;
-                        tmp.tag = "Enemy";
+                        tmp.tag = "Lava";
                         tmp.layer = 16;
 
                     }
@@ -66,6 +69,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 1;
 		pauseMenu.SetActive(false);
+        AudioManager.instance.PlaySound(musicTrack);
 	}
 	
 	// Update is called once per frame

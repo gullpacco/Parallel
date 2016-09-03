@@ -35,13 +35,13 @@ public class LaserDown : Laser {
 
                 {
                     hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
-                    distanceToReach = hit.point.x;
+                    distanceToReach = hit.point.y;
 
                 }
 
             }
 
-            else distanceToReach = hit.point.x;
+            else distanceToReach = hit.point.y;
 
 
 

@@ -103,7 +103,7 @@ public class PlatformCheck : MonoBehaviour {
 
 
             }
-            Debug.Log(pillarCount);
+
 
         }
 

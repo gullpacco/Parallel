@@ -9,36 +9,37 @@ public class PlayerController : MonoBehaviour {
     private float sliderSpeed;
     public float speed;
     public float jumpForce;
-    public bool canDie = true;
-    bool isSafe;
+    [HideInInspector]
+    bool canDie = true;
      bool isGrounded=true;
     int deaths;
     Rigidbody2D body;
      Text deathText;
     public PlayerController other;
-    public GameObject currentEnemy;
     bool canGoForward=true;
     bool canGoBack = true;
+
+
+
 
     bool checkPointReached;
     public float screenSize = 34f;
     public float screenHeight = 10f;
-    public float groundRadius;
     CheckPointManager cpm;
 
-
-    public Transform groundCheck;
-    public LayerMask whatIsGround;
     bool isJumping=false;
     bool locked = false;
 
     float regTime;
     float lastY;
 
-	public AudioClip jumpSample; 
-	public AudioClip landSample; 
-	private AudioSource jumpAudioSource;
-   public  AudioClip shot;
+
+
+
+    [Header("Sounds")]
+    public string jumpSound;
+    public string landSound, shotSound;
+
 
     // Use this for initialization
     void Start () {
@@ -48,7 +49,6 @@ public class PlayerController : MonoBehaviour {
         sliderSpeed = 0;
         cpm = GameObject.FindObjectOfType<CheckPointManager>();
 
-		jumpAudioSource = GetComponent<AudioSource>();
         if (isOne)
         {
             deathText = GameObject.FindGameObjectWithTag("P1D").GetComponent<Text>();
@@ -75,23 +75,7 @@ public class PlayerController : MonoBehaviour {
         }
         
        if(canDie) {
-            //if (!locked)
-            //    isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-
-
-                //RaycastHit2D hit= Physics2D.Raycast(transform.position, Vector2.left);
-                //{
-                //    if (hit)
-                //    {
-                //        Debug.Log(hit.transform.tag);
-                //        if (hit.transform.CompareTag("Ground"))
-                //        {
-                //            isGrounded = true;
-                //        }
-                //        else isGrounded = false;
-                //    }
-                //    else isGrounded = false;
-                //}
+           
 
                 if (transform.position.x - other.transform.position.x < screenSize)
             {
@@ -122,7 +106,7 @@ public class PlayerController : MonoBehaviour {
                     if (isGrounded && !isJumping && !locked)
                     {
                         Jump();
-                        jumpAudioSource.PlayOneShot(jumpSample);
+                        AudioManager.instance.PlaySound(jumpSound);
                     }
                 }
 
@@ -130,8 +114,7 @@ public class PlayerController : MonoBehaviour {
 
                 if (Input.GetKey(KeyCode.D) && canGoForward)
                 {
-                    //transform.Translate(speed * Time.deltaTime, 0, 0);
-                    //   transform.localPosition += transform.forward * Time.deltaTime * 6f;
+                   
                     body.velocity = new Vector2(speed + sliderSpeed, body.velocity.y);
 
                 }
@@ -139,7 +122,6 @@ public class PlayerController : MonoBehaviour {
 
                 else if (Input.GetKey(KeyCode.A) && canGoBack)
                 {
-                    // transform.Translate(-speed * Time.deltaTime, 0, 0);
                     body.velocity = new Vector2(-speed + sliderSpeed, body.velocity.y);
 
                 }
@@ -162,14 +144,13 @@ public class PlayerController : MonoBehaviour {
                     if (isGrounded && !isJumping&& !locked)
                     {
                         JumpDown();
-                        jumpAudioSource.PlayOneShot(jumpSample);
+                        AudioManager.instance.PlaySound(jumpSound);
                     }
                 }
 
 
                 if (Input.GetKey(KeyCode.RightArrow) && canGoForward)
                 {
-                    //transform.Translate(speed * Time.deltaTime, 0, 0);
                     body.velocity = new Vector2(speed +sliderSpeed, body.velocity.y);
 
                 }
@@ -178,7 +159,6 @@ public class PlayerController : MonoBehaviour {
 
                 else if (Input.GetKey(KeyCode.LeftArrow) && canGoBack)
                 {
-                    //transform.Translate(-speed * Time.deltaTime, 0, 0);
                     body.velocity = new Vector2(-speed + sliderSpeed, body.velocity.y);
 
                 }
@@ -201,7 +181,6 @@ public class PlayerController : MonoBehaviour {
         if (transform.position.x < other.transform.position.x + 7.5)
 
             body.velocity = new Vector2(speed, 0);
-        //transform.Translate(Vector3.forward * Time.deltaTime * 6f);
         else
             body.velocity = new Vector2(speed, 0);
 
@@ -229,7 +208,6 @@ public class PlayerController : MonoBehaviour {
 
     void Jump()
     {
-        //body.velocity = new Vector2(body.velocity.x, jumpForce);
         body.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         isJumping = true;
         isGrounded = false;
@@ -240,7 +218,6 @@ public class PlayerController : MonoBehaviour {
 
     void JumpDown()
     {
-        //body.velocity = new Vector2(body.velocity.x, jumpForce);
         body.AddForce(new Vector2(0, -jumpForce), ForceMode2D.Impulse);
         isJumping = true;
         isGrounded = false;
@@ -259,9 +236,13 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll)
 	{
         if(isGrounded)
-		jumpAudioSource.PlayOneShot(landSample);
+            AudioManager.instance.PlaySound(landSound);
 
-
+        if (coll.gameObject.tag == "MovingPlatform")
+        {
+            isJumping = false;
+            transform.parent = coll.transform;
+        }
 
     }
     void OnCollisionStay2D(Collision2D coll)
@@ -277,10 +258,6 @@ public class PlayerController : MonoBehaviour {
             isJumping = false;
             transform.parent = coll.transform;
         }
-        //else
-        //{
-        //    transform.parent = null;
-        //}
 
 
     }
@@ -295,22 +272,20 @@ public class PlayerController : MonoBehaviour {
 
         if (coll.gameObject.tag == "MovingPlatform")
         {
+
             isJumping = true;
             transform.parent = null;
+
         }
     }
 
 
 
 
+
     public void SetGround(bool ground)
     {
-        //if (!locked && canDie)
-        //{
-        //    if (isOne && transform.position.y <= lastY)
-        //        isGrounded = true;
-        //    else if (!isOne && transform.position.y >= lastY)
-        //        isGrounded=true; }
+       
         isGrounded = ground;
     }
 
@@ -324,57 +299,23 @@ public class PlayerController : MonoBehaviour {
         return checkPointReached;
     }
 
-    // void Throw()
-    //{
-    //    if (currentEnemy != null)
-    //    {
-    //        currentEnemy.GetComponent<EnemyController>().GetThrown();
-    //        if (isOne)
-    //        {
-    //            currentEnemy.GetComponent<EnemyController>().isUp = true;
-    //        }
-    //        else currentEnemy.GetComponent<EnemyController>().isUp = false;
-
-    //        currentEnemy = null;
-    //    }
-
-
-    //}
+  
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.tag == "SafeZone")
-        { isSafe = true;
-            Debug.Log("safezonetrue");
-}
-        else if (coll.tag == "Enemy" && canDie && !isSafe)
+
+
+       if ((coll.tag == "Enemy" || coll.tag=="Lava")&& canDie)
         {
-            //Time.timeScale = 0.05f;
-            //Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
-            //deaths++;
-            //deathText.text = "" + deaths;
-            //Invoke("Die", 0.15f);
-            //canDie = false;
-            //other.canDie = false;
-            //jumpAudioSource.PlayOneShot(shot);
+           
             SlowMo();
 
         }
        
-
     }
 
 
-    void OnTriggerExit2D(Collider2D coll)
-    {
-        if (coll.tag == "SafeZone")
-        {
-            isSafe = false;
-
-            Debug.Log("safezonefalse");
-        }
-
-    }
+  
 
     public void SlowMo()
     {
@@ -387,7 +328,7 @@ public class PlayerController : MonoBehaviour {
             Invoke("Die", 0.15f);
             canDie = false;
             other.canDie = false;
-            jumpAudioSource.PlayOneShot(shot);
+            AudioManager.instance.PlaySound(shotSound);
         }
     }
 
@@ -407,14 +348,6 @@ public class PlayerController : MonoBehaviour {
         sliderSpeed = sSpeed;
     }
 
-    //void EnemyFollow()
-    //{
-    //    currentEnemy.transform.position = new Vector3(transform.position.x - 3, transform.position.y);
-    //}
-
-    //void SlowDownHit()
-    //{
-    //    transform.position = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
-    //}
+   
 }
 
