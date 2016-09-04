@@ -8,13 +8,32 @@ public class Menu2 : MonoBehaviour {
 	public Button btnOptions;
 	public Button btnCredits;
 	public Button btnQuit;
-
+	
+	public Button btnGoBack;
+	
+	private bool btnStartSelected;
+	private bool btnOptionsSelected;
+	private bool btnCreditsSelected;
+	private bool btnQuitSelected;
+	
+	private bool onOptions;
+	
 	void Start() {
 		Time.timeScale=1;
-		
 		btnStart.Select();
 	}
 	
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.DownArrow) && btnStartSelected==false && btnOptionsSelected==false && btnCreditsSelected==false && btnQuitSelected==false && onOptions==false)
+		{
+			btnStart.Select();
+		}
+		if(Input.GetKeyDown(KeyCode.UpArrow) && btnStartSelected==false && btnOptionsSelected==false && btnCreditsSelected==false && btnQuitSelected==false &&onOptions==false)
+		{
+			btnQuit.Select();
+		}
+	}
 	public void EnableAnimator(Animator anim)
 	{
 		anim.SetBool("atWorld1", true);
@@ -54,24 +73,18 @@ public class Menu2 : MonoBehaviour {
 	public void DisableMenuAnimator(Animator anim)
 	{
 		anim.SetBool("isMenuDisplayed", false);
-		btnStart.interactable=true;
-		btnOptions.interactable=true;
-		btnCredits.interactable=true;
-		btnQuit.interactable=true;
 	}
 	
 	public void EnableMenuAnimator(Animator anim)
 	{
 		anim.SetBool("isMenuDisplayed", true);
-		btnStart.interactable=false;
-		btnOptions.interactable=false;
-		btnCredits.interactable=false;
-		btnQuit.interactable=false;
 	}
 	
 	public void ShowOptions(Animator optionsAnim)
 	{
 		optionsAnim.SetBool("ShowOptions", true);
+		btnGoBack.Select();
+		onOptions=true;
 	}
 	
 	public void HideMenu(Animator menuAnim)
@@ -82,11 +95,13 @@ public class Menu2 : MonoBehaviour {
 	public void HideOptions(Animator optionsAnim)
 	{
 		optionsAnim.SetBool("ShowOptions", false);
+		onOptions=false;
 	}
 	
 	public void ShowMenu(Animator menuAnim)
 	{
 		menuAnim.SetBool("HideMenu", false);
+		btnStart.Select();
 	}
 	
 	public void NavigateTo(int scene)
@@ -97,10 +112,6 @@ public class Menu2 : MonoBehaviour {
 	public void ClickBtn(Button selectedButton)
 	{
 		selectedButton.transform.localScale = new Vector2(.8f, .8f); //Il pulsante si rimpicciolisce
-		/*if (selectedButton.name == "btnOptions") 
-		{
-			Application.LoadLevel ("OptionsMenu");
-		} */
 		if (selectedButton.name == "btnCredits") 
 		{
 			Application.LoadLevel ("CreditsScene");
@@ -109,12 +120,68 @@ public class Menu2 : MonoBehaviour {
 		{
 			Application.Quit();
 		}
-
 	}
 	
 	public void loadLevel (string levelName)
 	{
 		Application.LoadLevel(levelName);
+	}
+
+	public void DeselectStartOver(Button selectedButton)
+	{
+		if((btnStartSelected!=false || btnOptionsSelected!=false || btnCreditsSelected!=false || btnQuitSelected!=false)&& onOptions==false)
+		{
+			GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+		}
+	
+		if(selectedButton==btnStart)
+		{
+			btnStartSelected=true;
+			btnOptionsSelected=false;
+			btnCreditsSelected=false;
+			btnQuitSelected=false;
+		}
+		if(selectedButton==btnOptions)
+		{
+			btnStartSelected=false;
+			btnOptionsSelected=true;
+			btnCreditsSelected=false;
+			btnQuitSelected=false;
+		}
+		if(selectedButton==btnCredits)
+		{
+			btnStartSelected=false;
+			btnOptionsSelected=false;
+			btnCreditsSelected=true;
+			btnQuitSelected=false;
+		}
+		if(selectedButton==btnQuit)
+		{
+			btnStartSelected=false;
+			btnOptionsSelected=false;
+			btnCreditsSelected=false;
+			btnQuitSelected=true;
+		}
+	}
+	
+	public void DeselectStartOut(Button selectedButton)
+	{
+		if(selectedButton==btnStart)
+		{
+			btnStartSelected=false;
+		}
+		if(selectedButton==btnOptions)
+		{
+			btnOptionsSelected=false;
+		}
+		if(selectedButton==btnCredits)
+		{
+			btnCreditsSelected=false;
+		}
+		if(selectedButton==btnQuit)
+		{
+			btnQuitSelected=false;
+		}
 	}
 
 	public void OverBtn(Button selectedButton)
