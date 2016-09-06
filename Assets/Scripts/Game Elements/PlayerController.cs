@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour {
                 if (transform.position.y > screenHeight)
                     body.velocity = new Vector2(body.velocity.y, 0);
 
-                if (Input.GetKey(KeyCode.W) && !isJumping)
+                if ((Input.GetKey(KeyCode.W) || Input.GetAxis("LV")<0)&& !isJumping)
                 {
                     if (isGrounded && !isJumping && !locked)
                     {
@@ -109,18 +109,17 @@ public class PlayerController : MonoBehaviour {
                         AudioManager.instance.PlaySound(jumpSound);
                     }
                 }
-
-             
-
-                if (Input.GetKey(KeyCode.D) && canGoForward)
+				
+				Debug.Log("/LH "+Input.GetAxis("LH")+" /LV "+Input.GetAxis("LV")+" /RH "+Input.GetAxis("RH")+" /RV "+Input.GetAxis("RV"));
+				
+				if ((Input.GetKey(KeyCode.D) ||  Input.GetAxis("LH")>0) && canGoForward)
                 {
                    
                     body.velocity = new Vector2(speed + sliderSpeed, body.velocity.y);
 
                 }
-
-
-                else if (Input.GetKey(KeyCode.A) && canGoBack)
+				 
+                else if ((Input.GetKey(KeyCode.A) || Input.GetAxis("LH")<0)  && canGoBack)
                 {
                     body.velocity = new Vector2(-speed + sliderSpeed, body.velocity.y);
 
@@ -139,7 +138,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if (transform.position.y < -screenHeight)
                     body.velocity = new Vector2(body.velocity.y, 0);
-                if (Input.GetKey(KeyCode.DownArrow) && !isJumping)
+                if ((Input.GetKey(KeyCode.DownArrow) || Input.GetAxis("RV")>0) && !isJumping)
                 {
                     if (isGrounded && !isJumping&& !locked)
                     {
@@ -149,7 +148,7 @@ public class PlayerController : MonoBehaviour {
                 }
 
 
-                if (Input.GetKey(KeyCode.RightArrow) && canGoForward)
+                if ((Input.GetKey(KeyCode.RightArrow) ||  Input.GetAxis("RH")>0) && canGoForward)
                 {
                     body.velocity = new Vector2(speed +sliderSpeed, body.velocity.y);
 
@@ -157,7 +156,7 @@ public class PlayerController : MonoBehaviour {
 
 
 
-                else if (Input.GetKey(KeyCode.LeftArrow) && canGoBack)
+                else if ((Input.GetKey(KeyCode.LeftArrow) ||  Input.GetAxis("RH")<0) && canGoBack)
                 {
                     body.velocity = new Vector2(-speed + sliderSpeed, body.velocity.y);
 
