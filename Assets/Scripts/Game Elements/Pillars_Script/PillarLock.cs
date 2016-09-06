@@ -17,6 +17,22 @@ public class PillarLock : Pillar
         myColor = new Vector3(sr.color.r, sr.color.g, sr.color.b);
         black = new Vector3(101 / 255f, 101 / 255f, 101 / 255f);
         currentColor = myColor;
+      
+            for(int i=0; i<arrowArray.Length; i++)
+            {
+               
+                    arrowArray[i].GetComponent<SpriteRenderer>().sprite = arrow;
+
+                if (GetComponent<EdgeCollider2D>().offset.y<0)
+                {
+                    arrowArray[i].transform.localScale= new Vector3(arrowArray[i].transform.localScale.x, -arrowArray[i].transform.localScale.y, transform.localScale.z);
+
+                }
+
+                }
+            
+        
+
     }
    
 
@@ -33,9 +49,8 @@ public class PillarLock : Pillar
         }
     }
 
-    void Update()
+    protected  void Update()
     {
-
         if (changingColour)
         {
             float distCovered = (Time.time - startTime) * colourSpeed;
@@ -47,8 +62,26 @@ public class PillarLock : Pillar
 
     }
 
-   
-   IEnumerator Lock()
+    public override void ResetPillar()
+    {
+        base.ResetPillar();
+        for (int i = 0; i < arrowArray.Length; i++)
+        {
+
+            //arrowArray[i].GetComponent<SpriteRenderer>().sprite = arrow;
+            //if (GetComponent<EdgeCollider2D>().offset.y < 0)
+            //{
+                arrowArray[i].GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.6f, 0.1f);
+
+
+            //  }
+
+        }
+
+    }
+
+
+    IEnumerator Lock()
     {
         yield return new WaitForEndOfFrame();
         body.isKinematic = true;
@@ -57,8 +90,19 @@ public class PillarLock : Pillar
         startTime = Time.time;
         changingColour = true;
         journeyLength = Vector3.Distance(myColor, black);
-        
-    }
+
+        for (int i = 0; i < arrowArray.Length; i++)
+        {
+
+            arrowArray[i].GetComponent<SpriteRenderer>().color = new Color (black.x, black.y, black.z);
+           
+
+        }
+
+
+
+    
+}
 
     //protected override void UnKinematic()
     //{

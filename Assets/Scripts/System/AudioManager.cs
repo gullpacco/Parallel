@@ -72,6 +72,7 @@ public class Sound
 
 
         //riproduzione
+        Debug.Log(source);
         if (source.isPlaying)
         {
             return false;
@@ -237,7 +238,7 @@ public class AudioManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Debug.Log(musics.Length);
 
 
 
@@ -302,7 +303,6 @@ public class AudioManager : MonoBehaviour
     {
 
         //chiamata del suono tramite nome
-
         if (soundName.ToCharArray()[0] == 'S')
         {
             for (int i = 0; i < sounds.Length; i++)

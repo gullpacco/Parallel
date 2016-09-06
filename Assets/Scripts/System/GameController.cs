@@ -69,11 +69,18 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 1;
 		pauseMenu.SetActive(false);
-        AudioManager.instance.PlaySound(musicTrack);
+        StartCoroutine(PlayMusic());
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    IEnumerator PlayMusic()
+    {
+        yield return new WaitForEndOfFrame();
+        AudioManager.instance.PlaySound(musicTrack);
+
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (ended)
         {
             if (Input.GetKeyDown(KeyCode.M))

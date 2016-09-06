@@ -46,25 +46,25 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Game Elements\EventTrigger.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\Laser.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\LaserDown.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\LaserLeft.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\LaserRight.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\LaserUp.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Lasers_Script\Laser.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Lasers_Script\LaserDown.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Lasers_Script\LaserLeft.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Lasers_Script\LaserRight.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Lasers_Script\LaserUp.cs" />
      <Compile Include="Assets\Scripts\Game Elements\ObjectMovement.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\Pillar.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\PillarElastic.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\PillarFree.cs" />
-     <Compile Include="Assets\Scripts\Game Elements\PillarLock.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Pillars_Script\Pillar.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Pillars_Script\PillarElastic.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Pillars_Script\PillarFree.cs" />
+     <Compile Include="Assets\Scripts\Game Elements\Pillars_Script\PillarLock.cs" />
      <Compile Include="Assets\Scripts\Game Elements\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Game Elements\Slider.cs" />
      <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelEnd.cs" />
-     <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelSelection.cs" />
-     <Compile Include="Assets\Scripts\Gui&amp;Menu\LevelSelection2.cs" />
-     <Compile Include="Assets\Scripts\Gui&amp;Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Gui&amp;Menu\Menu2.cs" />
+     <Compile Include="Assets\Scripts\Gui&amp;Menu\Options.cs" />
      <Compile Include="Assets\Scripts\Gui&amp;Menu\WorldSelection.cs" />
      <Compile Include="Assets\Scripts\OldScripts\BulletController.cs" />
+     <Compile Include="Assets\Scripts\OldScripts\LevelSelection.cs" />
+     <Compile Include="Assets\Scripts\OldScripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\OldScripts\PillarController.cs" />
      <Compile Include="Assets\Scripts\OldScripts\ShooterController.cs" />
      <Compile Include="Assets\Scripts\System\AudioManager.cs" />
