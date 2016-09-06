@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
 				
-				Debug.Log("/LH "+Input.GetAxis("LH")+" /LV "+Input.GetAxis("LV")+" /RH "+Input.GetAxis("RH")+" /RV "+Input.GetAxis("RV"));
+				//Debug.Log("/LH "+Input.GetAxis("LH")+" /LV "+Input.GetAxis("LV")+" /RH "+Input.GetAxis("RH")+" /RV "+Input.GetAxis("RV"));
 				
 				if ((Input.GetKey(KeyCode.D) ||  Input.GetAxis("LH")>0) && canGoForward)
                 {
