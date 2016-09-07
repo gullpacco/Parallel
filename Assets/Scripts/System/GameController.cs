@@ -112,7 +112,7 @@ public class GameController : MonoBehaviour {
             }
             else
             {
-                if (Input.GetKeyDown("joystick button 7")|| Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown("joystick button 7")|| Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
                 {
                     Time.timeScale = 1;
                     pauseMenu.SetActive(false);
