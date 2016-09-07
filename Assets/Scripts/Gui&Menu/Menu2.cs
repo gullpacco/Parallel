@@ -11,12 +11,16 @@ public class Menu2 : MonoBehaviour {
 	
 	public Button btnGoBack;
 	
+	public Button btnW1L1;
+	public Button btnW2L1;
+	public Button btnW3L1;
+	
 	private bool btnStartSelected;
 	private bool btnOptionsSelected;
 	private bool btnCreditsSelected;
 	private bool btnQuitSelected;
 	
-	private bool onOptions;
+	//private bool onOptions;
 	
 	void Start() {
 		Time.timeScale=1;
@@ -25,18 +29,19 @@ public class Menu2 : MonoBehaviour {
 	
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.DownArrow) && btnStartSelected==false && btnOptionsSelected==false && btnCreditsSelected==false && btnQuitSelected==false && onOptions==false)
+		/*if(Input.GetKeyDown(KeyCode.DownArrow) && btnStartSelected==false && btnOptionsSelected==false && btnCreditsSelected==false && btnQuitSelected==false && onOptions==false)
 		{
 			btnStart.Select();
 		}
 		if(Input.GetKeyDown(KeyCode.UpArrow) && btnStartSelected==false && btnOptionsSelected==false && btnCreditsSelected==false && btnQuitSelected==false &&onOptions==false)
 		{
 			btnQuit.Select();
-		}
+		}*/
 	}
 	public void EnableAnimator(Animator anim)
 	{
 		anim.SetBool("atWorld1", true);
+		btnW1L1.Select();
 	}
 	
 	public void DisableAnimator(Animator anim)
@@ -44,30 +49,35 @@ public class Menu2 : MonoBehaviour {
 		anim.SetBool("atWorld1", false);
 		anim.SetBool("atWorld2", false);
 		anim.SetBool("atWorld3", false);
+		btnStart.Select();
 	}
 	
 	public void EnableFirstLeft(Animator anim)
 	{
 		anim.SetBool("atWorld1", false);
 		anim.SetBool("atWorld2", true);
+		btnW2L1.Select();
 	}
 	
 	public void DisableFirstLeft(Animator anim)
 	{
 		anim.SetBool("atWorld1", true);
 		anim.SetBool("atWorld2", false);
+		btnW1L1.Select();
 	}
 	
 	public void EnableSecondLeft(Animator anim)
 	{
 		anim.SetBool("atWorld2", false);
 		anim.SetBool("atWorld3", true);
+		btnW3L1.Select();
 	}
 	
 	public void DisableSecondLeft(Animator anim)
 	{
 		anim.SetBool("atWorld2", true);
 		anim.SetBool("atWorld3", false);
+		btnW2L1.Select();
 	}
 
 	public void DisableMenuAnimator(Animator anim)
@@ -84,7 +94,7 @@ public class Menu2 : MonoBehaviour {
 	{
 		optionsAnim.SetBool("ShowOptions", true);
 		btnGoBack.Select();
-		onOptions=true;
+		//onOptions=true;
 	}
 	
 	public void HideMenu(Animator menuAnim)
@@ -95,7 +105,7 @@ public class Menu2 : MonoBehaviour {
 	public void HideOptions(Animator optionsAnim)
 	{
 		optionsAnim.SetBool("ShowOptions", false);
-		onOptions=false;
+		//onOptions=false;
 	}
 	
 	public void ShowMenu(Animator menuAnim)
@@ -126,8 +136,18 @@ public class Menu2 : MonoBehaviour {
 	{
 		Application.LoadLevel(levelName);
 	}
+	
+	public void OverBtn(Button selectedButton)
+	{
+		selectedButton.transform.localScale = new Vector2(.7f, .7f); //Il pulsante si rimpicciolisce
+	}
 
-	public void DeselectStartOver(Button selectedButton)
+	public void OutBtn(Button selectedButton)
+	{
+		selectedButton.transform.localScale = new Vector2(1f, 1f); //Il pulsante si rimpicciolisce
+	}
+	
+	/*public void DeselectStartOver(Button selectedButton)
 	{
 		if((btnStartSelected!=false || btnOptionsSelected!=false || btnCreditsSelected!=false || btnQuitSelected!=false)&& onOptions==false)
 		{
@@ -182,17 +202,6 @@ public class Menu2 : MonoBehaviour {
 		{
 			btnQuitSelected=false;
 		}
-	}
-
-	public void OverBtn(Button selectedButton)
-	{
-		selectedButton.transform.localScale = new Vector2(.7f, .7f); //Il pulsante si rimpicciolisce
-	}
-
-	public void OutBtn(Button selectedButton)
-	{
-		selectedButton.transform.localScale = new Vector2(1f, 1f); //Il pulsante si rimpicciolisce
-	}
-
+	}*/
 
 }

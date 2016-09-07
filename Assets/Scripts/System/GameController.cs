@@ -13,8 +13,6 @@ public class GameController : MonoBehaviour {
     public Text hideText;
 
     public string musicTrack;
-  
-
     void Awake()
     {
         instance = this;
@@ -83,7 +81,8 @@ public class GameController : MonoBehaviour {
     void Update () {
         if (ended)
         {
-            if (Input.GetKeyDown(KeyCode.M))
+			
+           /* if (Input.GetKeyDown(KeyCode.M))
             {
                 Application.LoadLevel("Menu2.0");
             }
@@ -96,30 +95,31 @@ public class GameController : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Application.LoadLevel(Application.loadedLevel);
-            }
+            }*/
         }
 
         else
         {
             if (!paused)
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (Input.GetKeyDown(KeyCode.Escape)|| Input.GetKeyDown("joystick button 7"))
                 {
                     Time.timeScale = 0;
                     pauseMenu.SetActive(true);
                     paused = true;
+					GameObject.Find("btnResume").GetComponent<Button>().Select();
                 }
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (Input.GetKeyDown("joystick button 7")|| Input.GetKeyDown("joystick button 1"))
                 {
                     Time.timeScale = 1;
                     pauseMenu.SetActive(false);
                     paused = false;
                 }
             }
-
+			/*
             if (Input.GetKeyDown(KeyCode.M) && paused)
             {
                 Application.LoadLevel("Menu2.0");
@@ -128,7 +128,7 @@ public class GameController : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.R) && paused)
             {
                 Application.LoadLevel(Application.loadedLevel);
-            }
+            }*/
 
         }
 
@@ -150,7 +150,56 @@ public class GameController : MonoBehaviour {
 
     }
 
+	public void OverBtn(Button selectedButton)
+	{
+		selectedButton.transform.localScale = new Vector2(.7f, .7f); //Il pulsante si rimpicciolisce
+	}
 
-   
+	public void OutBtn(Button selectedButton)
+	{
+		selectedButton.transform.localScale = new Vector2(1f, 1f); //Il pulsante si rimpicciolisce
+	}
+	
+	public void OverBtnEnd(Button selectedButton)
+	{
+		selectedButton.transform.localScale = new Vector2(.2f, .2f); //Il pulsante si rimpicciolisce
+	}
+
+	public void OutBtnEnd(Button selectedButton)
+	{
+		selectedButton.transform.localScale = new Vector2(.3104f,.3104f); //Il pulsante si rimpicciolisce
+	}
+	
+	public void ClickBtn(Button selectedButton)
+	{
+		//selectedButton.transform.localScale = new Vector2(.8f, .8f); //Il pulsante si rimpicciolisce
+		
+		if (selectedButton.name == "btnResume") 
+		{
+			Time.timeScale = 1;
+			pauseMenu.SetActive(false);
+			paused = false;
+		}
+		else if (selectedButton.name == "btnRestart") 
+		{
+			Application.LoadLevel(Application.loadedLevel);
+		}
+		else if (selectedButton.name == "btnMainMenu") 
+		{
+			Application.LoadLevel("Menu2.0");
+		}
+		else if (selectedButton.name == "btnMainMenuEnd" && ended) 
+		{
+			Application.LoadLevel("Menu2.0");
+		}
+		else if (selectedButton.name == "btnNext" && ended) 
+		{
+			Application.LoadLevel(Application.loadedLevel + 1);
+		}
+		else if (selectedButton.name == "btnRestartEnd" && ended) 
+		{
+			Application.LoadLevel(Application.loadedLevel);
+		}
+	}
 
 }

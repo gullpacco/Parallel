@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LevelEnd : MonoBehaviour {
 
@@ -30,6 +31,7 @@ public class LevelEnd : MonoBehaviour {
                     //Application.LoadLevel(nextLevel);
                 sm.SetHighScore();
                 GameController.instance.ended = true;
+				GameObject.Find("btnNext").GetComponent<Button>().Select();
             }
         }
     }
