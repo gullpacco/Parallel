@@ -11,6 +11,8 @@ public class Menu2 : MonoBehaviour {
 	
 	public Button btnGoBack;
 	
+	public InputField txtInputJump;
+	
 	public Button btnW1L1;
 	public Button btnW2L1;
 	public Button btnW3L1;
@@ -112,6 +114,18 @@ public class Menu2 : MonoBehaviour {
 	{
 		menuAnim.SetBool("HideMenu", false);
 		btnStart.Select();
+	}
+	
+	public void ShowControls(Animator optionsAnim)
+	{
+		optionsAnim.SetBool("ShowControls", true);
+		txtInputJump.Select();
+	}
+	
+	public void HideControls(Animator optionsAnim)
+	{
+		optionsAnim.SetBool("ShowControls", false);
+		btnGoBack.Select();
 	}
 	
 	public void NavigateTo(int scene)
