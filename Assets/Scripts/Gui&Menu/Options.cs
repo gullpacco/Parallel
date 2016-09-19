@@ -24,7 +24,7 @@ public class Options : MonoBehaviour {
 	
 	public void OverBtn(Button selectedButton)
 	{
-		selectedButton.transform.localScale = new Vector2(.15f, .08f); //Il pulsante si rimpicciolisce
+		selectedButton.transform.localScale = new Vector2(.25f, .12f); //Il pulsante si rimpicciolisce
 	}
 
 	public void OutBtn(Button selectedButton)
@@ -83,5 +83,15 @@ public class Options : MonoBehaviour {
 	public void ChangeMusicVolume()
 	{
 		audioSrc.volume=GameObject.Find("sldMusicVolume").GetComponent<UnityEngine.UI.Slider>().value;
+	}
+	
+	public void KeyToJoy(Animator anim)
+	{
+		anim.SetBool("ShowJoypad", false);
+	}
+	
+	public void JoyToKey(Animator anim)
+	{
+		anim.SetBool("ShowJoypad", true);
 	}
 }

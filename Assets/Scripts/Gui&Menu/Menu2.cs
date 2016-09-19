@@ -10,6 +10,7 @@ public class Menu2 : MonoBehaviour {
 	public Button btnQuit;
 	
 	public Button btnGoBack;
+	public Dropdown drpResolution;
 	
 	public InputField txtInputJump;
 	
@@ -95,7 +96,7 @@ public class Menu2 : MonoBehaviour {
 	public void ShowOptions(Animator optionsAnim)
 	{
 		optionsAnim.SetBool("ShowOptions", true);
-		btnGoBack.Select();
+		drpResolution.Select();
 		//onOptions=true;
 	}
 	
@@ -125,7 +126,7 @@ public class Menu2 : MonoBehaviour {
 	public void HideControls(Animator optionsAnim)
 	{
 		optionsAnim.SetBool("ShowControls", false);
-		btnGoBack.Select();
+		drpResolution.Select();
 	}
 	
 	public void NavigateTo(int scene)
@@ -153,7 +154,7 @@ public class Menu2 : MonoBehaviour {
 	
 	public void OverBtn(Button selectedButton)
 	{
-		selectedButton.transform.localScale = new Vector2(.7f, .7f); //Il pulsante si rimpicciolisce
+		selectedButton.transform.localScale = new Vector2(1.1f, 1.1f); //Il pulsante si rimpicciolisce
 	}
 
 	public void OutBtn(Button selectedButton)
