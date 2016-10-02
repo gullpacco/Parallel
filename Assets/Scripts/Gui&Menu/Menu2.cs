@@ -40,6 +40,13 @@ public class Menu2 : MonoBehaviour {
 		{
 			btnQuit.Select();
 		}*/
+		Debug.Log(PlayerController.jumpUp);
+		Debug.Log(PlayerController.moveFrontUp);
+		Debug.Log(PlayerController.moveBackUp);
+		
+		Debug.Log(PlayerController.jumpDown);
+		Debug.Log(PlayerController.moveFrontDown);
+		Debug.Log(PlayerController.moveBackDown);
 	}
 	public void EnableAnimator(Animator anim)
 	{
