@@ -151,7 +151,7 @@ public class Options : MonoBehaviour {
 	
 	public void jumpUpChanged(string text)
 	{
-		
+		text = text.ToLower();
 		if(fldTemp.text=="up arrow key")
 		{
 			PlayerController.jumpUp="up";
@@ -168,6 +168,10 @@ public class Options : MonoBehaviour {
 		{
 			PlayerController.jumpUp="right";
 		}
+		else if(fldTemp.text=="")
+		{
+			PlayerController.jumpUp="w";
+		}
 		else
 		{
 			PlayerController.jumpUp=text;
@@ -175,6 +179,7 @@ public class Options : MonoBehaviour {
 	}
 	public void moveFrontUpChanged(string text)
 	{
+		text = text.ToLower();
 		if(fldTemp.text=="up arrow key")
 		{
 			PlayerController.moveFrontUp="up";
@@ -191,6 +196,10 @@ public class Options : MonoBehaviour {
 		{
 			PlayerController.moveFrontUp="right";
 		}
+		else if(fldTemp.text=="")
+		{
+			PlayerController.moveFrontUp="d";
+		}
 		else
 		{
 			PlayerController.moveFrontUp=text;
@@ -198,6 +207,7 @@ public class Options : MonoBehaviour {
 	}
 	public void moveBackUpChanged(string text)
 	{
+		text = text.ToLower();
 		if(fldTemp.text=="up arrow key")
 		{
 			PlayerController.moveBackUp="up";
@@ -214,13 +224,19 @@ public class Options : MonoBehaviour {
 		{
 			PlayerController.moveBackUp="right";
 		}
+		else if(fldTemp.text=="")
+		{
+			PlayerController.moveBackUp="a";
+		}
 		else
 		{
 			PlayerController.moveBackUp=text;
 		}
 	}
+	
 	public void jumpDownChanged(string text)
 	{
+		text = text.ToLower();
 		if(fldTemp.text=="up arrow key")
 		{
 			PlayerController.jumpDown="up";
@@ -237,13 +253,19 @@ public class Options : MonoBehaviour {
 		{
 			PlayerController.jumpDown="right";
 		}
+		else if(fldTemp.text=="")
+		{
+			PlayerController.jumpUp="down";
+		}
 		else
 		{
 			PlayerController.jumpDown=text;
 		}
 	}
+	
 	public void moveFrontDownChanged(string text)
 	{
+		text = text.ToLower();
 		if(fldTemp.text=="up arrow key")
 		{
 			PlayerController.moveFrontDown="up";
@@ -260,13 +282,19 @@ public class Options : MonoBehaviour {
 		{
 			PlayerController.moveFrontDown="right";
 		}
+		else if(fldTemp.text=="")
+		{
+			PlayerController.moveFrontDown="right";
+		}
 		else
 		{
 			PlayerController.jumpUp=text;
 		}
 	}
+	
 	public void moveBackDownChanged(string text)
 	{
+		text = text.ToLower();
 		if(fldTemp.text=="up arrow key")
 		{
 			PlayerController.moveBackDown="up";
@@ -283,19 +311,27 @@ public class Options : MonoBehaviour {
 		{
 			PlayerController.moveBackDown="right";
 		}
+		else if(fldTemp.text=="")
+		{
+			PlayerController.moveBackDown="left";
+		}
 		else
 		{
 			PlayerController.moveBackDown=text;
 		}
 	}
+
 	public void selectInputField(InputField selectedFld)
 	{
 		fldTemp=selectedFld;
+		fldTemp.characterLimit = 1;
+		fldTemp.contentType=InputField.ContentType.Alphanumeric;
 		isFldSelected=true;
 	}
 	
 	public void deselectInputField()
 	{
+		fldTemp.text = fldTemp.text.ToLower();
 		fldTemp=null;
 		isFldSelected=false;
 	}
