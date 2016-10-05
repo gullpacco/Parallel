@@ -72,7 +72,7 @@ public class Sound
 
 
         //riproduzione
-        Debug.Log(source);
+
         if (source.isPlaying)
         {
             return false;
@@ -238,7 +238,7 @@ public class AudioManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log(musics.Length);
+
 
 
 

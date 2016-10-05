@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour {
             GameObject tmp;
             for (int i = 0; i < gos.Length; i++)
             {
+
                 if (gos[i].name.Contains("Collisions"))
                 {
                     if (gos[i].transform.childCount > 1)
@@ -59,6 +60,22 @@ public class GameController : MonoBehaviour {
                         tmp.layer = 16;
 
                     }
+                }
+
+                else if (gos[i].name.Contains("Terreno"))
+                    {
+                        MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
+                    renderer.sortingLayerName = "Main";
+                        renderer.sortingOrder = 3;
+
+            }
+                if (gos[i].name.Contains("Traguardo") || gos[i].name.Contains("CheckPoint"))
+                {
+                    MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
+                    renderer.sortingLayerName = "Main";
+
+                    renderer.sortingOrder = 4;
+
                 }
             }
         }
