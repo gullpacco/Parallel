@@ -4,20 +4,38 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     private Transform [] playerToFollow;
-    private int cursor = 0;
+    private int cursor = 0, nextPOI=1, lastPOI=0;
     public float offset, limit, increment;
-    float playersDistance, lastPlayerDistance;
+    float playersDistance, lastPlayerDistance, duration, elapsed, startZoom, endZoom;
     public Parallax[] parallaxElements;
+    Camera mainCamera;
+    public PointsOfInterest [] points;
+    bool zooming;
+
+    [System.Serializable]
+    public struct PointsOfInterest
+    {
+       public float position, size, zoomSpeed;
+
+    }
+
 
     [System.Serializable]
     public struct Parallax
     {
+
         public float parallaxSpeed;
         public Transform parallaxElement;
     }
 
+    void Awake()
+    {
+        mainCamera = GetComponent<Camera>();
+    }
+
     // Use this for initialization
     void Start () {
+        
         playerToFollow = new Transform[2];
 
         PlayerController[] players = GameObject.FindObjectsOfType<PlayerController>();
@@ -29,22 +47,63 @@ public class CameraController : MonoBehaviour {
         lastPlayerDistance = playersDistance;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         //CameraCheck();
-        playersDistance = (playerToFollow[0].position.x + playerToFollow[1].position.x)/2;
+        POICheck();
+        playersDistance = (playerToFollow[0].position.x + playerToFollow[1].position.x) / 2;
         if (playersDistance != lastPlayerDistance)
         {
             CalculateParallax(playersDistance - lastPlayerDistance);
         }
         lastPlayerDistance = playersDistance;
 
-        transform.position = new Vector3(playersDistance -offset, transform.position.y, transform.position.z);
-        if(offset>limit)
-        offset += increment;
-	}
+        transform.position = new Vector3(playersDistance - offset, transform.position.y, transform.position.z);
+        if (offset > limit)
+            offset += increment;
 
+        if (zooming)
+        {
+            elapsed += Time.deltaTime / duration;
+            mainCamera.orthographicSize = Mathf.Lerp(startZoom, endZoom, elapsed);
+            //this next line i'm not sure of, I'm not familiar with CameraMovement.ypos
+            //Camera.main.GetComponent<CameraMovement>().ypos = Mathf.Lerp(ypos1, ypos2, elapsed);
+            Debug.Log(elapsed);
+
+            if (elapsed > 1.0f)
+            {
+                zooming = false;
+            }
+        }
+    }
+
+    void POICheck()
+    {
+        if (transform.position.x > points[nextPOI].position)
+        {
+            CameraSizeLerping(points[nextPOI].size, points[nextPOI].zoomSpeed);
+            lastPOI = nextPOI;
+            nextPOI++;
+        }
+        else if (transform.position.x<points[lastPOI].position)
+        {
+            nextPOI = lastPOI;
+            lastPOI--;
+            CameraSizeLerping(points[lastPOI].size, points[lastPOI].zoomSpeed);
+     
+        }
+    }
+
+    void CameraSizeLerping(float size, float speed)
+    {
+
+        zooming = true;
+        startZoom = mainCamera.orthographicSize;
+        endZoom = size;
+        elapsed = 0;
+        duration = speed;
+    }
 
     void CalculateParallax(float difference)
     {
