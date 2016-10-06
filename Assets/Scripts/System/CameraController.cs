@@ -4,12 +4,14 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     private Transform [] playerToFollow;
-    private int cursor = 0, nextPOI=1, lastPOI=0;
+    private int cursor = 0, nextPOI=1, lastPOI=0, nextBP;
     public float offset, limit, increment;
     float playersDistance, lastPlayerDistance, duration, elapsed, startZoom, endZoom;
     public Parallax[] parallaxElements;
     Camera mainCamera;
-    public PointsOfInterest [] points;
+    public PointsOfInterest [] pointsOfInterest;
+    public BoostPoint[] boostPoints;
+    public ObjectMovement glitch;
     bool zooming;
 
     [System.Serializable]
@@ -19,13 +21,20 @@ public class CameraController : MonoBehaviour {
 
     }
 
-
     [System.Serializable]
     public struct Parallax
     {
 
         public float parallaxSpeed;
         public Transform parallaxElement;
+    }
+
+
+    [System.Serializable]
+    public struct BoostPoint
+    {
+
+        public float position, speed;
     }
 
     void Awake()
@@ -52,6 +61,7 @@ public class CameraController : MonoBehaviour {
     void Update() {
         //CameraCheck();
         POICheck();
+        BPCheck();
         playersDistance = (playerToFollow[0].position.x + playerToFollow[1].position.x) / 2;
         if (playersDistance != lastPlayerDistance)
         {
@@ -80,18 +90,26 @@ public class CameraController : MonoBehaviour {
 
     void POICheck()
     {
-        if (transform.position.x > points[nextPOI].position)
+        if (transform.position.x > pointsOfInterest[nextPOI].position)
         {
-            CameraSizeLerping(points[nextPOI].size, points[nextPOI].zoomSpeed);
+            CameraSizeLerping(pointsOfInterest[nextPOI].size, pointsOfInterest[nextPOI].zoomSpeed);
             lastPOI = nextPOI;
             nextPOI++;
         }
-        else if (transform.position.x<points[lastPOI].position)
+        else if (transform.position.x<pointsOfInterest[lastPOI].position)
         {
             nextPOI = lastPOI;
             lastPOI--;
-            CameraSizeLerping(points[lastPOI].size, points[lastPOI].zoomSpeed);
+            CameraSizeLerping(pointsOfInterest[lastPOI].size, pointsOfInterest[lastPOI].zoomSpeed);
      
+        }
+    }
+
+    void BPCheck()
+    {
+        if (transform.position.x > boostPoints[nextBP].position)
+        {
+            glitch.Speed_X = boostPoints[nextBP++].speed;
         }
     }
 
@@ -113,6 +131,12 @@ public class CameraController : MonoBehaviour {
             float speed = parallaxElements[k].parallaxSpeed;
             par.position = new Vector3(par.position.x - difference * speed, par.position.y, par.position.z);
         }
+    }
+
+    public void ResetGlitch(float spawnPoint)
+    {
+        glitch.transform.position = new Vector3(spawnPoint - 13, 0, 0);
+        nextBP = 0;
     }
 
     //void CameraCheck()
