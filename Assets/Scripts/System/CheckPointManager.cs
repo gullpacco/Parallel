@@ -8,6 +8,7 @@ public class CheckPointManager : MonoBehaviour {
     PlayerController[] players;
     Pillar[] pillars;
     CameraController mainCamera;
+    Glitch glitch;
   //  ShooterController[] shooters;
 
     void Awake()
@@ -16,6 +17,7 @@ public class CheckPointManager : MonoBehaviour {
         players = GameObject.FindObjectsOfType<PlayerController>();
         mainCamera = GameObject.FindObjectOfType<CameraController>();
         pillars = GameObject.FindObjectsOfType<Pillar>();
+        glitch = FindObjectOfType<Glitch>();
        // shooters = GameObject.FindObjectsOfType<ShooterController>();
     }
 
@@ -45,7 +47,7 @@ public class CheckPointManager : MonoBehaviour {
         //if (currentCheckpoint >= 0)
         //{ 
         float spawnPoint= checkpoints[currentCheckpoint].gameObject.transform.position.x;
-        mainCamera.ResetGlitch(spawnPoint);
+        glitch.Reset(spawnPoint);
         return spawnPoint;
 
 

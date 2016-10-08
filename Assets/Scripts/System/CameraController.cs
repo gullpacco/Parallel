@@ -4,13 +4,12 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     private Transform [] playerToFollow;
-    private int cursor = 0, nextPOI=1, lastPOI=0, nextBP;
+    private int cursor = 0, nextPOI=1, lastPOI=0;
     public float offset, limit, increment;
     float playersDistance, lastPlayerDistance, duration, elapsed, startZoom, endZoom;
     public Parallax[] parallaxElements;
     Camera mainCamera;
     public PointsOfInterest [] pointsOfInterest;
-    public BoostPoint[] boostPoints;
     public ObjectMovement glitch;
     bool zooming;
 
@@ -30,12 +29,6 @@ public class CameraController : MonoBehaviour {
     }
 
 
-    [System.Serializable]
-    public struct BoostPoint
-    {
-
-        public float position, speed;
-    }
 
     void Awake()
     {
@@ -61,7 +54,6 @@ public class CameraController : MonoBehaviour {
     void Update() {
         //CameraCheck();
         POICheck();
-        BPCheck();
         playersDistance = (playerToFollow[0].position.x + playerToFollow[1].position.x) / 2;
         if (playersDistance != lastPlayerDistance)
         {
@@ -105,14 +97,7 @@ public class CameraController : MonoBehaviour {
         }
     }
 
-    void BPCheck()
-    {
-        if (transform.position.x > boostPoints[nextBP].position)
-        {
-            glitch.Speed_X = boostPoints[nextBP++].speed;
-        }
-    }
-
+ 
     void CameraSizeLerping(float size, float speed)
     {
 
@@ -133,11 +118,7 @@ public class CameraController : MonoBehaviour {
         }
     }
 
-    public void ResetGlitch(float spawnPoint)
-    {
-        glitch.transform.position = new Vector3(spawnPoint - 13, 0, 0);
-        nextBP = 0;
-    }
+   
 
     //void CameraCheck()
     //{
