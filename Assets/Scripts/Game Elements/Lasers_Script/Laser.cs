@@ -16,7 +16,7 @@ public abstract class Laser : MonoBehaviour {
     public Material LasMaterial;
     bool hasStarted;
     protected float colliderOffset = 0.4f;
-
+    float startX, startY;
    // CircleCollider2D[] safeZones = new CircleCollider2D[2];
     protected Vector3 startPos, endPos;
     protected BoxCollider2D col;
@@ -42,7 +42,8 @@ public abstract class Laser : MonoBehaviour {
         col.transform.parent = transform;
         col.gameObject.layer = 2;
         col.gameObject.tag = "Enemy";
-
+        startY = transform.position.y;
+        startX = transform.position.x;
         //for (int s = 0; s < 2; s++) {
         //    safeZones[s] = new GameObject("SafeZone").AddComponent<CircleCollider2D>();
         //    safeZones[s].isTrigger = true;
@@ -134,13 +135,7 @@ public abstract class Laser : MonoBehaviour {
     void EndOffset()
     {
         offsetEnded = true;
-        Invoke("Shoot", 0.01f);
 
-    }
-
-    void Shoot()
-    {
-        hasStarted = true;
     }
 
     IEnumerator Switch(bool state, float time)
@@ -264,6 +259,20 @@ public abstract class Laser : MonoBehaviour {
     {
         parSystem.Emit(100);
     }
+
+    public void Reset() {
+
+        transform.position = new Vector3(startX, startY, transform.position.z);
+        CancelInvoke("StayOn");
+        CancelInvoke("Burst");
+        CancelInvoke("StayOff");
+
+        Invoke("EndOffset", activationOffset);
+        offsetEnded = false;
+
+    }
+
+
     protected abstract void LaserLength();
     protected abstract void ExtendBeam();
     protected abstract void FinalDist();
