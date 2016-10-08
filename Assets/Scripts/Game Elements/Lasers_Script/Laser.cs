@@ -85,42 +85,8 @@ public abstract class Laser : MonoBehaviour {
     {
         if (offsetEnded || triggerBased)
         {
-           
 
-            if (!isinvoking &&intermittent && !triggerBased)
-            {
-                StartInvoking();
-                isinvoking = true;
-            }
-                if (isOn)
-                {
-                //if (intermittent)
-                //    StartCoroutine(Switch(false, onTime));
-                col.enabled = true;
-                    LaserLength();
-
-                    if (distChanged)
-                        ExtendBeam();
-                    else
-                        FinalDist();
-
-                    las.SetPosition(0, transform.position);
-                    las.SetPosition(1, distance);
-
-                endPos = distance;
-                    particle.transform.position = distance;
-                }
-
-                else
-                {
-                    las.SetPosition(0, transform.position);
-                    las.SetPosition(1, transform.position);
-                    particle.transform.position = transform.position;
-                endPos = startPos;
-
-                col.enabled = false;
-                
-                }
+            CheckLaserStatus();
 
             //   }
 
@@ -133,6 +99,46 @@ public abstract class Laser : MonoBehaviour {
     void EndOffset()
     {
         offsetEnded = true;
+
+    }
+
+    void CheckLaserStatus()
+    {
+
+        if (!isinvoking && intermittent && !triggerBased)
+        {
+            StartInvoking();
+            isinvoking = true;
+        }
+        if (isOn)
+        {
+            //if (intermittent)
+            //    StartCoroutine(Switch(false, onTime));
+            col.enabled = true;
+            LaserLength();
+
+            if (distChanged)
+                ExtendBeam();
+            else
+                FinalDist();
+
+            las.SetPosition(0, transform.position);
+            las.SetPosition(1, distance);
+
+            endPos = distance;
+            particle.transform.position = distance;
+        }
+
+        else
+        {
+            las.SetPosition(0, transform.position);
+            las.SetPosition(1, transform.position);
+            particle.transform.position = transform.position;
+            endPos = startPos;
+
+            col.enabled = false;
+
+        }
 
     }
 
@@ -260,13 +266,13 @@ public abstract class Laser : MonoBehaviour {
 
     public void Reset() {
 
-        CancelInvoke("StayOn");
-        CancelInvoke("Burst");
-        CancelInvoke("StayOff");
+        CancelInvoke();
 
         Invoke("EndOffset", activationOffset);
         offsetEnded = false;
-
+        isOn = false;
+        isinvoking = false;
+        CheckLaserStatus();
     }
 
 
