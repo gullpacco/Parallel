@@ -71,10 +71,14 @@ public class GameController : MonoBehaviour {
             }
                 if (gos[i].name.Contains("Traguardo") || gos[i].name.Contains("CheckPoint"))
                 {
-                    MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
-                    renderer.sortingLayerName = "Main";
+                    if (gos[i].transform.childCount > 0)
+                    {
+                        MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
+                        renderer.sortingLayerName = "Main";
+                        renderer.sortingOrder = 4;
+                    }
 
-                    renderer.sortingOrder = 4;
+
 
                 }
             }

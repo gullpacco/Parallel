@@ -16,7 +16,6 @@ public abstract class Laser : MonoBehaviour {
     public Material LasMaterial;
     bool hasStarted;
     protected float colliderOffset = 0.4f;
-    float startX, startY;
    // CircleCollider2D[] safeZones = new CircleCollider2D[2];
     protected Vector3 startPos, endPos;
     protected BoxCollider2D col;
@@ -42,8 +41,7 @@ public abstract class Laser : MonoBehaviour {
         col.transform.parent = transform;
         col.gameObject.layer = 2;
         col.gameObject.tag = "Enemy";
-        startY = transform.position.y;
-        startX = transform.position.x;
+       
         //for (int s = 0; s < 2; s++) {
         //    safeZones[s] = new GameObject("SafeZone").AddComponent<CircleCollider2D>();
         //    safeZones[s].isTrigger = true;
@@ -262,7 +260,6 @@ public abstract class Laser : MonoBehaviour {
 
     public void Reset() {
 
-        transform.position = new Vector3(startX, startY, transform.position.z);
         CancelInvoke("StayOn");
         CancelInvoke("Burst");
         CancelInvoke("StayOff");

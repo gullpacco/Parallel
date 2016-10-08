@@ -9,6 +9,8 @@ public class CheckPointManager : MonoBehaviour {
     Pillar[] pillars;
     CameraController mainCamera;
     Glitch glitch;
+    Laser[] lasers;
+    ObjectMovement[] moving;
   //  ShooterController[] shooters;
 
     void Awake()
@@ -18,6 +20,9 @@ public class CheckPointManager : MonoBehaviour {
         mainCamera = GameObject.FindObjectOfType<CameraController>();
         pillars = GameObject.FindObjectsOfType<Pillar>();
         glitch = FindObjectOfType<Glitch>();
+        lasers = FindObjectsOfType<Laser>();
+        moving = FindObjectsOfType<ObjectMovement>();
+
        // shooters = GameObject.FindObjectsOfType<ShooterController>();
     }
 
@@ -40,13 +45,25 @@ public class CheckPointManager : MonoBehaviour {
             pillars[j].ResetPillar();
         }
 
+        for (int j = 0; j < lasers.Length; j++)
+        {
+
+            lasers[j].Reset();
+        }
+
+        for (int j = 0; j < moving.Length; j++)
+        {
+
+            moving[j].SetValues();
+        }
+
         //for (int k=0; k<shooters.Length; k++)
         //{
         //    shooters[k].ResetShooter();
         //}
         //if (currentCheckpoint >= 0)
         //{ 
-        float spawnPoint= checkpoints[currentCheckpoint].gameObject.transform.position.x;
+        float spawnPoint = checkpoints[currentCheckpoint].gameObject.transform.position.x;
         glitch.Reset(spawnPoint);
         return spawnPoint;
 
