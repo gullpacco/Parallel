@@ -83,16 +83,10 @@ public abstract class Laser : MonoBehaviour {
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
-        if (offsetEnded || triggerBased)
-        {
 
-            CheckLaserStatus();
-
+        CheckLaserStarted();
             //   }
 
-            addColliderToLine();
-          //  safeZones[1].transform.position = endPos;
-        }
 
     }
 
@@ -102,14 +96,27 @@ public abstract class Laser : MonoBehaviour {
 
     }
 
+    void CheckLaserStarted()
+    {
+    if (offsetEnded || triggerBased)
+    {
+
+            if (!isinvoking && intermittent && !triggerBased)
+            {
+                StartInvoking();
+                isinvoking = true;
+            }
+            CheckLaserStatus();
+
+            addColliderToLine();
+            //  safeZones[1].transform.position = endPos;
+        }
+
+    }
+    
     void CheckLaserStatus()
     {
 
-        if (!isinvoking && intermittent && !triggerBased)
-        {
-            StartInvoking();
-            isinvoking = true;
-        }
         if (isOn)
         {
             //if (intermittent)
@@ -142,57 +149,57 @@ public abstract class Laser : MonoBehaviour {
 
     }
 
-    IEnumerator Switch(bool state, float time)
-    {
+    //IEnumerator Switch(bool state, float time)
+    //{
 
 
-        yield return new WaitForSeconds(time);
-        intermittent = false;
+    //    yield return new WaitForSeconds(time);
+    //    intermittent = false;
 
-        if (isOn) { 
-        Debug.Log(this.name  + "On at " + (previousTimeOn - Time.time));
+    //    if (isOn) { 
+    //    Debug.Log(this.name  + "On at " + (previousTimeOn - Time.time));
 
-        previousTimeOn = Time.time; }
+    //    previousTimeOn = Time.time; }
 
-        else
-        {
-            Debug.Log(this.name + "Off at " + (previousTimeOff - Time.time));
+    //    else
+    //    {
+    //        Debug.Log(this.name + "Off at " + (previousTimeOff - Time.time));
 
-            previousTimeOff = Time.time;
-        }
-        isOn = state;
-        StopAllCoroutines();
-        if (!isOn)
-        {
-            las.SetPosition(0, transform.position);
-            las.SetPosition(1, transform.position);
-            particle.transform.position = transform.position;
-            if (skip < 4)
-            {
-                StartCoroutine(Switch(true, offTime - (offTime + onTime - previousTimeOff)));
-                skip++;
-            }
-            else
-            {
-                StartCoroutine(Switch(true, offTime));
-                skip = 0;
-            }
-        }
+    //        previousTimeOff = Time.time;
+    //    }
+    //    isOn = state;
+    //    StopAllCoroutines();
+    //    if (!isOn)
+    //    {
+    //        las.SetPosition(0, transform.position);
+    //        las.SetPosition(1, transform.position);
+    //        particle.transform.position = transform.position;
+    //        if (skip < 4)
+    //        {
+    //            StartCoroutine(Switch(true, offTime - (offTime + onTime - previousTimeOff)));
+    //            skip++;
+    //        }
+    //        else
+    //        {
+    //            StartCoroutine(Switch(true, offTime));
+    //            skip = 0;
+    //        }
+    //    }
 
-        else
-        {
-            if (skip < 4)
-            {
-                StartCoroutine(Switch(false, onTime - (offTime + onTime - previousTimeOn)));
-                skip++;
-            }
-            else
-            {
-                StartCoroutine(Switch(false, onTime));
-                skip = 0;
-            }
-        }
-    }
+    //    else
+    //    {
+    //        if (skip < 4)
+    //        {
+    //            StartCoroutine(Switch(false, onTime - (offTime + onTime - previousTimeOn)));
+    //            skip++;
+    //        }
+    //        else
+    //        {
+    //            StartCoroutine(Switch(false, onTime));
+    //            skip = 0;
+    //        }
+    //    }
+    //}
 
     void StayOn()
     {
@@ -242,6 +249,7 @@ public abstract class Laser : MonoBehaviour {
         InvokeRepeating("StayOn", 0, onTime + offTime);
         InvokeRepeating("Burst", onTime + offTime*0.75f /*- ((offTime+onTime)/5)*/ , onTime+offTime );
         InvokeRepeating("StayOff", onTime, onTime + offTime);
+        isOn = true;
     }
 
     protected virtual void addColliderToLine()
@@ -268,12 +276,14 @@ public abstract class Laser : MonoBehaviour {
 
         CancelInvoke();
 
-        Invoke("EndOffset", activationOffset);
         offsetEnded = false;
         if(intermittent)
         isOn = false;
         isinvoking = false;
         CheckLaserStatus();
+        Debug.Log(name + isOn);
+       Invoke("EndOffset", activationOffset);
+
     }
 
 
