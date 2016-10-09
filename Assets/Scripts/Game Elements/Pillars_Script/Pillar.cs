@@ -59,7 +59,8 @@ public class Pillar : MonoBehaviour
             SpriteRenderer sr1 = go.AddComponent<SpriteRenderer>();
             sr1.sprite = square;
             sr1.color = new Color(0.1f, 0.6f, 0.1f);
-            sr1.sortingOrder = 2;
+            sr1.sortingLayerName = "Main";
+            sr1.sortingOrder = 6;
             go.transform.parent = this.transform;
             go.transform.localScale = new Vector3(1/transform.lossyScale.x, 1 / transform.lossyScale.y, 1);
             if( c == 1)
