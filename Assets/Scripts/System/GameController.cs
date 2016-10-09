@@ -173,7 +173,7 @@ public class GameController : MonoBehaviour {
 
 	public void OverBtn(Button selectedButton)
 	{
-		selectedButton.transform.localScale = new Vector2(.7f, .7f); //Il pulsante si rimpicciolisce
+		selectedButton.transform.localScale = new Vector2(1.3f, 1.3f); //Il pulsante si rimpicciolisce
 	}
 
 	public void OutBtn(Button selectedButton)
@@ -183,7 +183,7 @@ public class GameController : MonoBehaviour {
 	
 	public void OverBtnEnd(Button selectedButton)
 	{
-		selectedButton.transform.localScale = new Vector2(.2f, .2f); //Il pulsante si rimpicciolisce
+		selectedButton.transform.localScale = new Vector2(.4208f, .4208f); //Il pulsante si rimpicciolisce
 	}
 
 	public void OutBtnEnd(Button selectedButton)
