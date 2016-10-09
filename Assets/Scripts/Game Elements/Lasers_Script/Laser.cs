@@ -258,9 +258,9 @@ public abstract class Laser : MonoBehaviour {
 
         float lineLength = Vector3.Distance(startPos, endPos) -colliderOffset;
         if(startPos.y==endPos.y)
-        col.size = new Vector3(lineLength, 0.1f, 1f); 
+        col.size = new Vector3(lineLength, 0.01f, 1f); 
         else
-            col.size = new Vector3(0.1f, lineLength, 1f);
+            col.size = new Vector3(0.01f, lineLength, 1f);
          midPoint = (startPos + endPos) / 2 ;
         
         
