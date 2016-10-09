@@ -108,7 +108,7 @@ public class PillarElastic : Pillar
         if (coll.tag == "PillarElastic")
         {
             Pillar pillar = coll.GetComponent<Pillar>();
-            Debug.Log(pillar);
+
             if ((pillar.pushedByPillar || pillar.pushedByPlayer) && !pushedByPlayer)
             {
                 if (pillar.pillarPushing != this)

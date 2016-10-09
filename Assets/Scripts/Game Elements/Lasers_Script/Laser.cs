@@ -270,6 +270,7 @@ public abstract class Laser : MonoBehaviour {
 
         Invoke("EndOffset", activationOffset);
         offsetEnded = false;
+        if(intermittent)
         isOn = false;
         isinvoking = false;
         CheckLaserStatus();
