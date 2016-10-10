@@ -208,11 +208,11 @@ public class GameController : MonoBehaviour {
 		}
 		else if (selectedButton.name == "btnMainMenu") 
 		{
-			Application.LoadLevel("Menu2.0");
+			Application.LoadLevel("MenuBuild");
 		}
 		else if (selectedButton.name == "btnMainMenuEnd" && ended) 
 		{
-			Application.LoadLevel("Menu2.0");
+			Application.LoadLevel("MenuBuild");
 		}
 		else if (selectedButton.name == "btnNext" && ended) 
 		{
