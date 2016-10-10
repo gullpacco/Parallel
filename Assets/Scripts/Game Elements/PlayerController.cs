@@ -48,10 +48,16 @@ public class PlayerController : MonoBehaviour {
 	public static string moveFrontDown="right";
 	public static string moveBackDown="left";
 
+    void Awake()
+    {
+        GameObject firstCP = GameObject.Find("Checkpoint");
+        firstCP.transform.position = new Vector3(transform.position.x, transform.position.y);
+        firstCP.GetComponent<Checkpoint>().First = true;
+    }
+
     // Use this for initialization
     void Start () {
-        GameObject firstGo = GameObject.Find("Checkpoint");
-        firstGo.transform.position = new Vector3(transform.position.x, transform.position.y);
+       
         body = GetComponent<Rigidbody2D>();
         sliderSpeed = 0;
         cpm = GameObject.FindObjectOfType<CheckPointManager>();

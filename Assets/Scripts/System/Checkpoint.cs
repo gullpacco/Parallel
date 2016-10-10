@@ -7,29 +7,73 @@ public class Checkpoint : MonoBehaviour {
     bool canTrigger = true;
     CheckPointManager cpm;
     PlatformCheck platformCheck;
+    GameObject child;
+    ParticleSystem rotatingParticles;
+    bool first;
+
+    public bool First
+    {
+        get
+        {
+            return first;
+        }
+
+        set { first = value; }
+    }
+
 
     void Awake()
     {
         cpm = GameObject.FindObjectOfType<CheckPointManager>();
         platformCheck = GameObject.FindObjectOfType<PlatformCheck>();
+        child = transform.GetChild(0).gameObject;
+        rotatingParticles = GetComponentInChildren<ParticleSystem>();
 
     }
 
     // Use this for initialization
     void Start () {
-        
+        if (first)
+            child.transform.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update () {
-        if (triggeredPlayers == 2 && canTrigger)
+       if(!first)
+            child.transform.Rotate(0, 0, 10 * Time.deltaTime);
+        if (triggeredPlayers == 2 )
         {
-            cpm.ActivateCheckpoint(this);
-            triggeredPlayers = 0;
-            canTrigger = false;
-            platformCheck.CheckpointReached();
-
+            if (canTrigger)
+            {
+                if (!first)
+                {
+                    if (rotatingParticles.startLifetime > 1)
+                    {
+                        rotatingParticles.startLifetime = 1;
+                        rotatingParticles.startSpeed = 3;
+                    }
+                }
+                
+                cpm.ActivateCheckpoint(this);
+               // triggeredPlayers = 0;
+                canTrigger = false;
+                platformCheck.CheckpointReached();
+            }
+            if (!first)
+            {
+                if (rotatingParticles.startLifetime > 0.4f)
+                    rotatingParticles.startLifetime -= 0.005f;
+                else
+                    Invoke("StopParticles", 1);
+            }
         }
+
+    }
+
+    void StopParticles()
+    {
+        rotatingParticles.emissionRate=0;
+        rotatingParticles.Stop();
     }
 
     void OnTriggerEnter2D(Collider2D coll)
