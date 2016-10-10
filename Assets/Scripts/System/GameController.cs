@@ -66,6 +66,7 @@ public class GameController : MonoBehaviour {
                     {
                         MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
                     renderer.sortingLayerName = "Main";
+                    renderer.material.shader = Shader.Find("Sprites/Default");
                         renderer.sortingOrder = 3;
 
             }

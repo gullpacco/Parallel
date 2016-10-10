@@ -590,7 +590,7 @@ public class AudioManager : MonoBehaviour
                 return false;
             }
         }
-        StopSound(soundName);
+        StopAllSounds();
         return true;
     }
 
