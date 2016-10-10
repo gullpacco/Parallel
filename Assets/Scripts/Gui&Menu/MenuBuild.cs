@@ -10,11 +10,16 @@ public class MenuBuild : MonoBehaviour {
 	private bool btnStartSelected;
 	private bool btnQuitSelected;
 	
+	public AudioClip clip;
 	//private bool onOptions;
 	
 	void Start() {
 		Time.timeScale=1;
 		btnStart.Select();
+		
+		AudioManager.instance.stopAllMusic();
+		
+		AudioManager.instance.PlaySound("MainTheme");
 	}
 
 	public void ClickBtn(Button selectedButton)
