@@ -7,7 +7,7 @@ public abstract class Laser : MonoBehaviour {
     protected LineRenderer las;
     public LayerMask playerMask;
     protected Vector3 distance, midPoint;
-    protected float minDistance = 0.4f;
+    protected float minDistance = 0.0f;
     protected GameObject particle;
     protected ParticleSystem parSystem;
     protected float distanceToReach,
