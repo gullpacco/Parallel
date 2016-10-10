@@ -286,6 +286,13 @@ public abstract class Laser : MonoBehaviour {
 
     }
 
+    protected void KillPlayer(PlayerController player)
+    {
+       
+        if(player.SlowMo())
+        AudioManager.instance.PlaySound("S_LaserHit");
+    }
+
 
     protected abstract void LaserLength();
     protected abstract void ExtendBeam();

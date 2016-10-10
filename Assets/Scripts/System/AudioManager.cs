@@ -23,7 +23,7 @@ public class Sound
     public float duration;
     float volume;
 
-    [Range(0.5f, 1.5f)]
+    [Range(0.5f, 20f)]
     public float pitch = 1;
 
 
@@ -82,6 +82,18 @@ public class Sound
             source.Play();
 
         return true;
+    }
+
+    public bool IsPlaying()
+    {
+
+        if (source.isPlaying)
+        {
+            return true;
+
+        }
+
+        return false;
     }
 
     public bool PlaySound(int soundID)
@@ -565,6 +577,21 @@ public class AudioManager : MonoBehaviour
 
         }
 
+    }
+
+    public bool StopIfDifferent(string soundName)
+    {
+
+        for(int i=0; i<musics.Length; i++)
+        {
+            if (musics[i].theName == soundName)
+            {
+                if(musics[i].IsPlaying())
+                return false;
+            }
+        }
+        StopSound(soundName);
+        return true;
     }
 
     public void PauseSound(string soundName)

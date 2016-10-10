@@ -45,6 +45,7 @@ public class PillarLock : Pillar
 
             {
                 StartCoroutine(Lock());
+                AudioManager.instance.PlaySound("S_Lock");
             }
         }
     }

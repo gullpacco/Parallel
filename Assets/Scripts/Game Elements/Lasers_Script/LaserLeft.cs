@@ -25,20 +25,23 @@ public class LaserLeft : Laser {
         if (hit.collider != null)
         {
 
-            if (hit.collider.tag == "Player" )
+            if (hit.collider.tag == "Player" || hit.collider.tag == "PlayerGround")
             {
 
-                if( hit.distance >= minDistance)
+                if ( hit.distance >= minDistance)
 
                    
                 {
-                    hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
+                    KillPlayer(hit.transform.gameObject.GetComponent<PlayerController>());
+
+
                     distanceToReach = hit.point.x;
 
                 }
 
             }
 
+           
             else distanceToReach = hit.point.x;
 
 

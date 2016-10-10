@@ -323,7 +323,7 @@ public class PlayerController : MonoBehaviour {
 
   
 
-    public void SlowMo()
+    public bool SlowMo()
     {
         if (canDie)
         {
@@ -334,8 +334,9 @@ public class PlayerController : MonoBehaviour {
             Invoke("Die", 0.15f);
             canDie = false;
             other.canDie = false;
-            AudioManager.instance.PlaySound(shotSound);
+            return true;
         }
+        else return false;
     }
 
     void Die()

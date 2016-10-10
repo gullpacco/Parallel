@@ -80,7 +80,7 @@ public class PillarElastic : Pillar
         yield return new WaitForSeconds(0.1f);
         if (!pushedByPillar && !pushedByPlayer)
         {
-            if (transform.position.y != baseY)
+            if (transform.position.y >= baseY + 0.005f || transform.position.y <= baseY-0.005f)
             {
                 StartLerping();
             }
@@ -186,7 +186,7 @@ public class PillarElastic : Pillar
     {
         if (!pushedByPillar && !pushedByPlayer && !isGoingBack)
         {
-
+            Invoke("PlayGoBack", 0.1f);
             isGoingBack = true;
             body.velocity = new Vector2(0, 0);
             startTime = Time.time;
@@ -195,4 +195,11 @@ public class PillarElastic : Pillar
         }
     }
 
+
+    void PlayGoBack()
+    {
+        if(isGoingBack)
+        AudioManager.instance.PlaySound("S_GoBack");
+
+    }
 }

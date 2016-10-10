@@ -27,24 +27,19 @@ public class LaserDown : Laser {
         if (hit.collider != null)
         {
 
-            if (hit.collider.tag == "Player")
+            if (hit.collider.tag == "Player" || hit.collider.tag == "PlayerGround")
             {
 
                 if (hit.distance >= minDistance)
 
 
                 {
-                    hit.transform.gameObject.GetComponent<PlayerController>().SlowMo();
+                    KillPlayer(hit.transform.gameObject.GetComponent<PlayerController>());
                     distanceToReach = hit.point.y;
-
                 }
-
             }
-
+         
             else distanceToReach = hit.point.y;
-
-
-
 
         }
         else distanceToReach = -1000;
