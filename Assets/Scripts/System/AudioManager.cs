@@ -23,7 +23,7 @@ public class Sound
     public float duration;
     float volume;
 
-    [Range(0.5f, 20f)]
+    [Range(0.5f, 2f)]
     public float pitch = 1;
 
 
