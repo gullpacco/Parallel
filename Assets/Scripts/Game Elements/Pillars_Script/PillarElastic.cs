@@ -186,7 +186,7 @@ public class PillarElastic : Pillar
     {
         if (!pushedByPillar && !pushedByPlayer && !isGoingBack)
         {
-            Invoke("PlayGoBack", 0.1f);
+            Invoke("PlayGoBack", Mathf.Sqrt(body.mass)*0.1f);
             isGoingBack = true;
             body.velocity = new Vector2(0, 0);
             startTime = Time.time;

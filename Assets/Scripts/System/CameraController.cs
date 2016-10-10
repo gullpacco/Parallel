@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour {
     public Parallax[] parallaxElements;
     Camera mainCamera;
     public PointsOfInterest [] pointsOfInterest;
-    public ObjectMovement glitch;
     bool zooming;
 
     [System.Serializable]
