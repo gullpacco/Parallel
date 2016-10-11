@@ -40,7 +40,7 @@ public abstract class Laser : MonoBehaviour {
         col.isTrigger = true;
         col.transform.parent = transform;
         col.gameObject.layer = 2;
-        col.gameObject.tag = "Enemy";
+        col.gameObject.tag = "Laser";
        
         //for (int s = 0; s < 2; s++) {
         //    safeZones[s] = new GameObject("SafeZone").AddComponent<CircleCollider2D>();

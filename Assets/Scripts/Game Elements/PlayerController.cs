@@ -316,13 +316,33 @@ public class PlayerController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D coll)
     {
 
-
-       if ((coll.tag == "Enemy" || coll.tag=="Lava")&& canDie)
+        if (canDie)
         {
-           
-            SlowMo();
+            switch (coll.tag)
+            {
+                case "Lava":
+                    //insert Sound
+                    SlowMo();
+                    break;
+                case "Enemy":
+                    //insert Sound and remove goto
+                    goto case "Lava";
+                case "Laser":
+                    AudioManager.instance.PlaySound("S_Laser");
+                    SlowMo();
+                    break;
+                case "Glitch":
+                    //insertSound and remove goto
+                    goto case "Lava";
+                default: break;
 
+            }
         }
+       //if ((coll.tag == "Enemy" || coll.tag=="Lava")&& canDie)
+       // {
+       //     SlowMo();
+
+       // }
        
     }
 
