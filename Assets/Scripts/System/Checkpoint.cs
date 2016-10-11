@@ -11,6 +11,7 @@ public class Checkpoint : MonoBehaviour {
     ParticleSystem rotatingParticles;
     bool first;
 
+
     public bool First
     {
         get
@@ -21,6 +22,20 @@ public class Checkpoint : MonoBehaviour {
         set { first = value; }
     }
 
+    public int TriggeredPlayers
+    {
+        set { triggeredPlayers = value; }
+
+    }
+
+    public bool CanTrigger
+    {
+        get
+        {
+            return canTrigger;
+        }
+
+    }
 
     void Awake()
     {
@@ -47,6 +62,7 @@ public class Checkpoint : MonoBehaviour {
             {
                 if (!first)
                 {
+                    AudioManager.instance.PlaySound("S_Checkpoint_Reached");
                     if (rotatingParticles.startLifetime > 1)
                     {
                         rotatingParticles.startLifetime = 1;
@@ -61,10 +77,10 @@ public class Checkpoint : MonoBehaviour {
             }
             if (!first)
             {
-                if (rotatingParticles.startLifetime > 0.4f)
+                if (rotatingParticles.startLifetime > 0.55f)
                     rotatingParticles.startLifetime -= 0.005f;
                 else
-                    Invoke("StopParticles", 1);
+                    Invoke("StopParticles", .8f);
             }
         }
 

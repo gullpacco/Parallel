@@ -57,6 +57,13 @@ public class CheckPointManager : MonoBehaviour {
             moving[j].SetValues();
         }
 
+
+        for (int j = 0; j < checkpoints.Length; j++)
+        {
+
+            if (checkpoints[j].CanTrigger)
+                checkpoints[j].TriggeredPlayers = 0;
+        }
         //for (int k=0; k<shooters.Length; k++)
         //{
         //    shooters[k].ResetShooter();
