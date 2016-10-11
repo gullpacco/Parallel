@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public bool complete;
     public GameObject [] textToHide;
     public Text hideText;
+    public Material groundMaterial;
 
     public string musicTrack;
     void Awake()
@@ -66,15 +67,20 @@ public class GameController : MonoBehaviour {
                     {
                         MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
                     renderer.sortingLayerName = "Main";
-                    renderer.material.shader = Shader.Find("Sprites/Default");
                         renderer.sortingOrder = 3;
+                    renderer.material = groundMaterial;
 
-            }
+
+
+                }
                 if (gos[i].name.Contains("Traguardo") || gos[i].name.Contains("CheckPoint"))
                 {
                     if (gos[i].transform.childCount > 0)
                     {
+
                         MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
+                        renderer.material = groundMaterial;
+
                         renderer.sortingLayerName = "Main";
                         renderer.sortingOrder = 4;
                     }
