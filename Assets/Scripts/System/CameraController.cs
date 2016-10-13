@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour {
             mainCamera.orthographicSize = Mathf.Lerp(startZoom, endZoom, elapsed);
             //this next line i'm not sure of, I'm not familiar with CameraMovement.ypos
             //Camera.main.GetComponent<CameraMovement>().ypos = Mathf.Lerp(ypos1, ypos2, elapsed);
-            Debug.Log(elapsed);
+
 
             if (elapsed > 1.0f)
             {
