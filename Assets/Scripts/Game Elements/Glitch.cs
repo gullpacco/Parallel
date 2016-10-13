@@ -7,7 +7,7 @@ public class Glitch : MonoBehaviour {
     public BoostPoint[] boostPoints;
     int nextBP;
     float speed;
-
+    public float offset;
 
    [System.Serializable]
     public struct BoostPoint
@@ -39,7 +39,7 @@ public class Glitch : MonoBehaviour {
 
     public void Reset(float spawnPoint)
     {
-        transform.position = new Vector3(spawnPoint - 13, 0, 0);
+        transform.position = new Vector3(spawnPoint - offset, 0, 0);
         nextBP = 0;
     }
 }
