@@ -18,18 +18,18 @@ public class PillarLock : Pillar
         black = new Vector3(101 / 255f, 101 / 255f, 101 / 255f);
         currentColor = myColor;
       
-            for(int i=0; i<arrowArray.Length; i++)
-            {
+            //for(int i=0; i<arrowArray.Length; i++)
+            //{
                
-                    arrowArray[i].GetComponent<SpriteRenderer>().sprite = arrow;
+            //        arrowArray[i].GetComponent<SpriteRenderer>().sprite = arrow;
 
-                if (GetComponent<EdgeCollider2D>().offset.y<0)
-                {
-                    arrowArray[i].transform.localScale= new Vector3(arrowArray[i].transform.localScale.x, -arrowArray[i].transform.localScale.y, transform.localScale.z);
+            //    if (GetComponent<EdgeCollider2D>().offset.y<0)
+            //    {
+            //        arrowArray[i].transform.localScale= new Vector3(arrowArray[i].transform.localScale.x, -arrowArray[i].transform.localScale.y, transform.localScale.z);
 
-                }
+            //    }
 
-                }
+            //    }
             
         
 
@@ -41,7 +41,6 @@ public class PillarLock : Pillar
 
         if (coll.tag == "Ground")
         {
-
 
             {
                 StartCoroutine(Lock());
@@ -66,18 +65,18 @@ public class PillarLock : Pillar
     public override void ResetPillar()
     {
         base.ResetPillar();
-        for (int i = 0; i < arrowArray.Length; i++)
-        {
+        //for (int i = 0; i < arrowArray.Length; i++)
+        //{
 
-            //arrowArray[i].GetComponent<SpriteRenderer>().sprite = arrow;
-            //if (GetComponent<EdgeCollider2D>().offset.y < 0)
-            //{
-                arrowArray[i].GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.6f, 0.1f);
+        //    //arrowArray[i].GetComponent<SpriteRenderer>().sprite = arrow;
+        //    //if (GetComponent<EdgeCollider2D>().offset.y < 0)
+        //    //{
+        //        arrowArray[i].GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.6f, 0.1f);
 
 
-            //  }
+        //    //  }
 
-        }
+        //}
 
     }
 
@@ -87,18 +86,18 @@ public class PillarLock : Pillar
         yield return new WaitForEndOfFrame();
         body.isKinematic = true;
         finalPosReached = true;
-        body.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+       // body.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         startTime = Time.time;
         changingColour = true;
         journeyLength = Vector3.Distance(myColor, black);
 
-        for (int i = 0; i < arrowArray.Length; i++)
-        {
+        //for (int i = 0; i < arrowArray.Length; i++)
+        //{
 
-            arrowArray[i].GetComponent<SpriteRenderer>().color = new Color (black.x, black.y, black.z);
+        //    arrowArray[i].GetComponent<SpriteRenderer>().color = new Color (black.x, black.y, black.z);
            
 
-        }
+        //}
 
 
 

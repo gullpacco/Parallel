@@ -21,7 +21,7 @@ public class Pillar : MonoBehaviour
     protected Color baseColor;
     protected SpriteRenderer sr;
 
-    protected GameObject []arrowArray; 
+    //protected GameObject []arrowArray; 
     protected Rigidbody2D body;
 
     public bool pushedByPlayer;
@@ -29,51 +29,51 @@ public class Pillar : MonoBehaviour
     public Pillar pillarPushing;
 
 
-    public Sprite square, arrow;
+    //public Sprite square, arrow;
 
     protected virtual void Awake()
     {
         baseY = transform.position.y;
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         baseColor = sr.color;
         body = GetComponent<Rigidbody2D>();
-        int arrowNumber=0;
-        if (body.mass < 1)
-        {
-            arrowNumber = 3;
-        } 
-        else if (body.mass < 6)
-        {
-            arrowNumber = 2;
-        }
-        else
-        {
-            arrowNumber = 1;
-        }
-        arrowArray = new GameObject[arrowNumber];
-        for(int c=0; c < arrowNumber; c++)
-        {
-            GameObject go = new GameObject();
-            go.name = "arrowSprite";
-            go.transform.position = transform.position;
-            SpriteRenderer sr1 = go.AddComponent<SpriteRenderer>();
-            sr1.sprite = square;
-            sr1.color = new Color(0.1f, 0.6f, 0.1f);
-            sr1.sortingLayerName = "Main";
-            sr1.sortingOrder = 6;
-            go.transform.parent = this.transform;
-            go.transform.localScale = new Vector3(1/transform.lossyScale.x, 1 / transform.lossyScale.y, 1);
-            if( c == 1)
-                {
-                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y + transform.localScale.y / 2, transform.position.z);
-                }
-            else if (c == 2)
-            {
-                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y - transform.localScale.y / 2, transform.position.z);
+        //int arrowNumber=0;
+        //if (body.mass < 1)
+        //{
+        //    arrowNumber = 3;
+        //} 
+        //else if (body.mass < 6)
+        //{
+        //    arrowNumber = 2;
+        //}
+        //else
+        //{
+        //    arrowNumber = 1;
+        //}
+        //arrowArray = new GameObject[arrowNumber];
+        //for(int c=0; c < arrowNumber; c++)
+        //{
+        //    GameObject go = new GameObject();
+        //    go.name = "arrowSprite";
+        //    go.transform.position = transform.position;
+        //    SpriteRenderer sr1 = go.AddComponent<SpriteRenderer>();
+        //    sr1.sprite = square;
+        //    sr1.color = new Color(0.1f, 0.6f, 0.1f);
+        //    sr1.sortingLayerName = "Main";
+        //    sr1.sortingOrder = 6;
+        //    go.transform.parent = this.transform;
+        //    go.transform.localScale = new Vector3(1/transform.lossyScale.x, 1 / transform.lossyScale.y, 1);
+        //    if( c == 1)
+        //        {
+        //        go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y + transform.localScale.y / 2, transform.position.z);
+        //        }
+        //    else if (c == 2)
+        //    {
+        //        go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y - transform.localScale.y / 2, transform.position.z);
 
-            }
-            arrowArray[c] = go;
-        }
+        //    }
+        //    arrowArray[c] = go;
+        //}
 
     }
 
@@ -90,53 +90,53 @@ public class Pillar : MonoBehaviour
     {
 
 
-        if (transform.position.y < baseY - 0.01f)
-        {
-            if (facingUp>0)
-            {
-                for (int c = 0; c < arrowArray.Length; c++)
-                {
-                    arrowArray[c].GetComponent<SpriteRenderer>().sprite = arrow;
-                    {
+        //if (transform.position.y < baseY - 0.01f)
+        //{
+        //    if (facingUp>0)
+        //    {
+        //        for (int c = 0; c < arrowArray.Length; c++)
+        //        {
+        //            arrowArray[c].GetComponent<SpriteRenderer>().sprite = arrow;
+        //            {
 
-                        if(arrowArray[c].transform.localScale.y>0)
-                        arrowArray[c].transform.localScale = new Vector3(arrowArray[c].transform.localScale.x, -arrowArray[c].transform.localScale.y, arrowArray[c].transform.localScale.z);
+        //                if(arrowArray[c].transform.localScale.y>0)
+        //                arrowArray[c].transform.localScale = new Vector3(arrowArray[c].transform.localScale.x, -arrowArray[c].transform.localScale.y, arrowArray[c].transform.localScale.z);
 
 
-                    }
-                }
-            } 
+        //            }
+        //        }
+        //    } 
 
-            facingUp = 0;
+        //    facingUp = 0;
 
-        }
+        //}
 
-        else if (transform.position.y > baseY + 0.01f)
-        {
+        //else if (transform.position.y > baseY + 0.01f)
+        //{
             
-            if (facingUp <2)
-            {
-                for (int c = 0; c < arrowArray.Length; c++)
-                {
-                    arrowArray[c].GetComponent<SpriteRenderer>().sprite = arrow;
-                    if (arrowArray[c].transform.localScale.y < 0)
+        //    if (facingUp <2)
+        //    {
+        //        for (int c = 0; c < arrowArray.Length; c++)
+        //        {
+        //            arrowArray[c].GetComponent<SpriteRenderer>().sprite = arrow;
+        //            if (arrowArray[c].transform.localScale.y < 0)
 
-                        arrowArray[c].transform.localScale = new Vector3(arrowArray[c].transform.localScale.x, -arrowArray[c].transform.localScale.y, arrowArray[c].transform.localScale.z);
+        //                arrowArray[c].transform.localScale = new Vector3(arrowArray[c].transform.localScale.x, -arrowArray[c].transform.localScale.y, arrowArray[c].transform.localScale.z);
 
                     
-                }
-            }
-            facingUp = 2;
+        //        }
+        //    }
+        //    facingUp = 2;
 
-        }
-        else
-        {
-            for (int c = 0; c < arrowArray.Length; c++)
-            {
-                arrowArray[c].GetComponent<SpriteRenderer>().sprite = square;
-            }
-            facingUp = 1;
-        }
+        //}
+        //else
+        //{
+        //    for (int c = 0; c < arrowArray.Length; c++)
+        //    {
+        //        arrowArray[c].GetComponent<SpriteRenderer>().sprite = square;
+        //    }
+        //    facingUp = 1;
+        //}
         
 
     }   
