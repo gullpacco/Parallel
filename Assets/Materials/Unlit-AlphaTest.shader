@@ -5,7 +5,9 @@
 
 Shader "Unlit/Transparent Cutout 2" {
 Properties {
-	_MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
+	[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
+	_Color("Tint", Color) = (1,1,1,1)
+
 	_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
 }
 SubShader {
