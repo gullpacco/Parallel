@@ -147,6 +147,23 @@ public class GameController : MonoBehaviour {
                     pauseMenu.SetActive(false);
                     paused = false;
                 }
+				
+				if (Input.GetKeyDown(KeyCode.Alpha1))
+				{
+					Application.LoadLevel(1);
+				}
+				if (Input.GetKeyDown(KeyCode.Alpha2))
+				{
+					Application.LoadLevel(2);
+				}
+				if (Input.GetKeyDown(KeyCode.Alpha3))
+				{
+					Application.LoadLevel(3);
+				}
+				if (Input.GetKeyDown(KeyCode.Alpha4))
+				{
+					Application.LoadLevel(4);
+				}
             }
 			/*
             if (Input.GetKeyDown(KeyCode.M) && paused)
