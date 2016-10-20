@@ -19,11 +19,6 @@ public class MenuController : MonoBehaviour {
 	{
 		//Application.loadedLevel (0);
 	}
-
-	public void loadLevel ()
-	{
-		Application.LoadLevel(1);
-	}
 	
 	public void QuitGame()
 	{
