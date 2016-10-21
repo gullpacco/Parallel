@@ -232,11 +232,11 @@ public class GameController : MonoBehaviour {
 		}
 		else if (selectedButton.name == "btnMainMenu") 
 		{
-			Application.LoadLevel("MenuBuild");
+			Application.LoadLevel("MenuSceneLucca");
 		}
 		else if (selectedButton.name == "btnMainMenuEnd" && ended) 
 		{
-			Application.LoadLevel("MenuBuild");
+			Application.LoadLevel("MenuSceneLucca");
 		}
 		else if (selectedButton.name == "btnNext" && ended) 
 		{

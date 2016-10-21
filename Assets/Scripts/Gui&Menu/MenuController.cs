@@ -22,9 +22,19 @@ public class MenuController : MonoBehaviour {
 	
 	public void QuitGame()
 	{
-		//menuPanel.GetComponent<TweenAlpha>.
-		menuPanel.SetActive (false);
-		exitPanel.SetActive (true);
+		Application.Quit ();
+//		menuPanel.GetComponent<TweenAlpha>.
+//		menuPanel.SetActive (false);
+//		exitPanel.SetActive (true);
 
 	}
+//	public void YesQuit()
+//	{
+//		Application.Quit ();
+//	}
+//	public void YesQuit()
+//	{
+//		menuPanel.SetActive (false);
+//		exitPanel.SetActive (true);
+//	}
 }
