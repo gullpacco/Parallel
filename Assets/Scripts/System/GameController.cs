@@ -63,31 +63,31 @@ public class GameController : MonoBehaviour {
                     }
                 }
 
-                else if (gos[i].name.Contains("Terreno"))
-                    {
-                        MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
-                    renderer.sortingLayerName = "Main";
-                        renderer.sortingOrder = 3;
-                    renderer.material = groundMaterial;
+                //else if (gos[i].name.Contains("Terreno"))
+                //    {
+                //        MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
+                //    renderer.sortingLayerName = "Main";
+                //        renderer.sortingOrder = 3;
+                //    renderer.material = groundMaterial;
 
 
 
-                }
-                if (gos[i].name.Contains("Traguardo") || gos[i].name.Contains("CheckPoint"))
-                {
-                    if (gos[i].transform.childCount > 0)
-                    {
+                //}
+                //if (gos[i].name.Contains("Traguardo") || gos[i].name.Contains("CheckPoint"))
+                //{
+                //    if (gos[i].transform.childCount > 0)
+                //    {
 
-                        MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
-                        renderer.material = groundMaterial;
+                //        MeshRenderer renderer = gos[i].transform.GetChild(0).GetComponent<MeshRenderer>();
+                //        renderer.material = groundMaterial;
 
-                        renderer.sortingLayerName = "Main";
-                        renderer.sortingOrder = 4;
-                    }
+                //        renderer.sortingLayerName = "Main";
+                //        renderer.sortingOrder = 4;
+                //    }
 
 
 
-                }
+          //      }
             }
         }
     }
