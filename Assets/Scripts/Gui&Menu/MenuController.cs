@@ -7,7 +7,8 @@ public class MenuController : MonoBehaviour {
 	public GameObject exitPanel;
 	// Use this for initialization
 	void Start () {
-
+		menuPanel.SetActive (true);
+		exitPanel.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -23,7 +24,7 @@ public class MenuController : MonoBehaviour {
 	public void QuitGame()
 	{
 		Application.Quit ();
-//		menuPanel.GetComponent<TweenAlpha>.
+
 //		menuPanel.SetActive (false);
 //		exitPanel.SetActive (true);
 
@@ -34,7 +35,7 @@ public class MenuController : MonoBehaviour {
 //	}
 //	public void YesQuit()
 //	{
-//		menuPanel.SetActive (false);
-//		exitPanel.SetActive (true);
+//		menuPanel.SetActive (true);
+//		exitPanel.SetActive (false);
 //	}
 }
