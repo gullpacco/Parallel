@@ -47,6 +47,8 @@ public class CameraController : MonoBehaviour {
         playersDistance = (playerToFollow[0].position.x + playerToFollow[1].position.x)/2;
         lastPlayerDistance = playersDistance;
 
+		CameraSizeLerping(8 , pointsOfInterest[lastPOI].zoomSpeed / 2);
+
     }
 
     // Update is called once per frame

@@ -3,6 +3,7 @@ using System.Collections;
 
 public abstract class Laser : MonoBehaviour {
 
+
     protected RaycastHit2D hit;
     protected LineRenderer las;
     public LayerMask playerMask;
@@ -19,6 +20,13 @@ public abstract class Laser : MonoBehaviour {
    // CircleCollider2D[] safeZones = new CircleCollider2D[2];
     protected Vector3 startPos, endPos;
     protected BoxCollider2D col;
+
+	//sprite renderer
+	public Sprite SpriteON;
+	public Sprite SpriteOff;
+
+	protected SpriteRenderer rend;
+
 
     public bool intermittent;
     public float offTime, onTime, activationOffset;
@@ -41,6 +49,7 @@ public abstract class Laser : MonoBehaviour {
         col.transform.parent = transform;
         col.gameObject.layer = 2;
         col.gameObject.tag = "Laser";
+
        
         //for (int s = 0; s < 2; s++) {
         //    safeZones[s] = new GameObject("SafeZone").AddComponent<CircleCollider2D>();
@@ -73,11 +82,13 @@ public abstract class Laser : MonoBehaviour {
 
         Invoke("EndOffset", activationOffset);
 
+		//spriteRen
+		rend = transform.GetComponent<SpriteRenderer>();
     }
 
     // Use this for initialization
     void Start () {
-       
+		rend.sprite = SpriteON as Sprite;
     }
 
     // Update is called once per frame
@@ -204,12 +215,16 @@ public abstract class Laser : MonoBehaviour {
     void StayOn()
     {
         isOn = true;
+	
+		rend.sprite = SpriteON as Sprite;
     }
 
 
     void StayOff()
     {
         isOn = false;
+
+		rend.sprite = SpriteOff as Sprite;
 
     }
     void OnTriggerEnter2D(Collider2D coll)
