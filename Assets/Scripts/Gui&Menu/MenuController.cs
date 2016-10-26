@@ -7,14 +7,23 @@ public class MenuController : MonoBehaviour {
 	public GameObject exitPanel;
 	// Use this for initialization
 	void Start () {
+
 		menuPanel.SetActive (true);
 		exitPanel.SetActive (false);
+		AudioManager.instance.PlaySound("M_Prova_1");
+//		Invoke("play", 1);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+//	void play(){
+//
+//		AudioManager.instance.PlaySound("M_Prova_1");
+//
+//	}
 
 	public void StartGame()
 	{
