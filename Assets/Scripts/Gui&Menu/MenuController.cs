@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour {
 
 		menuPanel.SetActive (true);
 		exitPanel.SetActive (false);
-		AudioManager.instance.PlaySound("M_Prova_1");
+		AudioManager.instance.PlaySound("M_Prova_2");
 //		Invoke("play", 1);
 	}
 	
@@ -27,12 +27,15 @@ public class MenuController : MonoBehaviour {
 
 	public void StartGame()
 	{
+        AudioManager.instance.PlaySound("S_Button_Confirm");
 		Application.LoadLevel (1);
 	}
 	
 	public void QuitGame()
 	{
-		Application.Quit ();
+        AudioManager.instance.PlaySound("S_Button_Confirm");
+
+        Application.Quit ();
 
 //		menuPanel.SetActive (false);
 //		exitPanel.SetActive (true);
