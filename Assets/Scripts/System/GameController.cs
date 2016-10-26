@@ -4,6 +4,8 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
+    public GameObject Loading;
+
     bool paused = false;
     public GameObject pauseMenu;
     public static GameController instance;
@@ -13,13 +15,15 @@ public class GameController : MonoBehaviour {
     public Text hideText;
     public Material groundMaterial;
 
+    private float loadingTimer = 0;
+
     public string musicTrack;
     void Awake()
     {
         instance = this;
         if (!complete)
         {
-
+            Loading.SetActive(false);
 
             GameObject[] gos = (GameObject[])FindObjectsOfType(typeof(GameObject));
             GameObject collisions;
@@ -108,6 +112,9 @@ public class GameController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
+        NextLevel();
+
         if (ended)
         {
 			
@@ -240,7 +247,9 @@ public class GameController : MonoBehaviour {
 		}
 		else if (selectedButton.name == "btnNext" && ended) 
 		{
-			Application.LoadLevel(Application.loadedLevel + 1);
+            Loading.SetActive(true);
+
+		//	Application.LoadLevel(Application.loadedLevel + 1);
 		}
 		else if (selectedButton.name == "btnRestartEnd" && ended) 
 		{
@@ -248,4 +257,15 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+    void NextLevel()
+    {
+       
+        if (Loading.activeInHierarchy)
+        {
+            loadingTimer += Time.unscaledDeltaTime;
+            Debug.Log(loadingTimer);
+            if(loadingTimer >= 2)
+                Application.LoadLevel(Application.loadedLevel + 1);
+        }
+    }
 }

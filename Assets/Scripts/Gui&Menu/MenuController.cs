@@ -5,8 +5,14 @@ using System.Collections;
 public class MenuController : MonoBehaviour {
 	public GameObject menuPanel;
 	public GameObject exitPanel;
-	// Use this for initialization
-	void Start () {
+
+    public GameObject Loading;
+    private float loadingTimer = 0;
+
+    // Use this for initialization
+    void Start () {
+
+        Loading.SetActive(false);
 
 		menuPanel.SetActive (true);
 		exitPanel.SetActive (false);
@@ -16,8 +22,16 @@ public class MenuController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+
+        if (Loading.activeInHierarchy)
+        {
+            loadingTimer += Time.unscaledDeltaTime;
+            Debug.Log(loadingTimer);
+            if (loadingTimer >= 2)
+                Application.LoadLevel(1);
+        }
+
+    }
 
 //	void play(){
 //
@@ -28,7 +42,8 @@ public class MenuController : MonoBehaviour {
 	public void StartGame()
 	{
         AudioManager.instance.PlaySound("S_Button_Confirm");
-		Application.LoadLevel (1);
+        Loading.SetActive(true);
+		//Application.LoadLevel (1);
 	}
 	
 	public void QuitGame()
