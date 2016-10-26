@@ -322,6 +322,7 @@ public class PlayerController : MonoBehaviour {
             {
                 case "Lava":
                     //insert Sound
+                    AudioManager.instance.PlaySound("S_Lava");
                     SlowMo();
                     break;
                 case "Enemy":
