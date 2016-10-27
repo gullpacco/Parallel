@@ -16,15 +16,20 @@ public class MenuController : MonoBehaviour {
 
 		menuPanel.SetActive (true);
 		exitPanel.SetActive (false);
-		AudioManager.instance.PlaySound("M_Prova_2");
-//		Invoke("play", 1);
+    	Invoke("playMusic", 0.1f);
 
 		Cursor.lockState=CursorLockMode.Locked;
 		Cursor.visible=false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void playMusic()
+    {
+        AudioManager.instance.PlaySound("M_Prova_2");
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (Loading.activeInHierarchy)
         {
