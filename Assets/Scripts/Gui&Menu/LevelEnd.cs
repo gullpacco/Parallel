@@ -27,11 +27,20 @@ public class LevelEnd : MonoBehaviour {
         {
             if (playerEnded == null)
                 playerEnded = coll.gameObject.name;
-            else   if  (coll.gameObject.name != playerEnded) { 
-                    //Application.LoadLevel(nextLevel);
+            else if (coll.gameObject.name != playerEnded)
+            {
+                //Application.LoadLevel(nextLevel);
                 sm.SetHighScore();
                 GameController.instance.ended = true;
-				GameObject.Find("btnNext").GetComponent<Button>().Select();
+                if (Application.loadedLevelName != "PietroMondo2_Medio2_Grafica 1")
+                {                 
+                    GameObject.Find("btnNext").GetComponent<Button>().Select();
+                }
+
+                else if (Application.loadedLevelName == "PietroMondo2_Medio2_Grafica 1")
+                {                  
+                    GameObject.Find("btnMainMenuEnd").GetComponent<Button>().Select();
+                }
             }
         }
     }
