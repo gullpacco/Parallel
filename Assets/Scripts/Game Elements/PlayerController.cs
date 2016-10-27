@@ -21,7 +21,9 @@ public class PlayerController : MonoBehaviour {
     TweenAlpha [] childAlpha;
     ParticleSystem ps; 
 
-
+	
+	public GameObject Sprite1;
+	public GameObject Sprite2;
 
 
     bool checkPointReached;
@@ -330,6 +332,8 @@ public class PlayerController : MonoBehaviour {
                 case "Lava":
                     //insert Sound
                     AudioManager.instance.PlaySound("S_Lava");
+
+
                     SlowMo();
                     break;
                 case "Enemy":
@@ -372,6 +376,10 @@ public class PlayerController : MonoBehaviour {
             Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
             deaths++;
             deathText.text = "" + deaths;
+			
+			Sprite1.SetActive(false);
+			Sprite2.SetActive(false);
+
             Invoke("Die", 0.15f);
             canDie = false;
             other.canDie = false;
@@ -389,6 +397,10 @@ public class PlayerController : MonoBehaviour {
             childAlpha[k].to = 1;
             childAlpha[k].duration = 0;
         }
+		
+		Sprite1.SetActive(true);
+		Sprite2.SetActive(true);
+
         transform.position = new Vector3(cpm.Respawn(), transform.position.y, transform.position.z);
         other.gameObject.transform.position = new Vector3(cpm.Respawn(), other.gameObject.transform.position.y, transform.position.z);
         canDie = true;

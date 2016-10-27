@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour {
     public Text hideText;
     public Material groundMaterial;
 
+
     private float loadingTimer = 0;
 
     public string musicTrack;
@@ -265,7 +266,6 @@ public class GameController : MonoBehaviour {
         if (Loading.activeInHierarchy)
         {
             loadingTimer += Time.unscaledDeltaTime;
-            Debug.Log(loadingTimer);
             if(loadingTimer >= 2)
                 Application.LoadLevel(Application.loadedLevel + 1);
         }
