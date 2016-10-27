@@ -100,8 +100,12 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 1;
 		pauseMenu.SetActive(false);
+		Cursor.lockState=CursorLockMode.Locked;
+		Cursor.visible=false;
        if( AudioManager.instance.StopIfDifferent(musicTrack))
         StartCoroutine(PlayMusic());
+	
+		
 	}
 
     IEnumerator PlayMusic()

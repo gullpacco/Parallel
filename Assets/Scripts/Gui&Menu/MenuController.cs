@@ -18,6 +18,9 @@ public class MenuController : MonoBehaviour {
 		exitPanel.SetActive (false);
 		AudioManager.instance.PlaySound("M_Prova_2");
 //		Invoke("play", 1);
+
+		Cursor.lockState=CursorLockMode.Locked;
+		Cursor.visible=false;
 	}
 	
 	// Update is called once per frame
