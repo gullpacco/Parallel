@@ -244,6 +244,7 @@ public class GameController : MonoBehaviour {
 		}
 		else if (selectedButton.name == "btnMainMenuEnd" && ended) 
 		{
+			AudioManager.instance.stopAllMusic();
 			Application.LoadLevel("MenuSceneLucca");
 		}
 		else if (selectedButton.name == "btnNext" && ended) 
