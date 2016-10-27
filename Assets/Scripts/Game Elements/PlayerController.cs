@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
     public PlayerController other;
     bool canGoForward=true;
     bool canGoBack = true;
+    TweenAlpha [] childAlpha;
+    ParticleSystem ps; 
 
 
 
@@ -53,6 +55,10 @@ public class PlayerController : MonoBehaviour {
         GameObject firstCP = GameObject.Find("Checkpoint");
         firstCP.transform.position = new Vector3(transform.position.x, transform.position.y);
         firstCP.GetComponent<Checkpoint>().First = true;
+        childAlpha = GetComponentsInChildren<TweenAlpha>();
+        ps = GetComponentInChildren<ParticleSystem>();
+        
+
     }
 
     // Use this for initialization
@@ -71,6 +77,7 @@ public class PlayerController : MonoBehaviour {
             deathText = GameObject.FindGameObjectWithTag("P2D").GetComponent<Text>();
 
         }
+        childAlpha[0].to =0;
 
         regTime = Time.fixedDeltaTime;
     }
@@ -354,6 +361,13 @@ public class PlayerController : MonoBehaviour {
     {
         if (canDie)
         {
+            for(int k=0; k<childAlpha.Length; k++)
+            {
+                childAlpha[k].to = 0;
+                childAlpha[k].duration = 2.7f;
+            }
+          //  ps.Simulate(3f, true, false);
+            ps.Play();
             Time.timeScale = 0.05f;
             Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
             deaths++;
@@ -370,7 +384,11 @@ public class PlayerController : MonoBehaviour {
     {
         Time.timeScale = 1;
         Time.fixedDeltaTime = regTime;
-
+        for (int k = 0; k < childAlpha.Length; k++)
+        {
+            childAlpha[k].to = 1;
+            childAlpha[k].duration = 0;
+        }
         transform.position = new Vector3(cpm.Respawn(), transform.position.y, transform.position.z);
         other.gameObject.transform.position = new Vector3(cpm.Respawn(), other.gameObject.transform.position.y, transform.position.z);
         canDie = true;
