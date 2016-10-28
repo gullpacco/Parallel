@@ -12,6 +12,8 @@ public class MenuController : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+
+        Time.timeScale = 1;
         Loading.SetActive(false);
 
 		menuPanel.SetActive (true);
@@ -24,6 +26,7 @@ public class MenuController : MonoBehaviour {
 
     void playMusic()
     {
+        AudioManager.instance.stopAllMusic();
         AudioManager.instance.PlaySound("M_Prova_2");
 
     }
@@ -34,7 +37,7 @@ public class MenuController : MonoBehaviour {
         if (Loading.activeInHierarchy)
         {
             loadingTimer += Time.unscaledDeltaTime;
-            Debug.Log(loadingTimer);
+        //    Debug.Log(loadingTimer);
             if (loadingTimer >= 2)
                 Application.LoadLevel(1);
         }
