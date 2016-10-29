@@ -56,7 +56,7 @@ public class Checkpoint : MonoBehaviour {
     void Update () {
        if(!first)
             child.transform.Rotate(0, 0, 10 * Time.deltaTime);
-        if (triggeredPlayers == 2 )
+        if (triggeredPlayers >= 2 )
         {
             if (canTrigger)
             {
