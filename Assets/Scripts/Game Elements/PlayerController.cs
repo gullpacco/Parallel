@@ -400,7 +400,8 @@ public class PlayerController : MonoBehaviour {
 		
 		Sprite1.SetActive(true);
 		Sprite2.SetActive(true);
-
+        checkPointReached = false;
+        other.ReachCheckpoint(false);
         transform.position = new Vector3(cpm.Respawn(), transform.position.y, transform.position.z);
         other.gameObject.transform.position = new Vector3(cpm.Respawn(), other.gameObject.transform.position.y, transform.position.z);
         canDie = true;
