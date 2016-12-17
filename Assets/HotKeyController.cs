@@ -29,5 +29,18 @@ public class HotKeyController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Alpha6)){
 			Application.LoadLevel("Level_6");
 		}
+
+		if(Input.GetKeyDown(KeyCode.Alpha7)){
+			Application.LoadLevel("Level_7");
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha8)){
+			Application.LoadLevel("Level_8");
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha9)){
+			Application.LoadLevel("Level_9");
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha0)){
+			Application.LoadLevel("Level_10");
+		}
 	}
 }
